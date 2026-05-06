@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Quality Engineering is Not Just Testing — Sandeep Singh</title>
+  <meta name="description" content="The mindset shift from QA to QE — and why it matters for modern software delivery. By Sandeep Singh, Quality Engineering Leader." />
+  <meta property="og:title" content="Why Quality Engineering is Not Just Testing" />
+  <meta property="og:description" content="The mindset shift from QA to QE — and why it matters for modern software delivery." />
+  <meta property="og:url" content="https://sandeepsingh87.in/blog/why-qe-is-not-just-testing.html" />
+  <meta property="og:type" content="article" />
+  <meta name="author" content="Sandeep Singh" />
+  <link rel="canonical" href="https://sandeepsingh87.in/blog/why-qe-is-not-just-testing.html" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Why Quality Engineering is Not Just Testing",
+    "author": { "@type": "Person", "name": "Sandeep Singh", "url": "https://sandeepsingh87.in" },
+    "datePublished": "2026-05-06",
+    "publisher": { "@type": "Person", "name": "Sandeep Singh" },
+    "description": "The mindset shift from QA to QE — and why it matters for modern software delivery."
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..500&display=swap" rel="stylesheet">
+  <style>
+    /* ── DESIGN TOKENS (matches index.html exactly) ────────────── */
+    :root, [data-theme="light"] {
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
+      --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
+      --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
+      --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
+      --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
+      --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
+      --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
+      --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;
+      --space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;
+      --space-12:3rem;--space-16:4rem;--space-20:5rem;--space-24:6rem;--space-32:8rem;
+      --color-bg:             #f6f5f1;
+      --color-surface:        #f9f8f5;
+      --color-surface-offset: #eeecea;
+      --color-divider:        #dddbd7;
+      --color-text:           #1a1917;
+      --color-text-muted:     #6b6965;
+      --color-text-faint:     #b0aea9;
+      --color-text-inverse:   #f5f4f0;
+      --color-primary:        #14365a;
+      --color-primary-hover:  #0f2842;
+      --color-primary-highlight: #d0dce8;
+      --color-accent:         #c5813d;
+      --radius-sm:.375rem;--radius-md:.5rem;--radius-lg:.75rem;
+      --radius-xl:1rem;--radius-full:9999px;
+      --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow-sm: 0 1px 3px rgba(20,54,90,0.07);
+      --shadow-md: 0 4px 16px rgba(20,54,90,0.10);
+      --content-wide: 1100px;
+      --content-prose: 680px;
+    }
+    [data-theme="dark"] {
+      --color-bg:#131210;--color-surface:#1a1916;--color-surface-offset:#252320;
+      --color-divider:#2e2c29;--color-text:#d4d2ce;--color-text-muted:#888580;
+      --color-text-faint:#5a5855;--color-text-inverse:#1a1917;
+      --color-primary:#7aafd4;--color-primary-hover:#5b98c6;
+      --color-primary-highlight:#1e2d3e;--color-accent:#e09e5a;
+      --shadow-sm:0 1px 3px rgba(0,0,0,0.25);--shadow-md:0 4px 16px rgba(0,0,0,0.35);
+    }
+    @media(prefers-color-scheme:dark){
+      :root:not([data-theme]){
+        --color-bg:#131210;--color-surface:#1a1916;--color-surface-offset:#252320;
+        --color-divider:#2e2c29;--color-text:#d4d2ce;--color-text-muted:#888580;
+        --color-text-faint:#5a5855;--color-primary:#7aafd4;--color-accent:#e09e5a;
+      }
+    }
+
+    /* ── BASE ──────────────────────────────────────────────────── */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+      text-rendering:optimizeLegibility;scroll-behavior:smooth;
+      scroll-padding-top:calc(clamp(56px,7vw,68px) + 1rem)}
+    body{font-family:var(--font-body);font-size:var(--text-base);
+      color:var(--color-text);background:var(--color-bg);min-height:100dvh;line-height:1.6}
+    a{text-decoration:none;color:inherit;
+      transition:color var(--transition),opacity var(--transition)}
+    button{cursor:pointer;background:none;border:none;font:inherit;color:inherit;
+      transition:color var(--transition),background var(--transition)}
+    img{display:block;max-width:100%}
+    ::selection{background:rgba(20,54,90,0.12)}
+    :focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;
+      border-radius:var(--radius-sm)}
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+    }
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+
+    /* ── NAV ───────────────────────────────────────────────────── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;
+      background:oklch(from var(--color-bg) l c h / 0.92);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid oklch(from var(--color-text) l c h / 0.07)}
+    .nav__inner{max-width:var(--content-wide);margin-inline:auto;
+      padding-inline:clamp(var(--space-4),5vw,var(--space-12));
+      height:clamp(56px,7vw,68px);
+      display:flex;align-items:center;justify-content:space-between}
+    .nav__logo{display:flex;align-items:center;gap:var(--space-3)}
+    .nav__logo-mark{width:34px;height:34px;flex-shrink:0}
+    .nav__logo-name{font-family:var(--font-display);font-size:var(--text-sm);
+      font-weight:400;letter-spacing:0.01em}
+    .nav__right{display:flex;align-items:center;gap:var(--space-3)}
+    .nav__back{font-size:var(--text-xs);font-weight:500;
+      display:flex;align-items:center;gap:var(--space-2);
+      color:var(--color-text-muted);padding:var(--space-2) var(--space-4);
+      border:1px solid oklch(from var(--color-text) l c h / 0.15);
+      border-radius:var(--radius-full)}
+    .nav__back:hover{color:var(--color-text);
+      border-color:oklch(from var(--color-text) l c h / 0.3)}
+    .theme-toggle{width:36px;height:36px;display:flex;align-items:center;
+      justify-content:center;color:var(--color-text-muted);border-radius:var(--radius-md)}
+    .theme-toggle:hover{color:var(--color-text);
+      background:oklch(from var(--color-text) l c h / 0.06)}
+
+    /* ── ARTICLE HERO ──────────────────────────────────────────── */
+    .article-hero{
+      padding-top:calc(clamp(56px,7vw,68px) + clamp(var(--space-12),7vw,var(--space-24)));
+      padding-bottom:clamp(var(--space-10),5vw,var(--space-16));
+      padding-inline:clamp(var(--space-4),5vw,var(--space-12));
+      max-width:var(--content-wide);margin-inline:auto;
+    }
+    .article-hero__inner{max-width:var(--content-prose);margin-inline:auto}
+    .article-hero__breadcrumb{
+      display:flex;align-items:center;gap:var(--space-2);
+      font-size:var(--text-xs);color:var(--color-text-faint);
+      margin-bottom:var(--space-6);
+    }
+    .article-hero__breadcrumb a{color:var(--color-text-muted)}
+    .article-hero__breadcrumb a:hover{color:var(--color-text)}
+    .article-hero__breadcrumb svg{flex-shrink:0}
+    .article-hero__category{
+      font-size:var(--text-xs);font-weight:600;letter-spacing:0.1em;
+      text-transform:uppercase;color:var(--color-accent);
+      margin-bottom:var(--space-4);
+    }
+    .article-hero__title{
+      font-family:var(--font-display);
+      font-size:clamp(1.9rem, 1rem + 3.5vw, 3.2rem);
+      font-weight:400;line-height:1.12;
+      color:var(--color-text);margin-bottom:var(--space-6);
+    }
+    .article-hero__title em{font-style:italic;color:var(--color-primary)}
+    .article-hero__meta{
+      display:flex;align-items:center;gap:var(--space-4);
+      flex-wrap:wrap;padding-bottom:var(--space-8);
+      border-bottom:1px solid var(--color-divider);
+    }
+    .article-hero__author{display:flex;align-items:center;gap:var(--space-3)}
+    .article-hero__avatar{
+      width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;
+      background:var(--color-primary-highlight);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .article-hero__avatar img{width:100%;height:100%;object-fit:cover;object-position:center top}
+    .article-hero__avatar-fallback{
+      font-family:var(--font-display);font-size:1rem;color:var(--color-primary)
+    }
+    .article-hero__author-name{font-size:var(--text-sm);font-weight:500;color:var(--color-text)}
+    .article-hero__author-title{font-size:var(--text-xs);color:var(--color-text-muted)}
+    .article-hero__divider{
+      width:1px;height:32px;background:var(--color-divider);flex-shrink:0
+    }
+    .article-hero__date{font-size:var(--text-xs);color:var(--color-text-faint)}
+    .article-hero__reading{
+      font-size:var(--text-xs);color:var(--color-text-faint);
+      display:flex;align-items:center;gap:var(--space-1);
+    }
+
+    /* ── ARTICLE LAYOUT ────────────────────────────────────────── */
+    .article-layout{
+      max-width:var(--content-wide);margin-inline:auto;
+      padding-inline:clamp(var(--space-4),5vw,var(--space-12));
+      padding-bottom:clamp(var(--space-16),8vw,var(--space-24));
+      display:grid;
+      grid-template-columns:var(--content-prose) 1fr;
+      gap:clamp(var(--space-10),5vw,var(--space-16));
+      align-items:start;
+    }
+
+    /* ── PROSE ─────────────────────────────────────────────────── */
+    .prose{
+      font-size:var(--text-base);
+      color:var(--color-text);
+      line-height:1.8;
+    }
+    .prose p{margin-bottom:var(--space-6);max-width:66ch}
+    .prose p:last-child{margin-bottom:0}
+    .prose strong{font-weight:600;color:var(--color-text)}
+    .prose em{font-style:italic}
+    .prose a{color:var(--color-primary);border-bottom:1px solid oklch(from var(--color-primary) l c h / 0.3)}
+    .prose a:hover{border-bottom-color:var(--color-primary)}
+
+    /* Headings */
+    .prose h2{
+      font-family:var(--font-display);font-size:var(--text-xl);font-weight:400;
+      color:var(--color-text);line-height:1.15;
+      margin-top:var(--space-12);margin-bottom:var(--space-5);
+      padding-top:var(--space-8);
+      border-top:1px solid var(--color-divider);
+    }
+    .prose h3{
+      font-family:var(--font-display);font-size:var(--text-lg);font-weight:400;
+      color:var(--color-text);line-height:1.2;
+      margin-top:var(--space-10);margin-bottom:var(--space-4);
+    }
+
+    /* Pull quote */
+    .prose blockquote{
+      margin-block:var(--space-10);
+      padding:var(--space-6) var(--space-8);
+      background:var(--color-surface);
+      border-left:3px solid var(--color-primary);
+      border-radius:0 var(--radius-lg) var(--radius-lg) 0;
+    }
+    .prose blockquote p{
+      font-family:var(--font-display);
+      font-size:var(--text-lg);font-weight:400;
+      color:var(--color-text);font-style:italic;
+      line-height:1.5;margin-bottom:0;max-width:52ch;
+    }
+
+    /* Callout box */
+    .callout{
+      margin-block:var(--space-8);
+      padding:var(--space-5) var(--space-6);
+      background:oklch(from var(--color-primary) l c h / 0.06);
+      border:1px solid oklch(from var(--color-primary) l c h / 0.15);
+      border-radius:var(--radius-lg);
+    }
+    .callout__label{
+      font-size:var(--text-xs);font-weight:700;letter-spacing:0.1em;
+      text-transform:uppercase;color:var(--color-primary);
+      margin-bottom:var(--space-3);
+    }
+    .callout p{font-size:var(--text-sm);color:var(--color-text-muted);
+      line-height:1.65;margin-bottom:var(--space-2);max-width:60ch}
+    .callout p:last-child{margin-bottom:0}
+
+    /* Comparison table */
+    .compare-table{
+      margin-block:var(--space-8);width:100%;
+      border-collapse:collapse;border-spacing:0;
+      font-size:var(--text-sm);
+    }
+    .compare-table thead tr{background:var(--color-primary);color:var(--color-text-inverse)}
+    .compare-table th{
+      padding:var(--space-3) var(--space-4);text-align:left;
+      font-weight:600;letter-spacing:0.03em;font-size:var(--text-xs);
+    }
+    .compare-table td{
+      padding:var(--space-3) var(--space-4);
+      border-bottom:1px solid var(--color-divider);
+      color:var(--color-text-muted);vertical-align:top;line-height:1.5;
+    }
+    .compare-table tr:last-child td{border-bottom:none}
+    .compare-table tr:nth-child(even) td{background:var(--color-surface)}
+    .compare-table .col-qa{color:var(--color-text-muted)}
+    .compare-table .col-qe{color:var(--color-primary);font-weight:500}
+
+    /* Ordered list */
+    .prose ol{
+      list-style:none;counter-reset:prose-counter;
+      margin-bottom:var(--space-6);
+    }
+    .prose ol li{
+      counter-increment:prose-counter;
+      display:flex;gap:var(--space-4);
+      margin-bottom:var(--space-4);
+      font-size:var(--text-base);color:var(--color-text-muted);
+      line-height:1.65;
+    }
+    .prose ol li::before{
+      content:counter(prose-counter);
+      font-family:var(--font-display);font-size:var(--text-lg);
+      color:var(--color-primary);font-weight:400;
+      min-width:1.5rem;line-height:1.3;
+    }
+    .prose ol li strong{color:var(--color-text)}
+
+    /* Unordered list */
+    .prose ul{list-style:none;margin-bottom:var(--space-6)}
+    .prose ul li{
+      display:flex;gap:var(--space-3);align-items:flex-start;
+      margin-bottom:var(--space-3);
+      font-size:var(--text-base);color:var(--color-text-muted);line-height:1.65;
+    }
+    .prose ul li::before{
+      content:"";width:5px;height:5px;border-radius:50%;
+      background:var(--color-accent);flex-shrink:0;margin-top:0.55em;
+    }
+
+    /* Section divider */
+    .prose hr{
+      border:none;height:1px;
+      background:var(--color-divider);
+      margin-block:var(--space-12);
+    }
+
+    /* ── SIDEBAR (sticky TOC) ──────────────────────────────────── */
+    .sidebar{
+      position:sticky;top:calc(clamp(56px,7vw,68px) + var(--space-8));
+    }
+    .toc{
+      padding:var(--space-5) var(--space-6);
+      background:var(--color-surface);
+      border:1px solid oklch(from var(--color-text) l c h / 0.07);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-sm);
+    }
+    .toc__label{
+      font-size:var(--text-xs);font-weight:700;letter-spacing:0.1em;
+      text-transform:uppercase;color:var(--color-text-faint);
+      margin-bottom:var(--space-4);
+    }
+    .toc__list{list-style:none}
+    .toc__list li{margin-bottom:var(--space-2)}
+    .toc__list a{
+      font-size:var(--text-xs);color:var(--color-text-muted);
+      line-height:1.5;display:block;padding:var(--space-1) 0;
+      border-left:2px solid transparent;
+      padding-left:var(--space-3);
+      transition:color var(--transition),border-color var(--transition);
+    }
+    .toc__list a:hover,.toc__list a.active{
+      color:var(--color-primary);
+      border-left-color:var(--color-primary);
+    }
+    .toc__share{margin-top:var(--space-6);padding-top:var(--space-5);
+      border-top:1px solid var(--color-divider)}
+    .toc__share-label{font-size:var(--text-xs);color:var(--color-text-faint);
+      margin-bottom:var(--space-3);letter-spacing:0.05em;text-transform:uppercase}
+    .toc__share-links{display:flex;gap:var(--space-2)}
+    .share-btn{
+      display:flex;align-items:center;gap:var(--space-2);
+      font-size:var(--text-xs);font-weight:500;
+      padding:var(--space-2) var(--space-3);
+      background:var(--color-bg);color:var(--color-text-muted);
+      border:1px solid oklch(from var(--color-text) l c h / 0.12);
+      border-radius:var(--radius-md);
+    }
+    .share-btn:hover{color:var(--color-primary);
+      border-color:oklch(from var(--color-primary) l c h / 0.3)}
+
+    /* ── AUTHOR BIO ────────────────────────────────────────────── */
+    .author-bio{
+      max-width:var(--content-prose);margin-inline:auto;
+      padding:var(--space-8) var(--space-8);
+      background:var(--color-surface);
+      border:1px solid oklch(from var(--color-text) l c h / 0.07);
+      border-radius:var(--radius-xl);
+      display:flex;gap:var(--space-6);align-items:flex-start;
+      margin-inline:0;
+    }
+    .author-bio__avatar{
+      width:64px;height:64px;border-radius:50%;overflow:hidden;flex-shrink:0;
+      background:var(--color-primary-highlight);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .author-bio__avatar img{width:100%;height:100%;object-fit:cover;object-position:center top}
+    .author-bio__avatar-fallback{
+      font-family:var(--font-display);font-size:1.5rem;color:var(--color-primary)
+    }
+    .author-bio__name{font-size:var(--text-base);font-weight:600;
+      color:var(--color-text);margin-bottom:var(--space-1)}
+    .author-bio__role{font-size:var(--text-xs);color:var(--color-accent);
+      font-weight:500;letter-spacing:0.04em;margin-bottom:var(--space-3)}
+    .author-bio__text{font-size:var(--text-sm);color:var(--color-text-muted);
+      line-height:1.65;max-width:48ch;margin-bottom:var(--space-4)}
+    .author-bio__link{
+      display:inline-flex;align-items:center;gap:var(--space-2);
+      font-size:var(--text-xs);font-weight:500;
+      color:var(--color-primary);
+      border:1px solid oklch(from var(--color-primary) l c h / 0.25);
+      border-radius:var(--radius-full);
+      padding:var(--space-2) var(--space-4);
+    }
+    .author-bio__link:hover{background:oklch(from var(--color-primary) l c h / 0.06)}
+
+    /* ── MORE POSTS ────────────────────────────────────────────── */
+    .more-posts{
+      max-width:var(--content-prose);margin-inline:auto;
+      padding-top:var(--space-12);border-top:1px solid var(--color-divider);
+      margin-top:var(--space-12);
+    }
+    .more-posts__label{
+      font-size:var(--text-xs);font-weight:700;letter-spacing:0.1em;
+      text-transform:uppercase;color:var(--color-text-faint);
+      margin-bottom:var(--space-6);
+    }
+    .more-posts__grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}
+    .more-card{
+      padding:var(--space-5);background:var(--color-surface);
+      border:1px solid oklch(from var(--color-text) l c h / 0.07);
+      border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);
+      transition:box-shadow var(--transition),transform var(--transition);
+    }
+    .more-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+    .more-card__category{font-size:var(--text-xs);color:var(--color-accent);
+      font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:var(--space-2)}
+    .more-card__title{font-family:var(--font-display);font-size:var(--text-base);
+      font-weight:400;color:var(--color-text);line-height:1.3;margin-bottom:var(--space-2)}
+    .more-card--soon .more-card__title{color:var(--color-text-faint)}
+    .more-card__status{font-size:var(--text-xs);color:var(--color-text-faint)}
+
+    /* ── FOOTER ────────────────────────────────────────────────── */
+    .footer{border-top:1px solid var(--color-divider);padding-block:var(--space-8)}
+    .footer__inner{max-width:var(--content-wide);margin-inline:auto;
+      padding-inline:clamp(var(--space-4),5vw,var(--space-12));
+      display:flex;align-items:center;justify-content:space-between;
+      flex-wrap:wrap;gap:var(--space-4)}
+    .footer__copy{font-size:var(--text-xs);color:var(--color-text-faint)}
+    .footer__links{display:flex;gap:var(--space-4);list-style:none}
+    .footer__links a{font-size:var(--text-xs);color:var(--color-text-faint)}
+    .footer__links a:hover{color:var(--color-text-muted)}
+
+    /* ── RESPONSIVE ────────────────────────────────────────────── */
+    @media(max-width:900px){
+      .article-layout{grid-template-columns:1fr;gap:0}
+      .sidebar{display:none}
+    }
+    @media(max-width:767px){
+      .article-hero__divider{display:none}
+      .article-hero__title{font-size:clamp(1.6rem,7vw,2.2rem)}
+      .prose h2{font-size:var(--text-lg)}
+      .author-bio{flex-direction:column;gap:var(--space-4);padding:var(--space-5)}
+      .nav__logo-name{display:none}
+      .more-posts__grid{grid-template-columns:1fr}
+    }
+    @media(max-width:479px){
+      .compare-table{font-size:var(--text-xs)}
+      .compare-table th,.compare-table td{padding:var(--space-2) var(--space-3)}
+      .footer__inner{flex-direction:column;align-items:flex-start}
+    }
+    @media(pointer:coarse){
+      .nav__back{min-height:44px}
+      .theme-toggle{min-width:44px;min-height:44px}
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="sr-only">Skip to content</a>
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo" aria-label="Sandeep Singh — Home">
+        <svg class="nav__logo-mark" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+          <rect width="34" height="34" rx="7" fill="var(--color-primary)"/>
+          <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
+            font-family="'Instrument Serif', Georgia, serif"
+            font-size="16" fill="var(--color-text-inverse)" letter-spacing="0.5">SS</text>
+        </svg>
+        <span class="nav__logo-name">Sandeep Singh</span>
+      </a>
+      <div class="nav__right">
+        <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <a href="../links.html" class="nav__back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          All Posts
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ARTICLE HERO -->
+  <header class="article-hero">
+    <div class="article-hero__inner">
+      <nav class="article-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        <a href="../links.html">Blog</a>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        <span>Why QE is Not Just Testing</span>
+      </nav>
+      <p class="article-hero__category">Quality Engineering</p>
+      <h1 class="article-hero__title">
+        Why Quality Engineering<br>is <em>Not Just Testing</em>
+      </h1>
+      <div class="article-hero__meta">
+        <div class="article-hero__author">
+          <div class="article-hero__avatar">
+            <img src="../profile.jpg" alt="Sandeep Singh"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <span class="article-hero__avatar-fallback" style="display:none">SS</span>
+          </div>
+          <div>
+            <div class="article-hero__author-name">Sandeep Singh</div>
+            <div class="article-hero__author-title">Manager, E2E Quality Engineering</div>
+          </div>
+        </div>
+        <div class="article-hero__divider" aria-hidden="true"></div>
+        <time class="article-hero__date" datetime="2026-05-06">May 6, 2026</time>
+        <div class="article-hero__divider" aria-hidden="true"></div>
+        <div class="article-hero__reading">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          8 min read
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ARTICLE BODY -->
+  <div class="article-layout" id="main">
+
+    <!-- PROSE COLUMN -->
+    <article class="prose" aria-label="Article content">
+
+      <p>
+        After 16 years in the software testing industry, one thing I hear repeatedly — from hiring managers, engineers, and even senior stakeholders — is the casual equation of "QA" with "testing." The two terms are used interchangeably, as if they describe the same discipline. They do not. And this confusion, subtle as it seems, has real consequences for how teams are built, how quality is measured, and ultimately, how software fails.
+      </p>
+
+      <p>
+        This is not a semantic argument. It is a strategic one. The shift from Quality Assurance to <strong>Quality Engineering</strong> represents a fundamental change in mindset — from reactive to proactive, from gatekeeper to enabler, from cost centre to competitive advantage.
+      </p>
+
+      <blockquote>
+        <p>Testing finds defects. Quality Engineering prevents them — and builds the systems that make prevention scalable.</p>
+      </blockquote>
+
+      <h2 id="the-old-model">The Old Model: QA as a Checkpoint</h2>
+
+      <p>
+        Traditional QA was built on a simple premise: developers build, testers verify. A separate team sits at the end of the pipeline, runs test cases, logs bugs, and either approves or rejects a release. In waterfall environments, this made structural sense. The software was handed over in a defined, testable state. Testing had a defined start and end.
+      </p>
+      <p>
+        But this model carries an embedded assumption that has not aged well: <strong>quality is something you check for, not something you build in.</strong> Defects discovered at the end of a sprint — or worse, in production — are far more expensive to fix than those caught during design or development. The QA checkpoint model essentially defers that cost to the worst possible moment.
+      </p>
+      <p>
+        In financial services, where I have spent most of my career, the stakes are even higher. A failed payment transaction, an incorrect balance display, a broken compliance check — these are not inconveniences. They are regulatory incidents, customer trust failures, and in some cases, financial loss events. Finding these issues after code is merged is already too late.
+      </p>
+
+      <h2 id="what-qe-actually-means">What Quality Engineering Actually Means</h2>
+
+      <p>
+        Quality Engineering is the discipline of embedding quality practices throughout the entire software development lifecycle — not just at the end. A QE practitioner is not primarily concerned with writing test cases. They are concerned with <strong>designing systems and processes where high-quality outcomes are the natural result.</strong>
+      </p>
+
+      <table class="compare-table" aria-label="QA versus QE comparison">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Traditional QA</th>
+            <th>Quality Engineering</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>When it happens</td>
+            <td class="col-qa">After development</td>
+            <td class="col-qe">Across the entire SDLC</td>
+          </tr>
+          <tr>
+            <td>Primary activity</td>
+            <td class="col-qa">Manual test execution</td>
+            <td class="col-qe">Building automation, pipelines, and quality frameworks</td>
+          </tr>
+          <tr>
+            <td>Defect posture</td>
+            <td class="col-qa">Reactive — find and report</td>
+            <td class="col-qe">Proactive — prevent and shift left</td>
+          </tr>
+          <tr>
+            <td>Relationship with dev</td>
+            <td class="col-qa">Separate, often adversarial</td>
+            <td class="col-qe">Collaborative, embedded in the team</td>
+          </tr>
+          <tr>
+            <td>Key skills</td>
+            <td class="col-qa">Test case writing, defect tracking</td>
+            <td class="col-qe">Automation, code review, CI/CD, risk analysis</td>
+          </tr>
+          <tr>
+            <td>Success metric</td>
+            <td class="col-qa">Defects found</td>
+            <td class="col-qe">Defect escape rate, release confidence, deployment frequency</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        The table above is not an indictment of traditional QA. It is a map of evolution. Many of the most skilled QE engineers I have worked with started as manual testers. The craft of exploratory testing, the instinct to find edge cases, the ability to think like a user under pressure — these remain irreplaceable. What changes is the scope and the toolset.
+      </p>
+
+      <h2 id="shift-left-not-just-a-buzzword">Shift Left: Not Just a Buzzword</h2>
+
+      <p>
+        "Shift left" has been in the industry vocabulary long enough to feel like a cliche. But the principle it describes is sound: the earlier a defect is caught, the cheaper it is to fix. Research consistently shows the cost multiplier of fixing a bug in production versus catching it in requirements can be <strong>10x to 100x.</strong>
+      </p>
+
+      <div class="callout">
+        <div class="callout__label">What Shift Left Looks Like in Practice</div>
+        <p>QE engineers review requirements and user stories for testability before a single line of code is written.</p>
+        <p>Acceptance criteria are written collaboratively — developer, QE, and product — so the definition of "done" includes quality gates.</p>
+        <p>Unit and integration tests are owned by the development team, with QE defining coverage standards and reviewing the strategy.</p>
+        <p>Automation runs on every pull request, not once per sprint. A failing test blocks a merge — not just a release.</p>
+      </div>
+
+      <p>
+        This is not about testers doing developer work. It is about quality being a shared responsibility. The QE engineer's role shifts from executing tests to <strong>architecting the quality system</strong> — the pipelines, the frameworks, the standards, and the culture.
+      </p>
+
+      <h2 id="the-role-of-automation">The Role of Automation</h2>
+
+      <p>
+        Test automation is often treated as the defining characteristic of modern QE. And while it is central to the discipline, it is frequently misunderstood. Automation is not a replacement for testing judgment. It is an amplifier of it.
+      </p>
+
+      <p>
+        Bad automation — brittle scripts, poor selector strategy, no maintenance discipline — creates more noise than signal. It erodes trust in CI pipelines. Engineers start ignoring failing tests because "the automation is probably just flaky again." When that happens, the safety net has failed.
+      </p>
+
+      <p>
+        Good automation is built on clear principles:
+      </p>
+
+      <ol>
+        <li><strong>Test at the right level.</strong> Unit tests are fast and cheap. E2E tests are slow and expensive. Invest in the right ratio — the testing pyramid is not just theory.</li>
+        <li><strong>Automate what is stable, explore what is not.</strong> Regression suites should cover stable, high-value paths. Exploratory testing covers new features, edge cases, and anything that does not yet have a pattern.</li>
+        <li><strong>Treat test code as production code.</strong> Code reviews, refactoring, naming conventions, documentation — these apply to test suites too. Technical debt in test code is just as dangerous as in production code.</li>
+        <li><strong>Measure outcomes, not coverage numbers.</strong> 95% code coverage means nothing if it does not reflect meaningful test scenarios. Focus on defect escape rate, mean time to detect, and release confidence.</li>
+      </ol>
+
+      <h2 id="qe-and-ai">QE in the Age of AI</h2>
+
+      <p>
+        The most significant current disruption to Quality Engineering is the integration of AI tools into the testing workflow. AI-assisted test generation, intelligent defect clustering, self-healing locators, and natural language test authoring are no longer speculative — they are available and increasingly adopted.
+      </p>
+
+      <p>
+        My perspective, after experimenting with several of these tools: AI accelerates QE but does not replace the judgment that makes QE valuable. An AI tool can generate a test case from a user story in seconds. It cannot tell you whether that test case actually reflects the critical business risk. It cannot evaluate whether your test data is representative. It cannot decide which flaky test is a real failure and which is environment noise.
+      </p>
+
+      <blockquote>
+        <p>AI makes the mechanical parts of QE faster. It makes the judgment parts more important.</p>
+      </blockquote>
+
+      <p>
+        The QE engineers who will thrive in this environment are those who understand quality as a systems problem, not a task list. They will use AI to handle the boilerplate and spend their time on architecture, risk analysis, and strategic thinking — exactly the work that has always distinguished good QE from mere test execution.
+      </p>
+
+      <h2 id="the-cultural-dimension">The Cultural Dimension</h2>
+
+      <p>
+        None of the above is purely technical. The most underappreciated aspect of Quality Engineering is that it requires a cultural shift, not just a tooling shift. In organisations where quality is the responsibility of a separate QA team, developers often hand off code without taking ownership of its quality. QE dismantles that separation.
+      </p>
+
+      <p>
+        This is a leadership challenge as much as an engineering one. In my experience managing QE teams, the hardest work is not building the automation framework. It is building the shared understanding that quality belongs to everyone — that a developer who ships code without tests is not moving fast, they are creating deferred work for someone else.
+      </p>
+
+      <ul>
+        <li>Quality conversations happen in sprint planning, not just in retrospectives</li>
+        <li>Developers take pride in testable, observable code</li>
+        <li>QE engineers are consulted during architecture decisions, not after them</li>
+        <li>The definition of done includes quality criteria that the team has agreed on</li>
+      </ul>
+
+      <hr />
+
+      <h2 id="conclusion">Where to Start</h2>
+
+      <p>
+        If you are a QA professional reading this and wondering where to begin the transition to Quality Engineering: start with one thing. Pick one part of your manual regression suite and automate it well. Learn what "well" actually means — stable selectors, good assertions, fast feedback. Then do it again.
+      </p>
+
+      <p>
+        If you are a manager building a QE function: hire for curiosity and systems thinking, not just tool knowledge. A tester who asks "why does this fail?" rather than just "does this pass?" is already thinking like a QE engineer.
+      </p>
+
+      <p>
+        Quality Engineering is not a title upgrade. It is a different way of thinking about what quality means, where it comes from, and who is responsible for it. That shift — when it takes hold in a team — is what the difference between software that ships confidently and software that ships anxiously.
+      </p>
+
+      <!-- AUTHOR BIO -->
+      <div class="author-bio" style="margin-top:var(--space-12)">
+        <div class="author-bio__avatar">
+          <img src="../profile.jpg" alt="Sandeep Singh"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+          <span class="author-bio__avatar-fallback" style="display:none">SS</span>
+        </div>
+        <div>
+          <div class="author-bio__name">Sandeep Singh</div>
+          <div class="author-bio__role">Manager, E2E Quality Engineering &mdash; Western Union</div>
+          <p class="author-bio__text">
+            16+ years in software quality engineering across Infosys, ITC Infotech, Cognizant, Capgemini, and Western Union. Specialising in E2E test strategy, automation frameworks, and AI-assisted testing in financial services.
+          </p>
+          <a href="https://www.linkedin.com/in/sandeepsingh87/" target="_blank" rel="noopener noreferrer" class="author-bio__link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            Connect on LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <!-- MORE POSTS -->
+      <div class="more-posts">
+        <div class="more-posts__label">More from the Blog</div>
+        <div class="more-posts__grid">
+          <div class="more-card more-card--soon">
+            <div class="more-card__category">Automation</div>
+            <div class="more-card__title">Getting Started with Playwright in 2026</div>
+            <div class="more-card__status">Coming soon</div>
+          </div>
+          <div class="more-card more-card--soon">
+            <div class="more-card__category">AI in QE</div>
+            <div class="more-card__title">AI in Testing — Hype vs. Reality</div>
+            <div class="more-card__status">Coming soon</div>
+          </div>
+        </div>
+      </div>
+
+    </article>
+
+    <!-- SIDEBAR — TOC -->
+    <aside class="sidebar" aria-label="Table of contents">
+      <nav class="toc">
+        <div class="toc__label">In this article</div>
+        <ul class="toc__list" role="list">
+          <li><a href="#the-old-model">The Old Model</a></li>
+          <li><a href="#what-qe-actually-means">What QE Actually Means</a></li>
+          <li><a href="#shift-left-not-just-a-buzzword">Shift Left</a></li>
+          <li><a href="#the-role-of-automation">The Role of Automation</a></li>
+          <li><a href="#qe-and-ai">QE in the Age of AI</a></li>
+          <li><a href="#the-cultural-dimension">The Cultural Dimension</a></li>
+          <li><a href="#conclusion">Where to Start</a></li>
+        </ul>
+        <div class="toc__share">
+          <div class="toc__share-label">Share</div>
+          <div class="toc__share-links">
+            <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href).then(()=>this.textContent='Copied!')" aria-label="Copy link">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              Copy link
+            </button>
+            <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://sandeepsingh87.in/blog/why-qe-is-not-just-testing.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__copy">&copy; 2026 Sandeep Singh. All rights reserved.</p>
+      <ul class="footer__links" role="list">
+        <li><a href="/">Home</a></li>
+        <li><a href="../links.html">Blog</a></li>
+        <li><a href="mailto:mailsandeeps3@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle — syncs with localStorage so it remembers across pages
+    (function(){
+      const t = document.querySelector('[data-theme-toggle]');
+      const r = document.documentElement;
+      let d = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      r.setAttribute('data-theme', d);
+      function updateIcon(theme) {
+        if (!t) return;
+        t.setAttribute('aria-label', 'Switch to ' + (theme === 'dark' ? 'light' : 'dark') + ' mode');
+        t.innerHTML = theme === 'dark'
+          ? '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+          : '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      }
+      updateIcon(d);
+      t && t.addEventListener('click', () => {
+        d = d === 'dark' ? 'light' : 'dark';
+        r.setAttribute('data-theme', d);
+        localStorage.setItem('theme', d);
+        updateIcon(d);
+      });
+    })();
+
+    // Active TOC link on scroll
+    (function(){
+      const headings = document.querySelectorAll('.prose h2[id]');
+      const tocLinks = document.querySelectorAll('.toc__list a');
+      if (!headings.length || !tocLinks.length) return;
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            tocLinks.forEach(l => l.classList.remove('active'));
+            const active = document.querySelector('.toc__list a[href="#' + entry.target.id + '"]');
+            if (active) active.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-20% 0% -70% 0%' });
+      headings.forEach(h => obs.observe(h));
+    })();
+  </script>
+
+</body>
+</html>
