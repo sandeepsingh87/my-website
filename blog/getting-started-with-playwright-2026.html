@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Started with Playwright in 2026 — Sandeep Singh</title>
+  <meta name="description" content="A practical, from-scratch guide to setting up Playwright with TypeScript for E2E test automation in 2026. Covers installation, Page Object Model, CI/CD, and the latest 1.58 features." />
+  <meta property="og:title" content="Getting Started with Playwright in 2026" />
+  <meta property="og:description" content="A practical guide to Playwright E2E automation with TypeScript — setup, POM, CI/CD, and 2026 best practices." />
+  <meta property="og:url" content="https://sandeepsingh87.in/blog/getting-started-with-playwright-2026.html" />
+  <meta property="og:type" content="article" />
+  <meta name="author" content="Sandeep Singh" />
+  <link rel="canonical" href="https://sandeepsingh87.in/blog/getting-started-with-playwright-2026.html" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Getting Started with Playwright in 2026",
+    "author": { "@type": "Person", "name": "Sandeep Singh", "url": "https://sandeepsingh87.in" },
+    "datePublished": "2026-05-10",
+    "publisher": { "@type": "Person", "name": "Sandeep Singh" },
+    "description": "A practical guide to setting up Playwright for E2E test automation from scratch."
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+      --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
+      --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
+      --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
+      --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
+      --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
+      --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
+      --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;
+      --space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;
+      --space-12:3rem;--space-16:4rem;--space-20:5rem;--space-24:6rem;
+      --color-bg:             #f6f5f1;
+      --color-surface:        #f9f8f5;
+      --color-surface-offset: #eeecea;
+      --color-divider:        #dddbd7;
+      --color-text:           #1a1917;
+      --color-text-muted:     #6b6965;
+      --color-text-faint:     #b0aea9;
+      --color-text-inverse:   #f5f4f0;
+      --color-primary:        #14365a;
+      --color-primary-hover:  #0f2842;
+      --color-primary-highlight: #d0dce8;
+      --color-accent:         #c5813d;
+      --color-code-bg:        #1e1e2e;
+      --color-code-text:      #cdd6f4;
+      --color-code-comment:   #6c7086;
+      --color-code-keyword:   #cba6f7;
+      --color-code-string:    #a6e3a1;
+      --color-code-function:  #89b4fa;
+      --color-code-number:    #fab387;
+      --color-code-type:      #f38ba8;
+      --radius-sm:.375rem;--radius-md:.5rem;--radius-lg:.75rem;
+      --radius-xl:1rem;--radius-full:9999px;
+      --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow-sm: 0 1px 3px rgba(20,54,90,0.07);
+      --shadow-md: 0 4px 16px rgba(20,54,90,0.10);
+      --content-wide: 1100px;
+      --content-prose: 680px;
+    }
+    [data-theme="dark"] {
+      --color-bg:#131210;--color-surface:#1a1916;--color-surface-offset:#252320;
+      --color-divider:#2e2c29;--color-text:#d4d2ce;--color-text-muted:#888580;
+      --color-text-faint:#5a5855;--color-text-inverse:#1a1917;
+      --color-primary:#7aafd4;--color-primary-hover:#5b98c6;
+      --color-primary-highlight:#1e2d3e;--color-accent:#e09e5a;
+      --color-code-bg:#11111b;
+      --shadow-sm:0 1px 3px rgba(0,0,0,0.25);--shadow-md:0 4px 16px rgba(0,0,0,0.35);
+    }
+    @media(prefers-color-scheme:dark){
+      :root:not([data-theme]){
+        --color-bg:#131210;--color-surface:#1a1916;--color-surface-offset:#252320;
+        --color-divider:#2e2c29;--color-text:#d4d2ce;--color-text-muted:#888580;
+        --color-text-faint:#5a5855;--color-primary:#7aafd4;--color-accent:#e09e5a;
+        --color-code-bg:#11111b;
+      }
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+      text-rendering:optimizeLegibility;scroll-behavior:smooth;
+      scroll-padding-top:calc(clamp(56px,7vw,68px) + 1rem)}
+    body{font-family:var(--font-body);font-size:var(--text-base);
+      color:var(--color-text);background:var(--color-bg);min-height:100dvh;line-height:1.6}
+    a{text-decoration:none;color:inherit;transition:color var(--transition),opacity var(--transition)}
+    button{cursor:pointer;background:none;border:none;font:inherit;color:inherit;
+      transition:color var(--transition),background var(--transition)}
+    img{display:block;max-width:100%}
+    ::selection{background:rgba(20,54,90,0.12)}
+    :focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;border-radius:var(--radius-sm)}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;
+      background:oklch(from var(--color-bg) l c h / 0.92);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid oklch(from var(--color-text) l c h / 0.07)}
+    .nav__inner{max-width:var(--content-wide);margin-inline:auto;
+      padding-inline:clamp(var(--space-4),5vw,var(--space-12));
+      height:clamp(56px,7vw,68px);display:flex;align-items:center;justify-content:space-between}
+    .nav__logo{display:flex;align-items:center;gap:var(--space-3)}
+    .nav__logo-mark{width:34px;height:34px;flex-shrink:0}
+    .nav__logo-name{font-family:var(--font-display);font-size:var(--text-sm);font-weight:400;letter-spacing:0.01em}
+    .nav__right{display:flex;align-items:center;gap:var(--space-3)}
+    .nav__back{font-size:var(--text-xs);font-weight:500;display:flex;align-items:center;gap:var(--space-2);
+      color:var(--color-text-muted);padding:var(--space-2) var(--space-4);
+      border:1px solid oklch(from var(--color-text) l c h / 0.15);border-radius:var(--radius-full)}
+    .nav__back:hover{color:var(--color-text);border-color:oklch(from var(--color-text) l c h / 0.3)}
+    .theme-toggle{width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+      color:var(--color-text-muted);border-radius:var(--radius-md)}
+    .theme-toggle:hover{color:var(--color-text);background:oklch(from var(--color-text) l c h / 0.06)}
+
+    /* ── ARTICLE HERO ── */
+    .article-hero{
+      padding-top:calc(clamp(56px,7vw,68px) + clamp(var(--space-12),7vw,var(--space-24)));
+      padding-bottom:clamp(var(--space-10),5vw,var(--space-16));
+      padding-inline:clamp(var(--space-4),5vw,var(--space-12));
+      max-width:var(--content-wide);margin-inline:auto}
+    .article-hero__inner{max-width:var(--content-prose);margin-inline:auto}
+    .article-hero__breadcrumb{display:flex;align-items:center;gap:var(--space-2);
+      font-size:var(--text-xs);color:var(--color-text-faint);margin-bottom:var(--space-6)}
+    .article-hero__breadcrumb a{color:var(--color-text-muted)}
+    .article-hero__breadcrumb a:hover{color:var(--color-text)}
+    .article-hero__category{font-size:var(--text-xs);font-weight:600;letter-spacing:0.1em;
+      text-transform:uppercase;color:var(--color-accent);margin-bottom:var(--space-4)}
+    .article-hero__title{font-family:var(--font-display);
+      font-size:clamp(1.9rem,1rem + 3.5vw,3.2rem);font-weight:400;line-height:1.12;
+      color:var(--color-text);margin-bottom:var(--space-6)}
+    .article-hero__title em{font-style:italic;color:var(--color-primary)}
+    .article-hero__meta{display:flex;align-items:center;gap:var(--space-4);flex-wrap:wrap;
+      padding-bottom:var(--space-8);border-bottom:1px solid var(--color-divider)}
+    .article-hero__author{display:flex;align-items:center;gap:var(--space-3)}
+    .article-hero__avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;
+      background:var(--color-primary-highlight);display:flex;align-items:center;justify-content:center}
+    .article-hero__avatar img{width:100%;height:100%;object-fit:cover;object-position:center top}
+    .article-hero__avatar-fallback{font-family:var(--font-display);font-size:1rem;color:var(--color-primary)}
+    .article-hero__author-name{font-size:var(--text-sm);font-weight:500;color:var(--color-text)}
+    .article-hero__author-title{font-size:var(--text-xs);color:var(--color-text-muted)}
+    .article-hero__divider{width:1px;height:32px;background:var(--color-divider);flex-shrink:0}
+    .article-hero__date{font-size:var(--text-xs);color:var(--color-text-faint)}
+    .article-hero__reading{font-size:var(--text-xs);color:var(--color-text-faint);
+      display:flex;align-items:center;gap:var(--space-1)}
+    .article-hero__tags{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-5)}
+    .article-tag{font-size:var(--text-xs);font-weight:500;padding:var(--space-1) var(--space-3);
+      background:oklch(from var(--color-primary) l c h / 0.1);color:var(--color-primary);
+      border-radius:var(--radius-full);letter-spacing:0.02em}
+
+    /* ── ARTICLE LAYOUT ── */
+    .article-layout{max-width:var(--content-wide);margin-inline:auto;
+      padding-inline:clamp(var(--space-4),5vw,var(--space-12));
+      padding-bottom:clamp(var(--space-16),8vw,var(--space-24));
+      display:grid;grid-template-columns:var(--content-prose) 1fr;
+      gap:clamp(var(--space-10),5vw,var(--space-16));align-items:start}
+
+    /* ── PROSE ── */
+    .prose{font-size:var(--text-base);color:var(--color-text);line-height:1.8}
+    .prose p{margin-bottom:var(--space-6);max-width:66ch}
+    .prose p:last-child{margin-bottom:0}
+    .prose strong{font-weight:600;color:var(--color-text)}
+    .prose em{font-style:italic}
+    .prose a{color:var(--color-primary);border-bottom:1px solid oklch(from var(--color-primary) l c h / 0.3)}
+    .prose a:hover{border-bottom-color:var(--color-primary)}
+    .prose h2{font-family:var(--font-display);font-size:var(--text-xl);font-weight:400;
+      color:var(--color-text);line-height:1.15;margin-top:var(--space-12);margin-bottom:var(--space-5);
+      padding-top:var(--space-8);border-top:1px solid var(--color-divider)}
+    .prose h3{font-family:var(--font-display);font-size:var(--text-lg);font-weight:400;
+      color:var(--color-text);line-height:1.2;margin-top:var(--space-10);margin-bottom:var(--space-4)}
+    .prose blockquote{margin-block:var(--space-10);padding:var(--space-6) var(--space-8);
+      background:var(--color-surface);border-left:3px solid var(--color-primary);
+      border-radius:0 var(--radius-lg) var(--radius-lg) 0}
+    .prose blockquote p{font-family:var(--font-display);font-size:var(--text-lg);font-weight:400;
+      color:var(--color-text);font-style:italic;line-height:1.5;margin-bottom:0;max-width:52ch}
+    .prose hr{border:none;height:1px;background:var(--color-divider);margin-block:var(--space-12)}
+
+    /* ── CODE BLOCKS ── */
+    .code-block{margin-block:var(--space-8);border-radius:var(--radius-lg);overflow:hidden;
+      box-shadow:var(--shadow-md)}
+    .code-block__header{display:flex;align-items:center;justify-content:space-between;
+      padding:var(--space-3) var(--space-5);background:#181825;
+      border-bottom:1px solid rgba(255,255,255,0.06)}
+    .code-block__filename{font-family:var(--font-mono);font-size:var(--text-xs);
+      color:#9399b2;letter-spacing:0.04em}
+    .code-block__lang{font-size:0.65rem;font-weight:600;letter-spacing:0.1em;
+      text-transform:uppercase;color:#6c7086;padding:2px 6px;
+      background:rgba(255,255,255,0.05);border-radius:var(--radius-sm)}
+    .code-block__copy{font-size:var(--text-xs);color:#6c7086;padding:var(--space-1) var(--space-3);
+      background:rgba(255,255,255,0.05);border-radius:var(--radius-sm);
+      transition:color 150ms,background 150ms;cursor:pointer;border:none;font-family:var(--font-body)}
+    .code-block__copy:hover{color:#cdd6f4;background:rgba(255,255,255,0.1)}
+    .code-block pre{background:var(--color-code-bg);margin:0;padding:var(--space-6);
+      overflow-x:auto;line-height:1.65}
+    .code-block code{font-family:var(--font-mono);font-size:0.82rem;color:var(--color-code-text)}
+
+    /* Syntax token colours */
+    .t-comment{color:#6c7086;font-style:italic}
+    .t-keyword{color:#cba6f7}
+    .t-string{color:#a6e3a1}
+    .t-function{color:#89b4fa}
+    .t-number{color:#fab387}
+    .t-type{color:#f38ba8}
+    .t-operator{color:#89dceb}
+    .t-plain{color:#cdd6f4}
+    .t-param{color:#f2cdcd}
+    .t-decorator{color:#f5c2e7}
+
+    /* ── INLINE CODE ── */
+    .prose code:not(pre code){font-family:var(--font-mono);font-size:0.82em;
+      padding:0.15em 0.4em;background:oklch(from var(--color-primary) l c h / 0.08);
+      color:var(--color-primary);border-radius:var(--radius-sm);letter-spacing:0.01em}
+
+    /* ── STEP INDICATOR ── */
+    .step{display:flex;gap:var(--space-5);margin-bottom:var(--space-8);align-items:flex-start}
+    .step__number{width:32px;height:32px;flex-shrink:0;border-radius:50%;
+      background:var(--color-primary);color:var(--color-text-inverse);
+      display:flex;align-items:center;justify-content:center;
+      font-family:var(--font-display);font-size:var(--text-sm);font-weight:400;
+      margin-top:var(--space-1)}
+    .step__content{flex:1;min-width:0}
+    .step__title{font-size:var(--text-base);font-weight:600;color:var(--color-text);
+      margin-bottom:var(--space-2)}
+    .step__desc{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;max-width:58ch}
+
+    /* ── CALLOUT ── */
+    .callout{margin-block:var(--space-8);padding:var(--space-5) var(--space-6);
+      background:oklch(from var(--color-primary) l c h / 0.06);
+      border:1px solid oklch(from var(--color-primary) l c h / 0.15);
+      border-radius:var(--radius-lg)}
+    .callout--warning{background:oklch(from var(--color-accent) l c h / 0.07);
+      border-color:oklch(from var(--color-accent) l c h / 0.2)}
+    .callout--success{background:oklch(0.92 0.05 142 / 0.5);border-color:oklch(0.7 0.12 142 / 0.3)}
+    [data-theme="dark"] .callout--success{background:oklch(0.25 0.05 142 / 0.3);border-color:oklch(0.5 0.1 142 / 0.4)}
+    .callout__label{font-size:var(--text-xs);font-weight:700;letter-spacing:0.1em;
+      text-transform:uppercase;color:var(--color-primary);margin-bottom:var(--space-3)}
+    .callout--warning .callout__label{color:var(--color-accent)}
+    .callout--success .callout__label{color:#40a02b}
+    [data-theme="dark"] .callout--success .callout__label{color:#a6e3a1}
+    .callout p{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;
+      margin-bottom:var(--space-2);max-width:60ch}
+    .callout p:last-child{margin-bottom:0}
+
+    /* ── COMPARISON TABLE ── */
+    .compare-table{margin-block:var(--space-8);width:100%;border-collapse:collapse;
+      font-size:var(--text-sm)}
+    .compare-table thead tr{background:var(--color-primary);color:var(--color-text-inverse)}
+    .compare-table th{padding:var(--space-3) var(--space-4);text-align:left;
+      font-weight:600;letter-spacing:0.03em;font-size:var(--text-xs)}
+    .compare-table td{padding:var(--space-3) var(--space-4);
+      border-bottom:1px solid var(--color-divider);
+      color:var(--color-text-muted);vertical-align:top;line-height:1.5}
+    .compare-table tr:last-child td{border-bottom:none}
+    .compare-table tr:nth-child(even) td{background:var(--color-surface)}
+    .compare-table .col-win{color:var(--color-primary);font-weight:500}
+
+    /* ── PROSE LISTS ── */
+    .prose ol{list-style:none;counter-reset:prose-counter;margin-bottom:var(--space-6)}
+    .prose ol li{counter-increment:prose-counter;display:flex;gap:var(--space-4);
+      margin-bottom:var(--space-4);font-size:var(--text-base);color:var(--color-text-muted);line-height:1.65}
+    .prose ol li::before{content:counter(prose-counter);font-family:var(--font-display);
+      font-size:var(--text-lg);color:var(--color-primary);font-weight:400;
+      min-width:1.5rem;line-height:1.3}
+    .prose ol li strong{color:var(--color-text)}
+    .prose ul{list-style:none;margin-bottom:var(--space-6)}
+    .prose ul li{display:flex;gap:var(--space-3);align-items:flex-start;
+      margin-bottom:var(--space-3);font-size:var(--text-base);color:var(--color-text-muted);line-height:1.65}
+    .prose ul li::before{content:"";width:5px;height:5px;border-radius:50%;
+      background:var(--color-accent);flex-shrink:0;margin-top:0.55em}
+
+    /* ── VERSION BADGE ── */
+    .version-badge{display:inline-flex;align-items:center;gap:var(--space-2);
+      font-size:var(--text-xs);font-weight:600;letter-spacing:0.06em;
+      padding:var(--space-1) var(--space-3);
+      background:oklch(from var(--color-accent) l c h / 0.12);
+      color:var(--color-accent);border-radius:var(--radius-full);
+      margin-bottom:var(--space-5)}
+
+    /* ── AUTHOR BIO ── */
+    .author-bio{padding:var(--space-8);background:var(--color-surface);
+      border:1px solid oklch(from var(--color-text) l c h / 0.07);
+      border-radius:var(--radius-xl);display:flex;gap:var(--space-6);align-items:flex-start;
+      margin-top:var(--space-12)}
+    .author-bio__avatar{width:64px;height:64px;border-radius:50%;overflow:hidden;flex-shrink:0;
+      background:var(--color-primary-highlight);display:flex;align-items:center;justify-content:center}
+    .author-bio__avatar img{width:100%;height:100%;object-fit:cover;object-position:center top}
+    .author-bio__avatar-fallback{font-family:var(--font-display);font-size:1.5rem;color:var(--color-primary)}
+    .author-bio__name{font-size:var(--text-base);font-weight:600;color:var(--color-text);margin-bottom:var(--space-1)}
+    .author-bio__role{font-size:var(--text-xs);color:var(--color-accent);font-weight:500;letter-spacing:0.04em;margin-bottom:var(--space-3)}
+    .author-bio__text{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;max-width:48ch;margin-bottom:var(--space-4)}
+    .author-bio__link{display:inline-flex;align-items:center;gap:var(--space-2);
+      font-size:var(--text-xs);font-weight:500;color:var(--color-primary);
+      border:1px solid oklch(from var(--color-primary) l c h / 0.25);
+      border-radius:var(--radius-full);padding:var(--space-2) var(--space-4)}
+    .author-bio__link:hover{background:oklch(from var(--color-primary) l c h / 0.06)}
+
+    /* ── MORE POSTS ── */
+    .more-posts{max-width:var(--content-prose);margin-inline:auto;
+      padding-top:var(--space-12);border-top:1px solid var(--color-divider);margin-top:var(--space-12)}
+    .more-posts__label{font-size:var(--text-xs);font-weight:700;letter-spacing:0.1em;
+      text-transform:uppercase;color:var(--color-text-faint);margin-bottom:var(--space-6)}
+    .more-posts__grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}
+    .more-card{padding:var(--space-5);background:var(--color-surface);
+      border:1px solid oklch(from var(--color-text) l c h / 0.07);
+      border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);
+      transition:box-shadow var(--transition),transform var(--transition)}
+    .more-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+    .more-card__category{font-size:var(--text-xs);color:var(--color-accent);
+      font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:var(--space-2)}
+    .more-card__title{font-family:var(--font-display);font-size:var(--text-base);
+      font-weight:400;color:var(--color-text);line-height:1.3;margin-bottom:var(--space-2)}
+    .more-card--soon .more-card__title{color:var(--color-text-faint)}
+    .more-card__status{font-size:var(--text-xs);color:var(--color-text-faint)}
+
+    /* ── SIDEBAR / TOC ── */
+    .sidebar{position:sticky;top:calc(clamp(56px,7vw,68px) + var(--space-8))}
+    .toc{padding:var(--space-5) var(--space-6);background:var(--color-surface);
+      border:1px solid oklch(from var(--color-text) l c h / 0.07);
+      border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
+    .toc__label{font-size:var(--text-xs);font-weight:700;letter-spacing:0.1em;
+      text-transform:uppercase;color:var(--color-text-faint);margin-bottom:var(--space-4)}
+    .toc__list{list-style:none}
+    .toc__list li{margin-bottom:var(--space-2)}
+    .toc__list a{font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.5;display:block;
+      padding:var(--space-1) 0;border-left:2px solid transparent;padding-left:var(--space-3);
+      transition:color var(--transition),border-color var(--transition)}
+    .toc__list a:hover,.toc__list a.active{color:var(--color-primary);border-left-color:var(--color-primary)}
+    .toc__share{margin-top:var(--space-6);padding-top:var(--space-5);border-top:1px solid var(--color-divider)}
+    .toc__share-label{font-size:var(--text-xs);color:var(--color-text-faint);
+      margin-bottom:var(--space-3);letter-spacing:0.05em;text-transform:uppercase}
+    .toc__share-links{display:flex;gap:var(--space-2)}
+    .share-btn{display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);font-weight:500;
+      padding:var(--space-2) var(--space-3);background:var(--color-bg);color:var(--color-text-muted);
+      border:1px solid oklch(from var(--color-text) l c h / 0.12);border-radius:var(--radius-md)}
+    .share-btn:hover{color:var(--color-primary);border-color:oklch(from var(--color-primary) l c h / 0.3)}
+
+    /* ── FOOTER ── */
+    .footer{border-top:1px solid var(--color-divider);padding-block:var(--space-8)}
+    .footer__inner{max-width:var(--content-wide);margin-inline:auto;
+      padding-inline:clamp(var(--space-4),5vw,var(--space-12));
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--space-4)}
+    .footer__copy{font-size:var(--text-xs);color:var(--color-text-faint)}
+    .footer__links{display:flex;gap:var(--space-4);list-style:none}
+    .footer__links a{font-size:var(--text-xs);color:var(--color-text-faint)}
+    .footer__links a:hover{color:var(--color-text-muted)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){.article-layout{grid-template-columns:1fr;gap:0}.sidebar{display:none}}
+    @media(max-width:767px){
+      .article-hero__divider{display:none}
+      .article-hero__title{font-size:clamp(1.6rem,7vw,2.2rem)}
+      .prose h2{font-size:var(--text-lg)}
+      .author-bio{flex-direction:column;gap:var(--space-4);padding:var(--space-5)}
+      .nav__logo-name{display:none}
+      .more-posts__grid{grid-template-columns:1fr}
+      .step{flex-direction:column;gap:var(--space-3)}
+    }
+    @media(max-width:479px){
+      .compare-table{font-size:var(--text-xs)}
+      .compare-table th,.compare-table td{padding:var(--space-2) var(--space-3)}
+      .footer__inner{flex-direction:column;align-items:flex-start}
+      .code-block pre{padding:var(--space-4)}
+    }
+    @media(pointer:coarse){.nav__back,.theme-toggle{min-height:44px;min-width:44px}}
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="sr-only">Skip to content</a>
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo" aria-label="Sandeep Singh — Home">
+        <svg class="nav__logo-mark" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+          <rect width="34" height="34" rx="7" fill="var(--color-primary)"/>
+          <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
+            font-family="'Instrument Serif', Georgia, serif"
+            font-size="16" fill="var(--color-text-inverse)" letter-spacing="0.5">SS</text>
+        </svg>
+        <span class="nav__logo-name">Sandeep Singh</span>
+      </a>
+      <div class="nav__right">
+        <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <a href="../links.html" class="nav__back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          All Posts
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ARTICLE HERO -->
+  <header class="article-hero">
+    <div class="article-hero__inner">
+      <nav class="article-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        <a href="../links.html">Blog</a>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        <span>Getting Started with Playwright</span>
+      </nav>
+      <div class="version-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        Playwright 1.58 — Updated May 2026
+      </div>
+      <p class="article-hero__category">Test Automation</p>
+      <h1 class="article-hero__title">
+        Getting Started with<br><em>Playwright in 2026</em>
+      </h1>
+      <div class="article-hero__meta">
+        <div class="article-hero__author">
+          <div class="article-hero__avatar">
+            <img src="../profile.jpg" alt="Sandeep Singh"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <span class="article-hero__avatar-fallback" style="display:none">SS</span>
+          </div>
+          <div>
+            <div class="article-hero__author-name">Sandeep Singh</div>
+            <div class="article-hero__author-title">Manager, E2E Quality Engineering</div>
+          </div>
+        </div>
+        <div class="article-hero__divider" aria-hidden="true"></div>
+        <time class="article-hero__date" datetime="2026-05-10">May 10, 2026</time>
+        <div class="article-hero__divider" aria-hidden="true"></div>
+        <div class="article-hero__reading">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          12 min read
+        </div>
+      </div>
+      <div class="article-hero__tags">
+        <span class="article-tag">Playwright</span>
+        <span class="article-tag">TypeScript</span>
+        <span class="article-tag">E2E Testing</span>
+        <span class="article-tag">Page Object Model</span>
+        <span class="article-tag">CI/CD</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ARTICLE BODY -->
+  <div class="article-layout" id="main">
+
+    <article class="prose" aria-label="Article content">
+
+      <p>
+        Playwright has quietly become the default choice for serious E2E test automation. Built by Microsoft and open-source since 2020, it has overtaken Cypress in adoption among enterprise teams — and for good reason. It is faster, supports all three major browser engines, handles modern authentication flows natively, and comes with a trace viewer that makes debugging failures genuinely pleasant.
+      </p>
+      <p>
+        This guide walks you through a complete, production-ready Playwright setup using <strong>TypeScript</strong> — from a blank folder to a structured framework with the Page Object Model, parallel execution, and a CI pipeline. Everything here is current to <strong>Playwright 1.58</strong>, the latest release line as of May 2026.
+      </p>
+
+      <blockquote>
+        <p>Playwright does not just run your tests — it tells you exactly why they failed, with a timeline, screenshots, network logs, and a step-by-step trace.</p>
+      </blockquote>
+
+      <h2 id="why-playwright">Why Playwright Over the Alternatives</h2>
+
+      <p>
+        Before diving into setup, it is worth understanding why Playwright is the right choice in 2026. The landscape of automation tools has consolidated significantly, and the choice largely comes down to three contenders.
+      </p>
+
+      <table class="compare-table" aria-label="Playwright vs Cypress vs Selenium comparison">
+        <thead>
+          <tr><th>Feature</th><th>Playwright</th><th>Cypress</th><th>Selenium</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Browser support</td><td class="col-win">Chromium, Firefox, WebKit</td><td>Chromium, Firefox, WebKit (limited)</td><td>All, via WebDriver</td></tr>
+          <tr><td>Architecture</td><td class="col-win">Direct protocol (no WebDriver)</td><td>In-browser execution</td><td>WebDriver protocol</td></tr>
+          <tr><td>Auto-waiting</td><td class="col-win">Built-in, intelligent</td><td>Built-in, limited scope</td><td>Manual, explicit waits</td></tr>
+          <tr><td>Multi-tab / iFrame</td><td class="col-win">Native support</td><td>Restricted (same origin only)</td><td>Supported with extra config</td></tr>
+          <tr><td>Trace &amp; debugging</td><td class="col-win">Trace Viewer, timeline, network</td><td>Time-travel debugging</td><td>Limited built-in tooling</td></tr>
+          <tr><td>Parallel execution</td><td class="col-win">Built-in, per-file by default</td><td>Requires paid plan (Cypress Cloud)</td><td>Manual configuration required</td></tr>
+          <tr><td>Language support</td><td class="col-win">JS, TS, Python, Java, .NET</td><td>JS / TS only</td><td>Most languages</td></tr>
+          <tr><td>CI speed</td><td class="col-win">Fast — browsers share per worker</td><td>Moderate</td><td>Slower, heavier setup</td></tr>
+        </tbody>
+      </table>
+
+      <p>
+        Selenium remains relevant for legacy enterprise environments where WebDriver compliance is a requirement. Cypress is excellent for frontend-focused teams running simple single-origin flows. But for a quality engineering team running a full E2E suite across authenticated journeys, APIs, and multiple browsers — Playwright is the clear choice.
+      </p>
+
+      <h2 id="prerequisites">Prerequisites</h2>
+      <p>Before you begin, ensure the following are installed on your machine:</p>
+      <ul>
+        <li><strong>Node.js 18 or higher</strong> — Playwright 1.58 requires Node 18+. Run <code>node --version</code> to check.</li>
+        <li><strong>VS Code</strong> — Install the official <strong>Playwright Test for VS Code</strong> extension for inline test running and debugging.</li>
+        <li><strong>Git</strong> — For version control and CI integration.</li>
+      </ul>
+
+      <h2 id="installation">Installation &amp; Project Setup</h2>
+
+      <div class="step">
+        <div class="step__number">1</div>
+        <div class="step__content">
+          <div class="step__title">Create your project folder</div>
+          <div class="step__desc">Create a new directory and initialise it with npm. The <code>-y</code> flag accepts all defaults.</div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__filename">terminal</span>
+          <div style="display:flex;gap:var(--space-3)">
+            <span class="code-block__lang">bash</span>
+            <button class="code-block__copy" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <pre><code><span class="t-plain">mkdir my-playwright-project
+cd my-playwright-project
+npm init -y</span></code></pre>
+      </div>
+
+      <div class="step">
+        <div class="step__number">2</div>
+        <div class="step__content">
+          <div class="step__title">Install Playwright with TypeScript</div>
+          <div class="step__desc">The <code>init</code> command installs everything and walks you through a setup wizard. Choose TypeScript when prompted.</div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__filename">terminal</span>
+          <div style="display:flex;gap:var(--space-3)">
+            <span class="code-block__lang">bash</span>
+            <button class="code-block__copy" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <pre><code><span class="t-plain">npm init playwright@latest</span>
+
+<span class="t-comment"># When prompted, select:
+# - TypeScript
+# - tests/ as your test directory
+# - Yes to GitHub Actions workflow
+# - Yes to install browsers</span></code></pre>
+      </div>
+
+      <div class="callout callout--success">
+        <div class="callout__label">What gets installed</div>
+        <p>Playwright installs three browser engines: Chromium (~250MB), Firefox (~85MB), and WebKit (~65MB). These are isolated from your system browsers — your production Chrome is never touched.</p>
+      </div>
+
+      <div class="step">
+        <div class="step__number">3</div>
+        <div class="step__content">
+          <div class="step__title">Verify the setup works</div>
+          <div class="step__desc">Run the example tests that were generated during init. All should pass.</div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__filename">terminal</span>
+          <div style="display:flex;gap:var(--space-3)">
+            <span class="code-block__lang">bash</span>
+            <button class="code-block__copy" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <pre><code><span class="t-plain">npx playwright test</span>
+
+<span class="t-comment"># Open the HTML report after the run</span>
+<span class="t-plain">npx playwright show-report</span></code></pre>
+      </div>
+
+      <h2 id="config">Configuring playwright.config.ts</h2>
+      <p>
+        The config file is the control centre of your Playwright suite. Here is a well-structured starting config that covers the most important settings for a professional setup:
+      </p>
+
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__filename">playwright.config.ts</span>
+          <div style="display:flex;gap:var(--space-3)">
+            <span class="code-block__lang">typescript</span>
+            <button class="code-block__copy" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <pre><code><span class="t-keyword">import</span> <span class="t-plain">{ defineConfig, devices }</span> <span class="t-keyword">from</span> <span class="t-string">'@playwright/test'</span><span class="t-plain">;</span>
+
+<span class="t-keyword">export default</span> <span class="t-function">defineConfig</span><span class="t-plain">({</span>
+  <span class="t-comment">// Test directory</span>
+  <span class="t-plain">testDir:</span> <span class="t-string">'./tests'</span><span class="t-plain">,</span>
+
+  <span class="t-comment">// Run all tests in parallel by default</span>
+  <span class="t-plain">fullyParallel:</span> <span class="t-keyword">true</span><span class="t-plain">,</span>
+
+  <span class="t-comment">// Fail CI if test.only is accidentally committed</span>
+  <span class="t-plain">forbidOnly: !!</span><span class="t-plain">process.env.CI,</span>
+
+  <span class="t-comment">// Retry failed tests once in CI, not locally</span>
+  <span class="t-plain">retries: process.env.CI ?</span> <span class="t-number">1</span> <span class="t-plain">:</span> <span class="t-number">0</span><span class="t-plain">,</span>
+
+  <span class="t-comment">// Parallel workers — 50% of CPU cores</span>
+  <span class="t-plain">workers: process.env.CI ?</span> <span class="t-number">2</span> <span class="t-plain">: undefined,</span>
+
+  <span class="t-comment">// HTML reporter with trace on first retry</span>
+  <span class="t-plain">reporter: [[</span><span class="t-string">'html'</span><span class="t-plain">], [</span><span class="t-string">'list'</span><span class="t-plain">]],</span>
+
+  <span class="t-plain">use: {</span>
+    <span class="t-comment">// Base URL — change to your app URL</span>
+    <span class="t-plain">baseURL:</span> <span class="t-string">'https://your-app.com'</span><span class="t-plain">,</span>
+
+    <span class="t-comment">// Collect trace on first retry for debugging</span>
+    <span class="t-plain">trace:</span> <span class="t-string">'on-first-retry'</span><span class="t-plain">,</span>
+
+    <span class="t-comment">// Screenshot only on failure</span>
+    <span class="t-plain">screenshot:</span> <span class="t-string">'only-on-failure'</span><span class="t-plain">,</span>
+
+    <span class="t-comment">// Video on first retry</span>
+    <span class="t-plain">video:</span> <span class="t-string">'on-first-retry'</span><span class="t-plain">,</span>
+
+    <span class="t-comment">// Sensible timeouts</span>
+    <span class="t-plain">actionTimeout:</span> <span class="t-number">10_000</span><span class="t-plain">,</span>
+    <span class="t-plain">navigationTimeout:</span> <span class="t-number">30_000</span><span class="t-plain">,</span>
+  <span class="t-plain">},</span>
+
+  <span class="t-comment">// Test against three browsers</span>
+  <span class="t-plain">projects: [</span>
+    <span class="t-plain">{ name:</span> <span class="t-string">'chromium'</span><span class="t-plain">, use: { ...devices[</span><span class="t-string">'Desktop Chrome'</span><span class="t-plain">] } },</span>
+    <span class="t-plain">{ name:</span> <span class="t-string">'firefox'</span><span class="t-plain">,  use: { ...devices[</span><span class="t-string">'Desktop Firefox'</span><span class="t-plain">] } },</span>
+    <span class="t-plain">{ name:</span> <span class="t-string">'webkit'</span><span class="t-plain">,   use: { ...devices[</span><span class="t-string">'Desktop Safari'</span><span class="t-plain">] } },</span>
+    <span class="t-comment">// Mobile viewports</span>
+    <span class="t-plain">{ name:</span> <span class="t-string">'mobile-chrome'</span><span class="t-plain">, use: { ...devices[</span><span class="t-string">'Pixel 5'</span><span class="t-plain">] } },</span>
+  <span class="t-plain">],</span>
+<span class="t-plain">});</span></code></pre>
+      </div>
+
+      <h2 id="locators">Writing Good Locators</h2>
+      <p>
+        The single most common cause of flaky Playwright tests is poor locator strategy. Playwright's built-in locators are designed around how users actually interact with a page — not how the DOM is structured. This makes tests more resilient when the UI changes.
+      </p>
+
+      <div class="callout callout--warning">
+        <div class="callout__label">Avoid These Locator Patterns</div>
+        <p>XPath selectors, CSS class selectors (<code>.btn-primary</code>), and <code>nth-child</code> selectors are all implementation details that change often. A single UI refactor can silently break dozens of tests.</p>
+      </div>
+
+      <p>Prefer these built-in locators in this order of priority:</p>
+
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__filename">tests/locators-guide.ts</span>
+          <div style="display:flex;gap:var(--space-3)">
+            <span class="code-block__lang">typescript</span>
+            <button class="code-block__copy" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <pre><code><span class="t-comment">// 1. By role — mirrors accessibility tree (BEST)</span>
+<span class="t-plain">page.</span><span class="t-function">getByRole</span><span class="t-plain">(</span><span class="t-string">'button'</span><span class="t-plain">, { name:</span> <span class="t-string">'Submit'</span> <span class="t-plain">})</span>
+<span class="t-plain">page.</span><span class="t-function">getByRole</span><span class="t-plain">(</span><span class="t-string">'textbox'</span><span class="t-plain">, { name:</span> <span class="t-string">'Email address'</span> <span class="t-plain">})</span>
+<span class="t-plain">page.</span><span class="t-function">getByRole</span><span class="t-plain">(</span><span class="t-string">'link'</span><span class="t-plain">, { name:</span> <span class="t-string">'Sign in'</span> <span class="t-plain">})</span>
+
+<span class="t-comment">// 2. By label — for form fields</span>
+<span class="t-plain">page.</span><span class="t-function">getByLabel</span><span class="t-plain">(</span><span class="t-string">'Password'</span><span class="t-plain">)</span>
+
+<span class="t-comment">// 3. By placeholder text</span>
+<span class="t-plain">page.</span><span class="t-function">getByPlaceholder</span><span class="t-plain">(</span><span class="t-string">'Search transactions...'</span><span class="t-plain">)</span>
+
+<span class="t-comment">// 4. By test ID — add data-testid to your HTML for stable anchors</span>
+<span class="t-plain">page.</span><span class="t-function">getByTestId</span><span class="t-plain">(</span><span class="t-string">'send-money-btn'</span><span class="t-plain">)</span>
+
+<span class="t-comment">// 5. By visible text — last resort for static content</span>
+<span class="t-plain">page.</span><span class="t-function">getByText</span><span class="t-plain">(</span><span class="t-string">'Transaction confirmed'</span><span class="t-plain">)</span>
+
+<span class="t-comment">// AVOID: fragile CSS / XPath selectors</span>
+<span class="t-comment">// page.locator('.btn-submit-v2')      ← breaks on CSS rename</span>
+<span class="t-comment">// page.locator('//div[3]/button[1]')  ← breaks on DOM change</span></code></pre>
+      </div>
+
+      <h2 id="page-object-model">Page Object Model</h2>
+      <p>
+        The Page Object Model (POM) is the most important structural pattern in E2E automation. Instead of writing page interactions directly in your test files, you encapsulate them in dedicated classes. This means when the UI changes, you update one file — not fifty tests.
+      </p>
+
+      <h3>Example: Login Page Object</h3>
+
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__filename">pages/LoginPage.ts</span>
+          <div style="display:flex;gap:var(--space-3)">
+            <span class="code-block__lang">typescript</span>
+            <button class="code-block__copy" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <pre><code><span class="t-keyword">import</span> <span class="t-plain">{ Page, Locator }</span> <span class="t-keyword">from</span> <span class="t-string">'@playwright/test'</span><span class="t-plain">;</span>
+
+<span class="t-keyword">export class</span> <span class="t-type">LoginPage</span> <span class="t-plain">{</span>
+  <span class="t-keyword">private readonly</span> <span class="t-plain">page:</span> <span class="t-type">Page</span><span class="t-plain">;</span>
+  <span class="t-keyword">private readonly</span> <span class="t-plain">emailInput:</span> <span class="t-type">Locator</span><span class="t-plain">;</span>
+  <span class="t-keyword">private readonly</span> <span class="t-plain">passwordInput:</span> <span class="t-type">Locator</span><span class="t-plain">;</span>
+  <span class="t-keyword">private readonly</span> <span class="t-plain">signInButton:</span> <span class="t-type">Locator</span><span class="t-plain">;</span>
+  <span class="t-keyword">private readonly</span> <span class="t-plain">errorMessage:</span> <span class="t-type">Locator</span><span class="t-plain">;</span>
+
+  <span class="t-function">constructor</span><span class="t-plain">(page:</span> <span class="t-type">Page</span><span class="t-plain">) {</span>
+    <span class="t-keyword">this</span><span class="t-plain">.page = page;</span>
+    <span class="t-keyword">this</span><span class="t-plain">.emailInput    = page.</span><span class="t-function">getByLabel</span><span class="t-plain">(</span><span class="t-string">'Email address'</span><span class="t-plain">);</span>
+    <span class="t-keyword">this</span><span class="t-plain">.passwordInput = page.</span><span class="t-function">getByLabel</span><span class="t-plain">(</span><span class="t-string">'Password'</span><span class="t-plain">);</span>
+    <span class="t-keyword">this</span><span class="t-plain">.signInButton  = page.</span><span class="t-function">getByRole</span><span class="t-plain">(</span><span class="t-string">'button'</span><span class="t-plain">, { name:</span> <span class="t-string">'Sign in'</span> <span class="t-plain">});</span>
+    <span class="t-keyword">this</span><span class="t-plain">.errorMessage  = page.</span><span class="t-function">getByRole</span><span class="t-plain">(</span><span class="t-string">'alert'</span><span class="t-plain">);</span>
+  <span class="t-plain">}</span>
+
+  <span class="t-keyword">async</span> <span class="t-function">goto</span><span class="t-plain">() {</span>
+    <span class="t-keyword">await</span> <span class="t-keyword">this</span><span class="t-plain">.page.</span><span class="t-function">goto</span><span class="t-plain">(</span><span class="t-string">'/login'</span><span class="t-plain">);</span>
+  <span class="t-plain">}</span>
+
+  <span class="t-keyword">async</span> <span class="t-function">login</span><span class="t-plain">(email:</span> <span class="t-type">string</span><span class="t-plain">, password:</span> <span class="t-type">string</span><span class="t-plain">) {</span>
+    <span class="t-keyword">await</span> <span class="t-keyword">this</span><span class="t-plain">.emailInput.</span><span class="t-function">fill</span><span class="t-plain">(email);</span>
+    <span class="t-keyword">await</span> <span class="t-keyword">this</span><span class="t-plain">.passwordInput.</span><span class="t-function">fill</span><span class="t-plain">(password);</span>
+    <span class="t-keyword">await</span> <span class="t-keyword">this</span><span class="t-plain">.signInButton.</span><span class="t-function">click</span><span class="t-plain">();</span>
+  <span class="t-plain">}</span>
+
+  <span class="t-keyword">async</span> <span class="t-function">getErrorMessage</span><span class="t-plain">():</span> <span class="t-type">Promise</span><span class="t-plain">&lt;</span><span class="t-type">string</span> <span class="t-plain">| null&gt; {</span>
+    <span class="t-keyword">return</span> <span class="t-keyword">this</span><span class="t-plain">.errorMessage.</span><span class="t-function">textContent</span><span class="t-plain">();</span>
+  <span class="t-plain">}</span>
+<span class="t-plain">}</span></code></pre>
+      </div>
+
+      <h3>Using the Page Object in a Test</h3>
+
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__filename">tests/auth/login.spec.ts</span>
+          <div style="display:flex;gap:var(--space-3)">
+            <span class="code-block__lang">typescript</span>
+            <button class="code-block__copy" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <pre><code><span class="t-keyword">import</span> <span class="t-plain">{ test, expect }</span> <span class="t-keyword">from</span> <span class="t-string">'@playwright/test'</span><span class="t-plain">;</span>
+<span class="t-keyword">import</span> <span class="t-plain">{ LoginPage }</span> <span class="t-keyword">from</span> <span class="t-string">'../../pages/LoginPage'</span><span class="t-plain">;</span>
+
+<span class="t-function">test</span><span class="t-plain">(</span><span class="t-string">'successful login redirects to dashboard'</span><span class="t-plain">, </span><span class="t-keyword">async</span> <span class="t-plain">({ page }) => {</span>
+  <span class="t-keyword">const</span> <span class="t-plain">loginPage =</span> <span class="t-keyword">new</span> <span class="t-type">LoginPage</span><span class="t-plain">(page);</span>
+
+  <span class="t-keyword">await</span> <span class="t-plain">loginPage.</span><span class="t-function">goto</span><span class="t-plain">();</span>
+  <span class="t-keyword">await</span> <span class="t-plain">loginPage.</span><span class="t-function">login</span><span class="t-plain">(</span><span class="t-string">'user@example.com'</span><span class="t-plain">,</span> <span class="t-string">'SecurePass123'</span><span class="t-plain">);</span>
+
+  <span class="t-keyword">await</span> <span class="t-function">expect</span><span class="t-plain">(page).</span><span class="t-function">toHaveURL</span><span class="t-plain">(</span><span class="t-string">'/dashboard'</span><span class="t-plain">);</span>
+  <span class="t-keyword">await</span> <span class="t-function">expect</span><span class="t-plain">(page.</span><span class="t-function">getByRole</span><span class="t-plain">(</span><span class="t-string">'heading'</span><span class="t-plain">, { name:</span> <span class="t-string">'Welcome back'</span> <span class="t-plain">})).</span><span class="t-function">toBeVisible</span><span class="t-plain">();</span>
+<span class="t-plain">});</span>
+
+<span class="t-function">test</span><span class="t-plain">(</span><span class="t-string">'invalid credentials shows error message'</span><span class="t-plain">, </span><span class="t-keyword">async</span> <span class="t-plain">({ page }) => {</span>
+  <span class="t-keyword">const</span> <span class="t-plain">loginPage =</span> <span class="t-keyword">new</span> <span class="t-type">LoginPage</span><span class="t-plain">(page);</span>
+
+  <span class="t-keyword">await</span> <span class="t-plain">loginPage.</span><span class="t-function">goto</span><span class="t-plain">();</span>
+  <span class="t-keyword">await</span> <span class="t-plain">loginPage.</span><span class="t-function">login</span><span class="t-plain">(</span><span class="t-string">'wrong@example.com'</span><span class="t-plain">,</span> <span class="t-string">'wrongpassword'</span><span class="t-plain">);</span>
+
+  <span class="t-keyword">const</span> <span class="t-plain">error = </span><span class="t-keyword">await</span> <span class="t-plain">loginPage.</span><span class="t-function">getErrorMessage</span><span class="t-plain">();</span>
+  <span class="t-keyword">await</span> <span class="t-function">expect</span><span class="t-plain">(error).</span><span class="t-function">toContain</span><span class="t-plain">(</span><span class="t-string">'Invalid credentials'</span><span class="t-plain">);</span>
+<span class="t-plain">});</span></code></pre>
+      </div>
+
+      <h2 id="ci-cd">CI/CD with GitHub Actions</h2>
+      <p>
+        Playwright's init wizard generates a GitHub Actions workflow for you, but the default config is minimal. Here is a production-ready version that caches browsers, runs tests in parallel, and uploads the HTML report as an artifact:
+      </p>
+
+      <div class="code-block">
+        <div class="code-block__header">
+          <span class="code-block__filename">.github/workflows/playwright.yml</span>
+          <div style="display:flex;gap:var(--space-3)">
+            <span class="code-block__lang">yaml</span>
+            <button class="code-block__copy" onclick="copyCode(this)">Copy</button>
+          </div>
+        </div>
+        <pre><code><span class="t-function">name</span><span class="t-plain">: Playwright E2E Tests</span>
+
+<span class="t-function">on</span><span class="t-plain">:</span>
+  <span class="t-function">push</span><span class="t-plain">:</span>
+    <span class="t-function">branches</span><span class="t-plain">: [main, develop]</span>
+  <span class="t-function">pull_request</span><span class="t-plain">:</span>
+    <span class="t-function">branches</span><span class="t-plain">: [main]</span>
+
+<span class="t-function">jobs</span><span class="t-plain">:</span>
+  <span class="t-function">test</span><span class="t-plain">:</span>
+    <span class="t-function">timeout-minutes</span><span class="t-plain">: 30</span>
+    <span class="t-function">runs-on</span><span class="t-plain">: ubuntu-latest</span>
+
+    <span class="t-function">steps</span><span class="t-plain">:</span>
+      <span class="t-plain">- </span><span class="t-function">uses</span><span class="t-plain">: actions/checkout@v4</span>
+
+      <span class="t-plain">- </span><span class="t-function">uses</span><span class="t-plain">: actions/setup-node@v4</span>
+        <span class="t-function">with</span><span class="t-plain">:</span>
+          <span class="t-function">node-version</span><span class="t-plain">: 20</span>
+          <span class="t-function">cache</span><span class="t-plain">: npm</span>
+
+      <span class="t-plain">- </span><span class="t-function">name</span><span class="t-plain">: Install dependencies</span>
+        <span class="t-function">run</span><span class="t-plain">: npm ci</span>
+
+      <span class="t-comment">      # Cache Playwright browsers — saves ~3 min per run</span>
+      <span class="t-plain">- </span><span class="t-function">name</span><span class="t-plain">: Cache Playwright browsers</span>
+        <span class="t-function">uses</span><span class="t-plain">: actions/cache@v4</span>
+        <span class="t-function">with</span><span class="t-plain">:</span>
+          <span class="t-function">path</span><span class="t-plain">: ~/.cache/ms-playwright</span>
+          <span class="t-function">key</span><span class="t-plain">: playwright-${{ hashFiles('package-lock.json') }}</span>
+
+      <span class="t-plain">- </span><span class="t-function">name</span><span class="t-plain">: Install Playwright browsers</span>
+        <span class="t-function">run</span><span class="t-plain">: npx playwright install --with-deps</span>
+
+      <span class="t-plain">- </span><span class="t-function">name</span><span class="t-plain">: Run Playwright tests</span>
+        <span class="t-function">run</span><span class="t-plain">: npx playwright test</span>
+
+      <span class="t-plain">- </span><span class="t-function">name</span><span class="t-plain">: Upload test report</span>
+        <span class="t-function">uses</span><span class="t-plain">: actions/upload-artifact@v4</span>
+        <span class="t-function">if</span><span class="t-plain">: always()</span>
+        <span class="t-function">with</span><span class="t-plain">:</span>
+          <span class="t-function">name</span><span class="t-plain">: playwright-report</span>
+          <span class="t-function">path</span><span class="t-plain">: playwright-report/</span>
+          <span class="t-function">retention-days</span><span class="t-plain">: 14</span></code></pre>
+      </div>
+
+      <div class="callout">
+        <div class="callout__label">Pro Tip — Browser Caching</div>
+        <p>The cache step above is critical for CI performance. Without it, downloading all three browser engines on every run adds 3–5 minutes. With the cache keyed to <code>package-lock.json</code>, browsers only re-download when you upgrade Playwright.</p>
+      </div>
+
+      <h2 id="playwright-158">What is New in Playwright 1.58</h2>
+      <p>
+        The 2026 release line has focused on debugging and developer experience rather than breaking API changes. The headline features in 1.58 are worth knowing if you are upgrading an existing suite.
+      </p>
+
+      <ol>
+        <li><strong>Timeline in HTML report.</strong> The new Speedboard tab shows a visual timeline of all test actions, making it straightforward to spot which step caused a slowdown or timeout without reading through logs line by line.</li>
+        <li><strong>Cmd/Ctrl+F search in Trace Viewer.</strong> You can now search inside code panels within the Trace Viewer and UI mode — a small but genuinely useful addition for large traces with many steps.</li>
+        <li><strong>System theme in UI mode.</strong> UI mode now respects your OS dark/light mode preference automatically.</li>
+        <li><strong>Removed: <code>_react</code> and <code>_vue</code> selectors.</strong> These experimental selectors were removed in 1.58. If your tests used <code>_react=</code> or <code>_vue=</code> selectors, migrate to <code>getByRole</code> or <code>getByTestId</code> before upgrading.</li>
+        <li><strong>Removed: <code>devtools</code> launch option.</strong> The <code>devtools: true</code> option in <code>browserType.launch()</code> has been removed. Use <code>headed: true</code> combined with manual DevTools if needed.</li>
+      </ol>
+
+      <h2 id="best-practices">Key Best Practices</h2>
+
+      <ul>
+        <li><strong>Never use <code>page.waitForTimeout()</code>.</strong> Hard-coded waits are the primary source of flakiness. Playwright's built-in auto-waiting handles element readiness — trust it.</li>
+        <li><strong>Use browser contexts for isolation.</strong> Each test gets its own browser context by default. Never share state between tests — it creates order dependencies that are impossible to debug.</li>
+        <li><strong>Use <code>storageState</code> for authenticated tests.</strong> Log in once, save the auth state to a file, and restore it in tests that need authentication. This removes login flows from every test and speeds up your suite significantly.</li>
+        <li><strong>Keep test files focused.</strong> One spec file per feature area, not one file per test. Playwright runs files in parallel — large monolithic test files serialize unnecessarily.</li>
+        <li><strong>Treat test code as production code.</strong> Code reviews, naming conventions, and refactoring apply equally to your test suite. Technical debt in test code compounds just as fast.</li>
+        <li><strong>Use <code>test.describe</code> for grouping, not for shared state.</strong> <code>beforeEach</code> inside a describe block is fine. Shared mutable variables between tests in a describe are not.</li>
+      </ul>
+
+      <hr />
+
+      <h2 id="next-steps">Where to Go Next</h2>
+      <p>
+        With this foundation in place, the next areas to explore are <strong>API testing</strong> (Playwright supports full HTTP request testing without a browser), <strong>visual regression testing</strong> using <code>expect(page).toHaveScreenshot()</code>, and <strong>fixtures</strong> for managing shared setup across your test suite in a clean, composable way.
+      </p>
+      <p>
+        The official <a href="https://playwright.dev/docs/intro" target="_blank" rel="noopener noreferrer">Playwright documentation</a> is exceptionally well-written and kept current with every release. It is the best single reference for everything beyond the fundamentals covered here.
+      </p>
+
+      <!-- AUTHOR BIO -->
+      <div class="author-bio">
+        <div class="author-bio__avatar">
+          <img src="../profile.jpg" alt="Sandeep Singh"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+          <span class="author-bio__avatar-fallback" style="display:none">SS</span>
+        </div>
+        <div>
+          <div class="author-bio__name">Sandeep Singh</div>
+          <div class="author-bio__role">Manager, E2E Quality Engineering &mdash; Western Union</div>
+          <p class="author-bio__text">
+            16+ years in software quality engineering. Currently driving E2E test strategy and automation at Western Union, Pune — with Playwright as the core framework.
+          </p>
+          <a href="https://www.linkedin.com/in/sandeepsingh87/" target="_blank" rel="noopener noreferrer" class="author-bio__link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            Connect on LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <!-- MORE POSTS -->
+      <div class="more-posts">
+        <div class="more-posts__label">More from the Blog</div>
+        <div class="more-posts__grid">
+          <a href="why-qe-is-not-just-testing.html" class="more-card">
+            <div class="more-card__category">Quality Engineering</div>
+            <div class="more-card__title">Why Quality Engineering is Not Just Testing</div>
+            <div class="more-card__status">8 min read</div>
+          </a>
+          <div class="more-card more-card--soon">
+            <div class="more-card__category">AI in QE</div>
+            <div class="more-card__title">AI in Testing — Hype vs. Reality</div>
+            <div class="more-card__status">Coming soon</div>
+          </div>
+        </div>
+      </div>
+
+    </article>
+
+    <!-- SIDEBAR TOC -->
+    <aside class="sidebar" aria-label="Table of contents">
+      <nav class="toc">
+        <div class="toc__label">In this article</div>
+        <ul class="toc__list" role="list">
+          <li><a href="#why-playwright">Why Playwright</a></li>
+          <li><a href="#prerequisites">Prerequisites</a></li>
+          <li><a href="#installation">Installation &amp; Setup</a></li>
+          <li><a href="#config">Config File</a></li>
+          <li><a href="#locators">Writing Good Locators</a></li>
+          <li><a href="#page-object-model">Page Object Model</a></li>
+          <li><a href="#ci-cd">CI/CD with GitHub Actions</a></li>
+          <li><a href="#playwright-158">What is New in 1.58</a></li>
+          <li><a href="#best-practices">Best Practices</a></li>
+          <li><a href="#next-steps">Next Steps</a></li>
+        </ul>
+        <div class="toc__share">
+          <div class="toc__share-label">Share</div>
+          <div class="toc__share-links">
+            <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href).then(()=>this.textContent='Copied!')" aria-label="Copy link">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              Copy
+            </button>
+            <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://sandeepsingh87.in/blog/getting-started-with-playwright-2026.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__copy">&copy; 2026 Sandeep Singh. All rights reserved.</p>
+      <ul class="footer__links" role="list">
+        <li><a href="/">Home</a></li>
+        <li><a href="../links.html">Blog</a></li>
+        <li><a href="mailto:mailsandeeps3@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle
+    (function(){
+      const t = document.querySelector('[data-theme-toggle]');
+      const r = document.documentElement;
+      let d = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      r.setAttribute('data-theme', d);
+      function updateIcon(theme) {
+        if (!t) return;
+        t.setAttribute('aria-label', 'Switch to ' + (theme === 'dark' ? 'light' : 'dark') + ' mode');
+        t.innerHTML = theme === 'dark'
+          ? '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+          : '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      }
+      updateIcon(d);
+      t && t.addEventListener('click', () => {
+        d = d === 'dark' ? 'light' : 'dark';
+        r.setAttribute('data-theme', d);
+        localStorage.setItem('theme', d);
+        updateIcon(d);
+      });
+    })();
+
+    // Active TOC on scroll
+    (function(){
+      const headings = document.querySelectorAll('.prose h2[id]');
+      const tocLinks = document.querySelectorAll('.toc__list a');
+      if (!headings.length || !tocLinks.length) return;
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            tocLinks.forEach(l => l.classList.remove('active'));
+            const active = document.querySelector('.toc__list a[href="#' + entry.target.id + '"]');
+            if (active) active.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-20% 0% -70% 0%' });
+      headings.forEach(h => obs.observe(h));
+    })();
+
+    // Copy code block
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = orig, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
