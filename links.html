@@ -89,7 +89,7 @@
     }
     .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0; }
 
-    /* ── NAV ───────────────────────────────────────────── */
+    /* ── NAV ── */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: oklch(from var(--color-bg) l c h / 0.92);
@@ -123,7 +123,7 @@
     }
     .theme-toggle:hover { color: var(--color-text); background: oklch(from var(--color-text) l c h / 0.06); }
 
-    /* ── PAGE HEADER ───────────────────────────────────── */
+    /* ── PAGE HEADER ── */
     .page-header {
       padding-top: calc(clamp(56px, 7vw, 68px) + clamp(3rem, 8vw, 5rem));
       padding-bottom: clamp(var(--space-10), 5vw, var(--space-16));
@@ -146,14 +146,14 @@
       max-width: 52ch; line-height: 1.6;
     }
 
-    /* ── MAIN LAYOUT ───────────────────────────────────── */
+    /* ── MAIN LAYOUT ── */
     .main {
       max-width: var(--content-wide); margin-inline: auto;
       padding-inline: clamp(var(--space-4), 5vw, var(--space-12));
       padding-block: clamp(var(--space-10), 6vw, var(--space-16));
     }
 
-    /* ── CATEGORY SECTION ──────────────────────────────── */
+    /* ── CATEGORY SECTION ── */
     .category { margin-bottom: clamp(var(--space-12), 6vw, var(--space-20)); }
     .category:last-child { margin-bottom: 0; }
     .category__header {
@@ -185,7 +185,7 @@
       border-radius: var(--radius-full); letter-spacing: 0.04em;
     }
 
-    /* ── LINK CARDS ────────────────────────────────────── */
+    /* ── LINK CARDS ── */
     .cards { display: flex; flex-direction: column; gap: var(--space-3); }
 
     .card {
@@ -250,7 +250,7 @@
       transition: transform var(--transition), opacity var(--transition);
     }
 
-    /* ── FOOTER ────────────────────────────────────────── */
+    /* ── FOOTER ── */
     .footer { border-top: 1px solid var(--color-divider); padding-block: var(--space-8); }
     .footer__inner {
       max-width: var(--content-wide); margin-inline: auto;
@@ -263,7 +263,7 @@
     .footer__links a { font-size: var(--text-xs); color: var(--color-text-faint); }
     .footer__links a:hover { color: var(--color-text-muted); }
 
-    /* ── RESPONSIVE ────────────────────────────────────── */
+    /* ── RESPONSIVE ── */
     @media (max-width: 767px) {
       .page-header__title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
       .card { padding: var(--space-4) var(--space-5); gap: var(--space-4); }
@@ -326,7 +326,7 @@
   <!-- MAIN -->
   <main id="main" class="main">
 
-    <!-- ── CATEGORY 1: BLOG ─────────────────────────────── -->
+    <!-- ── CATEGORY 1: BLOG ── -->
     <section class="category" aria-labelledby="cat-blog">
       <div class="category__header">
         <div class="category__icon">
@@ -342,11 +342,12 @@
           <div class="category__label">Writing</div>
           <h2 class="category__title" id="cat-blog">Blog &amp; Articles</h2>
         </div>
-        <span class="category__count">1 post</span>
+        <!-- ✅ UPDATED: count now shows 2 posts -->
+        <span class="category__count">2 posts</span>
       </div>
       <div class="cards">
 
-        <!-- LIVE: Blog post 1 -->
+        <!-- ✅ LIVE: Blog post 1 — Why QE is Not Just Testing -->
         <a href="blog/why-qe-is-not-just-testing.html" class="card card--active">
           <div class="card__icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
@@ -360,24 +361,27 @@
             <div class="card__desc">The mindset shift from QA to QE — and why it matters for modern software delivery.</div>
           </div>
           <div class="card__right">
-            <span class="card__badge card__badge--new">New</span>
             <svg class="card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
         </a>
 
-        <!-- COMING SOON: Blog post 2 -->
-        <div class="card card--soon" aria-hidden="true">
+        <!-- ✅ LIVE: Blog post 2 — Getting Started with Playwright in 2026 (NEWLY ACTIVATED) -->
+        <a href="blog/getting-started-with-playwright-2026.html" class="card card--active">
           <div class="card__icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
           </div>
           <div class="card__body">
             <div class="card__title">Getting Started with Playwright in 2026</div>
             <div class="card__desc">A practical guide to setting up Playwright for E2E test automation from scratch.</div>
           </div>
           <div class="card__right">
-            <span class="card__badge card__badge--soon">Soon</span>
+            <span class="card__badge card__badge--new">New</span>
+            <svg class="card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
-        </div>
+        </a>
 
         <!-- COMING SOON: Blog post 3 -->
         <div class="card card--soon" aria-hidden="true">
@@ -396,7 +400,7 @@
       </div>
     </section>
 
-    <!-- ── CATEGORY 2: QE RESOURCES ─────────────────────── -->
+    <!-- ── CATEGORY 2: QE RESOURCES ── -->
     <section class="category" aria-labelledby="cat-qe">
       <div class="category__header">
         <div class="category__icon">
@@ -454,7 +458,7 @@
       </div>
     </section>
 
-    <!-- ── CATEGORY 3: TOOLS & TEMPLATES ────────────────── -->
+    <!-- ── CATEGORY 3: TOOLS & TEMPLATES ── -->
     <section class="category" aria-labelledby="cat-tools">
       <div class="category__header">
         <div class="category__icon">
