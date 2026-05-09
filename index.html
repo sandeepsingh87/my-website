@@ -413,7 +413,37 @@
       .hero__name { font-size: 28pt; }
       @page { margin: 2cm; }
     }
+    /* ── LINKEDIN BADGE ─────────────────────────────────── */
+.linkedin-section {
+  padding-block: clamp(var(--space-16), 8vw, var(--space-24));
+  background: var(--color-surface);
+}
+.linkedin-section__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(var(--space-8), 5vw, var(--space-16));
+  flex-wrap: wrap;
+}
+.linkedin-section__text {}
+.linkedin-section__badge {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+}
+/* Force badge to respect dark mode */
+[data-theme="dark"] .badge-base {
+  filter: invert(0);
+}
+@media (max-width: 767px) {
+  .linkedin-section__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
   </style>
+  <!-- LinkedIn Badge Script -->
+<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 </head>
 <body>
 
@@ -437,6 +467,7 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="links.html">Resources</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="#connect">Connect</a></li>
       </ul>
       <div class="nav__right">
         <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
@@ -459,6 +490,7 @@
         <li><a href="#skills" onclick="closeMobile()">Skills</a></li>
         <li><a href="links.html" onclick="closeMobile()">Resources</a></li>
         <li><a href="#contact" onclick="closeMobile()">Contact</a></li>
+        <li><a href="#connect" onclick="closeMobile()">Connect</a></li>
       </ul>
     </div>
   </nav>
@@ -851,6 +883,42 @@
 
     <div class="divider"></div>
 
+   <!-- LINKEDIN BADGE -->
+<section class="section linkedin-section" id="connect">
+  <div class="container">
+    <div class="linkedin-section__inner">
+
+      <div class="linkedin-section__text">
+        <p class="section__label">Professional Network</p>
+        <h2 class="section__title">Let's Connect on LinkedIn</h2>
+        <p class="section__subtitle">
+          16+ years of quality engineering experience. Follow for insights on
+          QE strategy, test automation, and building high-performing teams.
+        </p>
+      </div>
+
+      <div class="linkedin-section__badge">
+        <!-- Light theme badge (visible in light mode) -->
+        <div class="badge-base LI-profile-badge"
+          data-locale="en_US"
+          data-size="large"
+          data-theme="light"
+          data-type="VERTICAL"
+          data-vanity="sandeepsingh87"
+          data-version="v1">
+          <a class="badge-base__link LI-simple-link"
+            href="https://in.linkedin.com/in/sandeepsingh87?trk=profile-badge">
+            Sandeep Singh
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
     <!-- CONTACT -->
     <section id="contact" class="section contact-section" aria-labelledby="contact-title">
       <div class="container">
@@ -934,6 +1002,22 @@
     }, { passive: true });
     scrollBtn && scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   </script>
+
+<script>
+  // Sync LinkedIn badge theme with site theme
+  function syncLinkedInBadge() {
+    const theme = document.documentElement.getAttribute('data-theme') || 'light';
+    const badge = document.querySelector('.LI-profile-badge');
+    if (badge) {
+      badge.setAttribute('data-theme', theme);
+      // Reload badge script to re-render
+      if (window.LIRenderAll) window.LIRenderAll();
+    }
+  }
+  // Run on theme toggle click
+  document.querySelector('[data-theme-toggle]')
+    ?.addEventListener('click', () => setTimeout(syncLinkedInBadge, 50));
+</script>
 
 </body>
 </html>
