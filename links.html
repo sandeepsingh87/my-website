@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sandeep Singh — Links & Resources</title>
   <meta name="description" content="All useful pages, articles, QE resources, and tools created by Sandeep Singh — Quality Engineering Leader." />
+  <meta http-equiv="refresh" content="0; url=library.html" />
   <meta property="og:title" content="Sandeep Singh — Links & Resources" />
   <meta property="og:description" content="Blog, QE resources, tools and templates by Sandeep Singh." />
   <meta property="og:url" content="https://sandeepsingh87.in/links" />
@@ -281,27 +282,20 @@
       .theme-toggle { min-width: 44px; min-height: 44px; }
     }
 
-    /* NAV LINKS + MOBILE (added for Library nav) */
+    /* Nav links + mobile */
     .nav__links { display: flex; align-items: center; gap: var(--space-5); list-style: none; }
     .nav__links a { font-size: var(--text-sm); color: var(--color-text-muted); text-decoration: none; letter-spacing: 0.02em; }
-    .nav__links a:hover, .nav__links a[aria-current="page"] { color: var(--color-text); }
-    .nav__hamburger { display: none; width: 36px; height: 36px; align-items: center; justify-content: center;
-      color: var(--color-text-muted); border-radius: var(--radius-sm); }
+    .nav__links a:hover { color: var(--color-text); }
+    .nav__hamburger { display: none; width: 36px; height: 36px; align-items: center; justify-content: center; color: var(--color-text-muted); border-radius: var(--radius-sm); }
     .nav__hamburger:hover { color: var(--color-text); }
-    .nav__mobile { display: none; padding: var(--space-4) clamp(var(--space-4), 5vw, var(--space-12)) var(--space-6);
-      border-top: 1px solid var(--color-divider); }
+    .nav__mobile { display: none; padding: var(--space-4) clamp(var(--space-4), 5vw, var(--space-12)) var(--space-6); border-top: 1px solid var(--color-divider); }
     .nav__mobile.open { display: block; }
     .nav__mobile-links { list-style: none; display: flex; flex-direction: column; gap: var(--space-4); }
     .nav__mobile-links a { font-size: var(--text-base); color: var(--color-text-muted); text-decoration: none; display: block; padding: var(--space-2) 0; }
     .nav__mobile-links a:hover { color: var(--color-text); }
-    @media (max-width: 767px) {
-      .nav__links { display: none; }
-      .nav__back { display: none; }
-      .nav__hamburger { display: flex; }
-    }
+    @media (max-width: 767px) { .nav__links, .nav__back { display: none; } .nav__hamburger { display: flex; } }
     @media (max-width: 1023px) { .nav__links { gap: var(--space-3); } .nav__links a { font-size: 0.8rem; } }
     @media (pointer: coarse) { .nav__hamburger { min-width: 44px; min-height: 44px; } }
-
   </style>
 </head>
 <body>
@@ -324,7 +318,6 @@
         <li><a href="/#about">About</a></li>
         <li><a href="/#experience">Experience</a></li>
         <li><a href="/#skills">Skills</a></li>
-        <li><a href="links.html" aria-current="page">Resources</a></li>
         <li><a href="library.html">Library</a></li>
         <li><a href="/#contact">Contact</a></li>
       </ul>
@@ -350,7 +343,6 @@
         <li><a href="/#about" onclick="closeMobile()">About</a></li>
         <li><a href="/#experience" onclick="closeMobile()">Experience</a></li>
         <li><a href="/#skills" onclick="closeMobile()">Skills</a></li>
-        <li><a href="links.html" onclick="closeMobile()">Resources</a></li>
         <li><a href="library.html" onclick="closeMobile()">Library</a></li>
         <li><a href="/#contact" onclick="closeMobile()">Contact</a></li>
       </ul>
