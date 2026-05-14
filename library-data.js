@@ -70,5 +70,16 @@ const LIBRARY = [
     tags: ["Test Strategy", "Fintech", "Risk-Based Testing", "QA Governance"],
     file: "sessions/test-strategy-fintech.html",
     featured: false
+  },
+  {
+  id: "qe-is-not-just-testing",
+  title: "Why Quality Engineering is Not Just Testing",
+  category: "Session",   // Training | Course | Session | Project | Workshop
+  date: "2026-05-14",
+  duration: "30 min read",
+  description: "Why Quality Engineering is Not Just Testing",
+  tags: ["QE", "Testing", "Quality Assurance", "Quality Engineering"],
+  file: "sessions/why-qe-is-not-just-testing.html",
+  featured: true
   }
 ];
