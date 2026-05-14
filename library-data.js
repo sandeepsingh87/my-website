@@ -6,6 +6,17 @@
 
 const LIBRARY = [
   {
+    id: "atlassian-infrastructure-deep-dive",
+    title: "Atlassian Infrastructure Deep Dive",
+    category: "Session",
+    date: "2026-05-14",
+    duration: "40 min read",
+    description: "How Atlassian built platform infrastructure for Jira, Confluence & Bitbucket at scale — Envoy proxies, self-service APIs, centralised auth, IaC, and platform engineering lessons from 8 years of real work.",
+    tags: ["Platform Engineering", "Atlassian", "Cloud Infrastructure", "Envoy", "AWS"],
+    file: "sessions/atlassian-training.html",
+    featured: true
+  },
+  {
     id: "playwright-getting-started-2026",
     title: "Getting Started with Playwright in 2026",
     category: "Training",          // Training | Course | Session | Project | Workshop
