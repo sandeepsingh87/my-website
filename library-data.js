@@ -10,7 +10,7 @@ const LIBRARY = [
     title: "Atlassian Infrastructure Deep Dive",
     category: "Session",
     date: "2026-05-14",
-    duration: "40 min read",
+    duration: "15 min read",
     description: "How Atlassian built platform infrastructure for Jira, Confluence & Bitbucket at scale — Envoy proxies, self-service APIs, centralised auth, IaC, and platform engineering lessons from 8 years of real work.",
     tags: ["Platform Engineering", "Atlassian", "Cloud Infrastructure", "Envoy", "AWS"],
     file: "sessions/atlassian-training.html",
@@ -21,13 +21,13 @@ const LIBRARY = [
     title: "Getting Started with Playwright in 2026",
     category: "Training",          // Training | Course | Session | Project | Workshop
     date: "2026-05-08",
-    duration: "45 min read",
+    duration: "15 min read",
     description: "A practical intro to Playwright — covering installation, first test, selectors, assertions, and running tests in headed vs headless mode. Built for QE teams new to Playwright.",
     tags: ["Playwright", "Test Automation", "JavaScript", "E2E Testing"],
     file: "sessions/getting-started-with-playwright-2026.html",
     featured: true
   },
-  {
+  /* {
     id: "ai-in-testing-overview",
     title: "AI in Testing — What QEs Need to Know",
     category: "Session",
@@ -37,8 +37,8 @@ const LIBRARY = [
     tags: ["AI", "Quality Engineering", "Automation", "GenAI"],
     file: "sessions/ai-in-testing-overview.html",
     featured: true
-  },
-  {
+  }, */
+/*   {
     id: "safe-agile-qe-role",
     title: "QE's Role in a SAFe Agile Program",
     category: "Course",
@@ -48,8 +48,8 @@ const LIBRARY = [
     tags: ["SAFe", "Agile", "Quality Engineering", "PI Planning"],
     file: "sessions/safe-agile-qe-role.html",
     featured: false
-  },
-  {
+  }, */
+/*   {
     id: "api-testing-postman-restassured",
     title: "API Testing with Postman & RestAssured",
     category: "Workshop",
@@ -59,8 +59,8 @@ const LIBRARY = [
     tags: ["API Testing", "Postman", "RestAssured", "Java"],
     file: "sessions/api-testing-postman-restassured.html",
     featured: false
-  },
-  {
+  }, */
+/*   {
     id: "playwright-mcp-agentic-testing",
     title: "Playwright MCP — Agentic Test Automation",
     category: "Training",
@@ -70,8 +70,8 @@ const LIBRARY = [
     tags: ["Playwright", "MCP", "AI", "Agentic Testing"],
     file: "sessions/playwright-mcp-agentic-testing.html",
     featured: true
-  },
-  {
+  }, */
+/*   {
     id: "test-strategy-fintech",
     title: "Building a Test Strategy for Fintech Products",
     category: "Project",
@@ -81,13 +81,13 @@ const LIBRARY = [
     tags: ["Test Strategy", "Fintech", "Risk-Based Testing", "QA Governance"],
     file: "sessions/test-strategy-fintech.html",
     featured: false
-  },
+  }, */
   {
   id: "qe-is-not-just-testing",
   title: "Why Quality Engineering is Not Just Testing",
   category: "Session",   // Training | Course | Session | Project | Workshop
-  date: "2026-05-14",
-  duration: "30 min read",
+  date: "2026-05-01",
+  duration: "5 min read",
   description: "Why Quality Engineering is Not Just Testing",
   tags: ["QE", "Testing", "Quality Assurance", "Quality Engineering"],
   file: "sessions/why-qe-is-not-just-testing.html",
