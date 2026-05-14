@@ -13,7 +13,7 @@ const LIBRARY = [
     duration: "45 min read",
     description: "A practical intro to Playwright — covering installation, first test, selectors, assertions, and running tests in headed vs headless mode. Built for QE teams new to Playwright.",
     tags: ["Playwright", "Test Automation", "JavaScript", "E2E Testing"],
-    file: "sessions/playwright-getting-started-2026.html",
+    file: "sessions/getting-started-with-playwright-2026.html",
     featured: true
   },
   {
