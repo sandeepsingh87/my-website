@@ -280,6 +280,28 @@
       .nav__back { min-height: 44px; }
       .theme-toggle { min-width: 44px; min-height: 44px; }
     }
+
+    /* NAV LINKS + MOBILE (added for Library nav) */
+    .nav__links { display: flex; align-items: center; gap: var(--space-5); list-style: none; }
+    .nav__links a { font-size: var(--text-sm); color: var(--color-text-muted); text-decoration: none; letter-spacing: 0.02em; }
+    .nav__links a:hover, .nav__links a[aria-current="page"] { color: var(--color-text); }
+    .nav__hamburger { display: none; width: 36px; height: 36px; align-items: center; justify-content: center;
+      color: var(--color-text-muted); border-radius: var(--radius-sm); }
+    .nav__hamburger:hover { color: var(--color-text); }
+    .nav__mobile { display: none; padding: var(--space-4) clamp(var(--space-4), 5vw, var(--space-12)) var(--space-6);
+      border-top: 1px solid var(--color-divider); }
+    .nav__mobile.open { display: block; }
+    .nav__mobile-links { list-style: none; display: flex; flex-direction: column; gap: var(--space-4); }
+    .nav__mobile-links a { font-size: var(--text-base); color: var(--color-text-muted); text-decoration: none; display: block; padding: var(--space-2) 0; }
+    .nav__mobile-links a:hover { color: var(--color-text); }
+    @media (max-width: 767px) {
+      .nav__links { display: none; }
+      .nav__back { display: none; }
+      .nav__hamburger { display: flex; }
+    }
+    @media (max-width: 1023px) { .nav__links { gap: var(--space-3); } .nav__links a { font-size: 0.8rem; } }
+    @media (pointer: coarse) { .nav__hamburger { min-width: 44px; min-height: 44px; } }
+
   </style>
 </head>
 <body>
@@ -298,6 +320,14 @@
         </svg>
         <span class="nav__logo-name">Sandeep Singh</span>
       </a>
+      <ul class="nav__links" role="list">
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#experience">Experience</a></li>
+        <li><a href="/#skills">Skills</a></li>
+        <li><a href="links.html" aria-current="page">Resources</a></li>
+        <li><a href="library.html">Library</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
       <div class="nav__right">
         <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -308,7 +338,22 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
           Back to Home
         </a>
+        <button class="nav__hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+        </button>
       </div>
+    </div>
+    <div class="nav__mobile" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+      <ul class="nav__mobile-links" role="list">
+        <li><a href="/#about" onclick="closeMobile()">About</a></li>
+        <li><a href="/#experience" onclick="closeMobile()">Experience</a></li>
+        <li><a href="/#skills" onclick="closeMobile()">Skills</a></li>
+        <li><a href="links.html" onclick="closeMobile()">Resources</a></li>
+        <li><a href="library.html" onclick="closeMobile()">Library</a></li>
+        <li><a href="/#contact" onclick="closeMobile()">Contact</a></li>
+      </ul>
     </div>
   </nav>
 
@@ -524,6 +569,7 @@
       <p class="footer__copy">&copy; 2026 Sandeep Singh. All rights reserved.</p>
       <ul class="footer__links" role="list">
         <li><a href="/">Home</a></li>
+        <li><a href="library.html">Library</a></li>
         <li><a href="https://www.linkedin.com/in/sandeepsingh87/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
         <li><a href="mailto:mailsandeeps3@gmail.com">Email</a></li>
       </ul>
