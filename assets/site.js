@@ -95,13 +95,15 @@
   }
 
   window.copyCode = function copyCode(button) {
-    const pre = button.closest('.code-block')?.querySelector('pre');
+    const pre = button.closest('.code-block, .code-wrap')?.querySelector('pre');
     if (!pre) return;
     navigator.clipboard.writeText(pre.innerText).then(() => {
       const original = button.textContent;
       button.textContent = 'Copied!';
+      button.classList.add('copied');
       setTimeout(() => {
         button.textContent = original;
+        button.classList.remove('copied');
       }, 2000);
     });
   };

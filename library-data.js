@@ -6,6 +6,17 @@
 
 const LIBRARY = [
   {
+    id: "website-hosting-tutorial",
+    title: "Host Your Website for Free — Step by Step Guide",
+    category: "Training",
+    date: "2026-05-18",
+    duration: "20 min read",
+    description: "A practical walkthrough for hosting a personal website with GitHub, Cloudflare Pages, and a custom domain, including setup, DNS, and update workflow.",
+    tags: ["Website Hosting", "GitHub", "Cloudflare Pages", "Custom Domain", "Deployment"],
+    file: "sessions/website-hosting-tutorial.html",
+    featured: true
+  },
+  {
     id: "atlassian-infrastructure-deep-dive",
     title: "Atlassian Infrastructure Deep Dive",
     category: "Session",

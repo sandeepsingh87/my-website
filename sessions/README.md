@@ -15,7 +15,14 @@ The template already includes the consistent header, footer, scroll-to-top butto
 Place the generated file in `sessions/`, then run:
 
 ```sh
+# From the repo root
 node scripts/add-session-shell.js sessions/new-session.html
+```
+
+If you are already inside this `sessions/` folder, run:
+
+```sh
+node ../scripts/add-session-shell.js new-session.html
 ```
 
 The script adds:

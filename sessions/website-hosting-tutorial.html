@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Host Your Website for Free — Step by Step Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,wght@0,300;0,700;0,900;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --black: #0a0a0a;
+    --white: #fafaf8;
+    --accent: #f5c842;
+    --accent2: #ff6b35;
+    --green: #2ecc71;
+    --muted: #6b6b6b;
+    --border: #e0e0d8;
+    --card: #ffffff;
+    --code-bg: #1a1a2e;
+    --step1: #f5c842;
+    --step2: #ff6b35;
+    --step3: #4ecdc4;
+    --step4: #a29bfe;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--black);
+    color: var(--white);
+    padding: 80px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0.12;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 10%;
+    width: 180px; height: 180px;
+    background: var(--accent2);
+    border-radius: 50%;
+    opacity: 0.1;
+  }
+  .hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--black);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    font-size: 18px;
+    color: #b0b0a8;
+    max-width: 560px;
+    margin-bottom: 36px;
+    font-weight: 300;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .stat-val {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .stat-label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* NAV */
+  .toc {
+    background: var(--black);
+    border-top: 1px solid #222;
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow-x: auto;
+  }
+  .toc-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+  }
+  .toc a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 20px;
+    color: #888;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  .toc a:hover { color: var(--white); border-bottom-color: var(--accent); }
+  .toc-num {
+    width: 20px; height: 20px;
+    background: #222;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+  }
+
+  /* MAIN */
+  main { max-width: 860px; margin: 0 auto; padding: 0 40px 80px; }
+
+  /* COST BANNER */
+  .cost-banner {
+    margin: 48px 0;
+    background: var(--black);
+    border-radius: 12px;
+    padding: 32px 36px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cost-banner::after {
+    content: '₹647/yr';
+    position: absolute;
+    right: 24px; bottom: -10px;
+    font-family: 'Fraunces', serif;
+    font-size: 80px;
+    font-weight: 900;
+    color: var(--accent);
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  .cost-item { color: var(--white); }
+  .cost-item-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #666; margin-bottom: 6px; }
+  .cost-item-val { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; }
+  .cost-item-val.free { color: var(--green); }
+  .cost-item-val.paid { color: var(--accent); }
+
+  /* STEPS */
+  .step {
+    margin: 56px 0;
+    scroll-margin-top: 60px;
+  }
+  .step-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 52px; height: 52px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--black);
+  }
+  .step-title-wrap { flex: 1; }
+  .step-title {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .step-subtitle { font-size: 14px; color: var(--muted); }
+
+  .step-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 28px 0;
+  }
+
+  /* SUB-STEPS */
+  .substeps { display: flex; flex-direction: column; gap: 24px; }
+  .substep {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .substep-num {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .substep-body { flex: 1; }
+  .substep-body p { margin-bottom: 10px; color: #333; }
+  .substep-body p:last-child { margin-bottom: 0; }
+
+  /* CODE BLOCKS */
+  .code-wrap {
+    background: var(--code-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 12px 0;
+  }
+  .code-header {
+    background: #111827;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .code-lang {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .copy-btn {
+    background: #1f2937;
+    border: 1px solid #374151;
+    color: #9ca3af;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: var(--accent); color: var(--black); border-color: var(--accent); }
+  .copy-btn.copied { background: var(--green); color: var(--black); border-color: var(--green); }
+  pre {
+    padding: 20px;
+    overflow-x: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 13.5px;
+    line-height: 1.8;
+    color: #e2e8f0;
+  }
+  pre .comment { color: #4b5563; }
+  pre .string { color: #86efac; }
+  pre .keyword { color: #93c5fd; }
+  code {
+    font-family: 'DM Mono', monospace;
+    background: #f0ede6;
+    color: #c0392b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  /* INFO BOXES */
+  .info-box {
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .info-box.tip { background: #fefce8; border-left: 4px solid var(--accent); }
+  .info-box.warn { background: #fff7ed; border-left: 4px solid var(--accent2); }
+  .info-box.success { background: #f0fdf4; border-left: 4px solid var(--green); }
+  .info-box.info { background: #eff6ff; border-left: 4px solid #3b82f6; }
+  .info-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .info-body { font-size: 14px; color: #444; line-height: 1.6; }
+  .info-body strong { color: var(--black); }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    background: var(--black);
+    color: var(--white);
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+  td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 14px; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafaf5; }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+  }
+  .badge.free { background: #dcfce7; color: #166534; }
+  .badge.paid { background: #fef9c3; color: #854d0e; }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 12px 0; }
+  .checklist li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: #333;
+    padding: 10px 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+  .checklist li .check { color: var(--green); flex-shrink: 0; font-size: 16px; margin-top: 1px; }
+
+  /* PROGRESS */
+  .progress-tracker {
+    background: var(--black);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin: 40px 0;
+    color: var(--white);
+  }
+  .progress-title { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: #666; margin-bottom: 20px; }
+  .progress-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .progress-step {
+    padding: 14px;
+    border-radius: 8px;
+    background: #111;
+    border: 1px solid #222;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .progress-step:hover { border-color: var(--accent); background: #181818; }
+  .ps-num { font-family: 'DM Mono', monospace; font-size: 11px; color: #555; margin-bottom: 6px; }
+  .ps-label { font-size: 13px; font-weight: 500; color: var(--white); line-height: 1.3; }
+  .ps-cost { font-family: 'DM Mono', monospace; font-size: 11px; margin-top: 8px; }
+  .ps-cost.free { color: var(--green); }
+  .ps-cost.paid { color: var(--accent); }
+
+  /* SECTION HEADINGS */
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 24px 0 12px;
+    color: var(--black);
+  }
+  h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 16px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+  }
+  p { margin-bottom: 12px; font-size: 15px; color: #333; }
+
+  /* FINAL SUMMARY */
+  .final-summary {
+    background: linear-gradient(135deg, var(--black) 0%, #111 100%);
+    border-radius: 16px;
+    padding: 48px;
+    margin: 56px 0;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .final-summary::before {
+    content: '✓';
+    position: absolute;
+    right: 40px; top: 20px;
+    font-size: 160px;
+    color: var(--green);
+    opacity: 0.05;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+  }
+  .final-summary h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+  .final-summary h2 span { color: var(--accent); }
+  .final-summary p { color: #888; font-size: 16px; margin-bottom: 32px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .summary-item {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .summary-label { font-size: 14px; color: #888; }
+  .summary-val { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; color: var(--white); }
+  .summary-val.free { color: var(--green); }
+  .summary-val.accent { color: var(--accent); }
+
+  /* WORKFLOW */
+  .workflow {
+    display: flex;
+    gap: 0;
+    margin: 20px 0;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+  .workflow-step {
+    flex: 1;
+    min-width: 140px;
+    padding: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-right: none;
+    text-align: center;
+    font-size: 13px;
+    position: relative;
+  }
+  .workflow-step:first-child { border-radius: 8px 0 0 8px; }
+  .workflow-step:last-child { border-radius: 0 8px 8px 0; border-right: 1px solid var(--border); }
+  .workflow-icon { font-size: 24px; margin-bottom: 8px; }
+  .workflow-label { font-weight: 600; color: var(--black); margin-bottom: 4px; }
+  .workflow-sub { color: var(--muted); font-size: 12px; }
+  .workflow-arrow {
+    display: flex;
+    align-items: center;
+    color: var(--accent);
+    font-size: 20px;
+    padding: 0 4px;
+    font-weight: bold;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    color: #555;
+    text-align: center;
+    padding: 32px;
+    font-size: 13px;
+  }
+  footer span { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 48px 24px 40px; }
+    main { padding: 0 24px 60px; }
+    .toc { padding: 0 16px; }
+    .cost-banner { grid-template-columns: repeat(2, 1fr); }
+    .progress-steps { grid-template-columns: repeat(2, 1fr); }
+    .summary-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+    .final-summary { padding: 32px 24px; }
+  }
+
+  @media print {
+    .toc, .copy-btn, footer { display: none; }
+    .hero { background: white; color: black; padding: 20px 0; }
+    .hero h1 span, .stat-val { color: black; }
+    body { font-size: 12px; }
+    .step { page-break-inside: avoid; }
+  }
+</style>
+  <link rel="stylesheet" href="../assets/session-shell.css" />
+</head>
+<body>
+  <nav class="session-nav" aria-label="Main navigation">
+    <div class="session-nav__inner">
+      <a href="/" class="session-nav__logo" aria-label="Sandeep Singh — Home">
+        <svg class="session-nav__mark" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+          <rect width="34" height="34" rx="7" fill="var(--session-primary)"/>
+          <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#fff" letter-spacing="0.5">SS</text>
+        </svg>
+        <span class="session-nav__name">Sandeep Singh</span>
+      </a>
+      <div class="session-nav__right">
+        <button class="session-nav__theme" data-theme-toggle aria-label="Switch to dark mode">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <a href="../library.html" class="session-nav__back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          All Posts
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="session-progress" aria-label="Reading progress">
+    <div class="session-progress__inner">
+      <span class="session-progress__label">Reading Progress</span>
+      <div class="session-progress__track">
+        <div class="session-progress__fill" data-reading-progress-fill></div>
+      </div>
+      <span class="session-progress__label" data-reading-progress-label>0%</span>
+    </div>
+  </div>
+
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Complete Tutorial · 2026 Edition</div>
+    <h1>Host Your Website<br><span>for ₹647 a Year</span></h1>
+    <p class="hero-sub">A step-by-step guide to hosting your personal website — resume, blog, HTML pages — using GitHub Pages + Cloudflare Pages + a custom domain. No paid hosting needed.</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-val">₹647</span><span class="stat-label">Total / Year</span></div>
+      <div class="stat"><span class="stat-val">₹0</span><span class="stat-label">Hosting Cost</span></div>
+      <div class="stat"><span class="stat-val">4</span><span class="stat-label">Steps</span></div>
+      <div class="stat"><span class="stat-val">~2 hrs</span><span class="stat-label">Setup Time</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="toc" aria-label="Tutorial steps">
+  <div class="toc-inner">
+    <a href="#step1"><span class="toc-num">1</span> GitHub</a>
+    <a href="#step2"><span class="toc-num">2</span> Cloudflare Pages</a>
+    <a href="#step3"><span class="toc-num">3</span> Domain</a>
+    <a href="#step4"><span class="toc-num">4</span> Connect</a>
+    <a href="#workflow"><span class="toc-num">→</span> Workflow</a>
+  </div>
+</nav>
+
+<main class="session-shell-offset">
+
+  <!-- COST OVERVIEW -->
+  <div class="cost-banner">
+    <div class="cost-item">
+      <div class="cost-item-label">Hosting</div>
+      <div class="cost-item-val free">FREE</div>
+    </div>
+    <div class="cost-item">
+      <div class="cost-item-label">SSL Certificate</div>
+      <div class="cost-item-val free">FREE</div>
+    </div>
+    <div class="cost-item">
+      <div class="cost-item-label">Domain (.in / year)</div>
+      <div class="cost-item-val paid">~₹647</div>
+    </div>
+  </div>
+
+  <!-- WHAT YOU NEED -->
+  <section>
+    <h3>What You'll Need</h3>
+    <ul class="checklist">
+      <li><span class="check">✓</span> A computer with a terminal / command prompt</li>
+      <li><span class="check">✓</span> VS Code installed (free — code.visualstudio.com)</li>
+      <li><span class="check">✓</span> Basic HTML knowledge</li>
+      <li><span class="check">✓</span> A GitHub account (free — github.com)</li>
+      <li><span class="check">✓</span> A Cloudflare account (free — cloudflare.com)</li>
+      <li><span class="check">✓</span> ₹647 for a .in domain from Hostinger</li>
+    </ul>
+  </section>
+
+  <!-- PROGRESS TRACKER -->
+  <div class="progress-tracker">
+    <div class="progress-title">Your Roadmap</div>
+    <div class="progress-steps">
+      <a class="progress-step" href="#step1">
+        <div class="ps-num">STEP 01</div>
+        <div class="ps-label">Set Up GitHub Repository</div>
+        <div class="ps-cost free">FREE</div>
+      </a>
+      <a class="progress-step" href="#step2">
+        <div class="ps-num">STEP 02</div>
+        <div class="ps-label">Deploy on Cloudflare Pages</div>
+        <div class="ps-cost free">FREE</div>
+      </a>
+      <a class="progress-step" href="#step3">
+        <div class="ps-num">STEP 03</div>
+        <div class="ps-label">Buy Your Domain</div>
+        <div class="ps-cost paid">~₹647/yr</div>
+      </a>
+      <a class="progress-step" href="#step4">
+        <div class="ps-num">STEP 04</div>
+        <div class="ps-label">Connect Domain to Site</div>
+        <div class="ps-cost free">FREE</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────── -->
+  <!-- STEP 1 -->
+  <!-- ─────────────────────────────────── -->
+  <section class="step" id="step1">
+    <div class="step-header">
+      <div class="step-num" style="background: var(--step1);">1</div>
+      <div class="step-title-wrap">
+        <div class="step-title">Set Up GitHub Account & Repository</div>
+        <div class="step-subtitle">Where your website files will live · Estimated time: 20 min</div>
+      </div>
+    </div>
+
+    <p>GitHub is a free platform to store and version your website files. Every time you push a change, Cloudflare will automatically re-deploy your site.</p>
+
+    <div class="step-divider"></div>
+    <div class="substeps">
+
+      <div class="substep">
+        <div class="substep-num">1</div>
+        <div class="substep-body">
+          <p><strong>Create a GitHub account</strong> — go to <code>github.com</code> and sign up. Use a professional username (e.g. <code>sandeepsingh87</code>) since it may appear in URLs.</p>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">2</div>
+        <div class="substep-body">
+          <p><strong>Create a new repository</strong> — click the <code>+</code> icon → New repository. Set:</p>
+          <ul class="checklist">
+            <li><span class="check">→</span> Name: <code>my-website</code></li>
+            <li><span class="check">→</span> Visibility: <strong>Public</strong></li>
+            <li><span class="check">→</span> Check "Add a README file"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">3</div>
+        <div class="substep-body">
+          <p><strong>Install Git on your Mac</strong> — open Terminal and run:</p>
+          <div class="code-wrap">
+            <div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+            <pre>brew install git</pre>
+          </div>
+          <div class="info-box tip"><span class="info-icon">💡</span><div class="info-body">If you don't have Homebrew, install it first from <strong>brew.sh</strong> — it's the standard Mac package manager.</div></div>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">4</div>
+        <div class="substep-body">
+          <p><strong>Configure Git</strong> with your name and email:</p>
+          <div class="code-wrap">
+            <div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+            <pre>git config --global user.name "Your Name"
+git config --global user.email "your@email.com"</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">5</div>
+        <div class="substep-body">
+          <p><strong>Clone the repository</strong> to your computer:</p>
+          <div class="code-wrap">
+            <div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+            <pre>git clone https://github.com/YOUR-USERNAME/my-website.git
+cd my-website</pre>
+          </div>
+          <p>Replace <code>YOUR-USERNAME</code> with your actual GitHub username.</p>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">6</div>
+        <div class="substep-body">
+          <p><strong>Create your first HTML file</strong>. Open VS Code in the project folder:</p>
+          <div class="code-wrap">
+            <div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+            <pre>code .</pre>
+          </div>
+          <p>Create a new file called <code>index.html</code> and paste this placeholder:</p>
+          <div class="code-wrap">
+            <div class="code-header"><span class="code-lang">html</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+            <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;My Website&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Coming Soon&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">7</div>
+        <div class="substep-body">
+          <p><strong>Push your files to GitHub:</strong></p>
+          <div class="code-wrap">
+            <div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+            <pre>git add .
+git commit -m "Initial commit"
+git push origin main</pre>
+          </div>
+          <div class="info-box warn"><span class="info-icon">⚠️</span><div class="info-body"><strong>Common mistake:</strong> Don't forget the <code>.</code> after <code>git add</code> — it means "add all files". Running <code>git add</code> alone does nothing.</div></div>
+          <p>Visit <code>github.com/YOUR-USERNAME/my-website</code> and confirm <code>index.html</code> is visible.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="info-box success" style="margin-top: 24px;">
+      <span class="info-icon">✅</span>
+      <div class="info-body"><strong>Step 1 complete!</strong> Your code is on GitHub. You should see both <code>README.md</code> and <code>index.html</code> in your repository.</div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── -->
+  <!-- STEP 2 -->
+  <!-- ─────────────────────────────────── -->
+  <section class="step" id="step2">
+    <div class="step-header">
+      <div class="step-num" style="background: var(--step2); color: white;">2</div>
+      <div class="step-title-wrap">
+        <div class="step-title">Deploy on Cloudflare Pages</div>
+        <div class="step-subtitle">Get a free live URL in minutes · Estimated time: 10 min</div>
+      </div>
+    </div>
+
+    <p>Cloudflare Pages reads your GitHub repo and publishes it to the internet automatically — every time you push new code, your site updates within 30 seconds.</p>
+
+    <div class="step-divider"></div>
+    <div class="substeps">
+
+      <div class="substep">
+        <div class="substep-num">1</div>
+        <div class="substep-body">
+          <p><strong>Create a Cloudflare account</strong> at <code>cloudflare.com</code> → Sign up (free).</p>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">2</div>
+        <div class="substep-body">
+          <p><strong>Go to Workers & Pages</strong> — from your dashboard, find "Workers & Pages" in the left sidebar under <em>Compute</em>, or click "Start building" on the home screen.</p>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">3</div>
+        <div class="substep-body">
+          <p><strong>Create a Pages project</strong> — click <code>Create application</code> → at the bottom of the popup look for <strong>"Looking to deploy Pages? Get started"</strong> and click it.</p>
+          <div class="info-box info"><span class="info-icon">ℹ️</span><div class="info-body">Cloudflare's UI updates frequently. If you don't see a "Pages" tab, look for the "Get started" link at the bottom of the "Ship something new" dialog.</div></div>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">4</div>
+        <div class="substep-body">
+          <p><strong>Connect GitHub</strong> — select "Import an existing Git repository" → Get started → authorize Cloudflare to access your GitHub → select your <code>my-website</code> repo → click "Begin setup".</p>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">5</div>
+        <div class="substep-body">
+          <p><strong>Configure build settings</strong> — fill in the form exactly like this:</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Field</th><th>Value</th></tr></thead>
+              <tbody>
+                <tr><td>Project name</td><td><code>my-website</code></td></tr>
+                <tr><td>Production branch</td><td><code>main</code></td></tr>
+                <tr><td>Framework preset</td><td><strong>None</strong></td></tr>
+                <tr><td>Build command</td><td><em>Leave blank</em></td></tr>
+                <tr><td>Build output directory</td><td><em>Leave blank</em></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Click <strong>"Save and Deploy"</strong>.</p>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">6</div>
+        <div class="substep-body">
+          <p><strong>Wait ~1 minute</strong> for deployment. You'll see log output like:</p>
+          <div class="code-wrap">
+            <div class="code-header"><span class="code-lang">deploy log</span></div>
+            <pre>✨ Success! Uploaded 2 files (1.70 sec)
+✨ Upload complete!
+Success: Assets published!
+Success: Your site was deployed!</pre>
+          </div>
+          <p>You'll get a live URL like <code>my-website-abc.pages.dev</code> — visit it to see your "Coming Soon" page! 🎉</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="info-box success" style="margin-top: 24px;">
+      <span class="info-icon">✅</span>
+      <div class="info-body"><strong>Step 2 complete!</strong> Your site is live on the internet at a free <code>.pages.dev</code> URL with global CDN and free SSL.</div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── -->
+  <!-- STEP 3 -->
+  <!-- ─────────────────────────────────── -->
+  <section class="step" id="step3">
+    <div class="step-header">
+      <div class="step-num" style="background: var(--step3);">3</div>
+      <div class="step-title-wrap">
+        <div class="step-title">Buy Your Custom Domain</div>
+        <div class="step-subtitle">Get yourname.in — the only cost in this whole setup · Estimated time: 15 min</div>
+      </div>
+    </div>
+
+    <p>Without a custom domain, your site is at <code>something.pages.dev</code>. Buying a domain gives you a professional URL like <code>yourname.in</code>.</p>
+
+    <div class="step-divider"></div>
+
+    <h3>Choosing a Domain</h3>
+    <p>For a personal/professional site targeting India, <code>.in</code> is the best balance of price and credibility. Some good name formats:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Domain Example</th><th>Type</th><th>Year 1</th><th>Renewal</th></tr></thead>
+        <tbody>
+          <tr><td><code>yourname.in</code></td><td>Personal brand</td><td>~₹549</td><td>~₹899/yr</td></tr>
+          <tr><td><code>yourname87.in</code></td><td>Personal + number</td><td>~₹549</td><td>~₹899/yr</td></tr>
+          <tr><td><code>yourname-qe.in</code></td><td>Name + specialty</td><td>~₹549</td><td>~₹899/yr</td></tr>
+          <tr><td><code>yourname.com</code></td><td>Global reach</td><td>~₹749</td><td>~₹1,299/yr</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-box warn">
+      <span class="info-icon">⚠️</span>
+      <div class="info-body"><strong>Watch out for renewal prices!</strong> Many registrars offer cheap Year 1 prices but triple the renewal. Always check the renewal rate before buying. All prices shown include 18% GST.</div>
+    </div>
+
+    <div class="substeps" style="margin-top: 24px;">
+
+      <div class="substep">
+        <div class="substep-num">1</div>
+        <div class="substep-body">
+          <p>Go to <strong>hostinger.in</strong> → click <strong>Domains</strong> in the top menu.</p>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">2</div>
+        <div class="substep-body">
+          <p>Search for your desired domain name (e.g. <code>yourname.in</code>). Try a few variations until you find one that's available and affordable.</p>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">3</div>
+        <div class="substep-body">
+          <p>Add to cart. When selecting the period, choose <strong>1 year</strong> to minimize upfront cost. Do NOT add hosting — you don't need it!</p>
+          <div class="info-box tip"><span class="info-icon">💡</span><div class="info-body">When asked to "Add hosting for ₹219/mo" — <strong>skip it</strong>. Cloudflare Pages is your free host.</div></div>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">4</div>
+        <div class="substep-body">
+          <p>Complete purchase. After payment, Hostinger will show a dashboard. Look for any <strong>"Finish domain registration"</strong> prompt and complete it — <code>.in</code> domains require contact verification.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="info-box success" style="margin-top: 24px;">
+      <span class="info-icon">✅</span>
+      <div class="info-body"><strong>Step 3 complete!</strong> You own a domain. Now let's point it to your Cloudflare Pages site.</div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── -->
+  <!-- STEP 4 -->
+  <!-- ─────────────────────────────────── -->
+  <section class="step" id="step4">
+    <div class="step-header">
+      <div class="step-num" style="background: var(--step4);">4</div>
+      <div class="step-title-wrap">
+        <div class="step-title">Connect Domain to Your Site</div>
+        <div class="step-subtitle">Point yourname.in to Cloudflare Pages · Estimated time: 30 min + up to 2 hrs propagation</div>
+      </div>
+    </div>
+
+    <p>This step has two parts: (A) add your domain to Cloudflare, and (B) update the nameservers in Hostinger to point to Cloudflare.</p>
+
+    <div class="step-divider"></div>
+
+    <h3>Part A — Add domain to Cloudflare</h3>
+    <div class="substeps">
+
+      <div class="substep">
+        <div class="substep-num">1</div>
+        <div class="substep-body">
+          <p>In Cloudflare dashboard → <strong>Workers & Pages</strong> → click your <code>my-website</code> project → click the <strong>"Custom domains"</strong> tab.</p>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">2</div>
+        <div class="substep-body">
+          <p>Click <strong>"Set up a custom domain"</strong> → type your domain (e.g. <code>yourname.in</code>) → Continue → you'll see a "Transfer DNS management" screen → click <strong>"Begin DNS transfer"</strong>.</p>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">3</div>
+        <div class="substep-body">
+          <p>On the next screen, type your domain in the field, keep <strong>"Import DNS records automatically"</strong> selected, and click <strong>Continue</strong>.</p>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">4</div>
+        <div class="substep-body">
+          <p>Select the <strong>Free plan ($0)</strong> — it has everything you need: DDoS protection, free SSL, global CDN.</p>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">5</div>
+        <div class="substep-body">
+          <p>Review the DNS records Cloudflare found. Click <strong>"Continue to activation"</strong>. On the next page, Cloudflare will show you <strong>2 nameservers</strong>. Copy them — they'll look like:</p>
+          <div class="code-wrap">
+            <div class="code-header"><span class="code-lang">nameservers</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+            <pre>kianchau.ns.cloudflare.com
+linda.ns.cloudflare.com</pre>
+          </div>
+          <p><strong>Keep this Cloudflare tab open.</strong> Open a new tab for Hostinger.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h3>Part B — Update nameservers in Hostinger</h3>
+    <div class="substeps">
+
+      <div class="substep">
+        <div class="substep-num">6</div>
+        <div class="substep-body">
+          <p>Go to <strong>hpanel.hostinger.com</strong> → <strong>Domains</strong> in the left sidebar → click your domain → click <strong>DNS / Nameservers</strong>.</p>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">7</div>
+        <div class="substep-body">
+          <p>Find the <strong>Nameservers</strong> section. Click <strong>Change Nameservers</strong> and replace the existing ones with your two Cloudflare nameservers. Save.</p>
+          <div class="info-box info"><span class="info-icon">ℹ️</span><div class="info-body">You'll see a confirmation popup saying "Nameservers changed!" with the two Cloudflare nameservers listed. This is correct.</div></div>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">8</div>
+        <div class="substep-body">
+          <p>Go back to the Cloudflare tab and click <strong>"I updated my nameservers"</strong>. Cloudflare will begin verifying.</p>
+          <div class="info-box warn"><span class="info-icon">⏱️</span><div class="info-body"><strong>Wait time:</strong> DNS propagation typically takes <strong>10 min – 2 hours</strong>. In rare cases up to 24 hours. You'll get an email from Cloudflare when it's done: <em>"Cloudflare's network is now boosting your domain's speed and security."</em></div></div>
+        </div>
+      </div>
+
+      <div class="substep">
+        <div class="substep-num">9</div>
+        <div class="substep-body">
+          <p><strong>Once you receive the activation email</strong>, go back to Cloudflare → Workers & Pages → your project → Custom domains → "Set up a custom domain" → type your domain again → Continue → <strong>"Activate domain"</strong>.</p>
+          <p>You should see your domain with a <strong>🟢 Active</strong> status and <strong>SSL enabled</strong>.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="info-box success" style="margin-top: 24px;">
+      <span class="info-icon">🎉</span>
+      <div class="info-body"><strong>Step 4 complete!</strong> Your custom domain is now live and pointing to your Cloudflare Pages site — with free SSL and global CDN.</div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── -->
+  <!-- ONGOING WORKFLOW -->
+  <!-- ─────────────────────────────────── -->
+  <section id="workflow" style="scroll-margin-top: 60px;">
+    <h3>Your Ongoing Publishing Workflow</h3>
+    <p>Every time you want to update your site, it's just 3 commands. Cloudflare auto-deploys within ~30 seconds.</p>
+
+    <div class="workflow">
+      <div class="workflow-step">
+        <div class="workflow-icon">✏️</div>
+        <div class="workflow-label">Edit</div>
+        <div class="workflow-sub">Make changes in VS Code</div>
+      </div>
+      <div class="workflow-arrow">›</div>
+      <div class="workflow-step">
+        <div class="workflow-icon">📦</div>
+        <div class="workflow-label">Commit</div>
+        <div class="workflow-sub">git add + commit</div>
+      </div>
+      <div class="workflow-arrow">›</div>
+      <div class="workflow-step">
+        <div class="workflow-icon">🚀</div>
+        <div class="workflow-label">Push</div>
+        <div class="workflow-sub">git push origin main</div>
+      </div>
+      <div class="workflow-arrow">›</div>
+      <div class="workflow-step">
+        <div class="workflow-icon">🌐</div>
+        <div class="workflow-label">Live!</div>
+        <div class="workflow-sub">Auto-deployed in ~30s</div>
+      </div>
+    </div>
+
+    <div class="code-wrap">
+      <div class="code-header"><span class="code-lang">bash — your update workflow</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <pre><span class="comment"># 1. Open your project</span>
+cd my-website
+code .
+
+<span class="comment"># 2. Make your changes, then save in VS Code</span>
+
+<span class="comment"># 3. Deploy in 3 commands</span>
+git add .
+git commit -m "Add new blog post"
+git push origin main
+
+<span class="comment"># ✅ Cloudflare auto-deploys — check yourname.in in ~30 seconds!</span></pre>
+    </div>
+  </section>
+
+  <!-- FINAL SUMMARY -->
+  <div class="final-summary">
+    <h2>You're Live! <span>🎉</span></h2>
+    <p>Here's a summary of what you've built — a professional personal website with enterprise-grade infrastructure.</p>
+    <div class="summary-grid">
+      <div class="summary-item">
+        <span class="summary-label">Hosting</span>
+        <span class="summary-val free">FREE — Cloudflare Pages</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">SSL Certificate</span>
+        <span class="summary-val free">FREE — Auto-managed</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">CDN (Content Delivery)</span>
+        <span class="summary-val free">FREE — 300+ edge locations</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">DDoS Protection</span>
+        <span class="summary-val free">FREE — Cloudflare</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">Custom Domain (.in)</span>
+        <span class="summary-val accent">~₹647 / year</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">Total Annual Cost</span>
+        <span class="summary-val accent">~₹647 / year</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEXT STEPS -->
+  <section>
+    <h3>What to Build Next</h3>
+    <ul class="checklist">
+      <li><span class="check">→</span> <strong>Resume page</strong> — replace index.html with a professional HTML resume</li>
+      <li><span class="check">→</span> <strong>Blog</strong> — add new HTML files (e.g. blog/post-1.html) for each article</li>
+      <li><span class="check">→</span> <strong>Image gallery</strong> — create an images/ folder and link from your HTML</li>
+      <li><span class="check">→</span> <strong>Multiple pages</strong> — add about.html, projects.html, contact.html</li>
+      <li><span class="check">→</span> <strong>Custom styling</strong> — add a style.css file and link it from all pages</li>
+    </ul>
+  </section>
+
+</main>
+
+<script>
+  // Animate step numbers on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.style.opacity = '1';
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.step').forEach(s => {
+    s.style.opacity = '0';
+    s.style.transition = 'opacity 0.5s ease';
+    observer.observe(s);
+  });
+</script>
+  <footer class="session-footer">
+    <div class="session-footer__inner">
+      <p class="session-footer__copy">&copy; 2026 Sandeep Singh. All rights reserved.</p>
+      <ul class="session-footer__links">
+        <li><a href="/">Home</a></li>
+        <li><a href="../library.html">Library</a></li>
+        <li><a href="mailto:mailsandeeps3@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+  <script src="../assets/site.js"></script>
+</body>
+</html>

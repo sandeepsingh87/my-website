@@ -39,7 +39,14 @@ Best option:
 If a page is generated outside the repo by an AI tool or written manually as a full HTML file, place it in `sessions/` and run:
 
 ```sh
+# From the repo root
 node scripts/add-session-shell.js sessions/new-session.html
+```
+
+If you are already inside the `sessions/` folder, run:
+
+```sh
+node ../scripts/add-session-shell.js new-session.html
 ```
 
 This adds the consistent Sandeep Singh header, `All Posts` button, shared footer, scroll-to-top button, reading progress bar, and shared site JavaScript.
