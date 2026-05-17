@@ -60,6 +60,23 @@
     button.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
 
+  function initReadingProgress() {
+    const bar = document.querySelector('[data-reading-progress-fill], #progFill');
+    const label = document.querySelector('[data-reading-progress-label], #progPct');
+    if (!bar && !label) return;
+
+    function update() {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const percent = maxScroll > 0 ? Math.min(100, Math.max(0, Math.round((window.scrollY / maxScroll) * 100))) : 0;
+      if (bar) bar.style.width = percent + '%';
+      if (label) label.textContent = percent + '%';
+    }
+
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+  }
+
   function initToc() {
     const headings = document.querySelectorAll('.prose h2[id]');
     const tocLinks = document.querySelectorAll('.toc__list a');
@@ -93,6 +110,7 @@
     initThemeToggle();
     initMobileNav();
     initScrollTop();
+    initReadingProgress();
     initToc();
   });
 })();
