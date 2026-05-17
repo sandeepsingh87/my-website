@@ -88,7 +88,7 @@ const LIBRARY = [
   category: "Session",   // Training | Course | Session | Project | Workshop
   date: "2026-05-01",
   duration: "5 min read",
-  description: "Why Quality Engineering is Not Just Testing",
+  description: "A practical explanation of how modern QE moves beyond test execution into prevention, automation, risk thinking, and shared quality ownership.",
   tags: ["QE", "Testing", "Quality Assurance", "Quality Engineering"],
   file: "sessions/why-qe-is-not-just-testing.html",
   featured: true
