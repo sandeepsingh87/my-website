@@ -10,11 +10,8 @@ This guide is written for you as the site owner — not for web developers. Your
 |--------------|--------------------------|
 | Change homepage text, job history, skills | `index.html` |
 | Add or reorder library cards | `library-data.js` |
-| Add or reorder QE Repository cards | `qe-repository-data.js` |
 | Change library page intro or layout | `library.html` |
-| Change QE Repository page | `qe-repository.html` |
 | Write a new article / training note | `sessions/` (see below) |
-| Write QE-specific resource (template, case study) | `qe-repo/` (see below) |
 | Change colours/fonts site-wide | `assets/tokens.css` |
 | Change top navigation & footer (home + library) | `assets/site-chrome.css` |
 | Change homepage-only sections | `assets/home.css` |
@@ -23,36 +20,9 @@ This guide is written for you as the site owner — not for web developers. Your
 | Session page header (“All Posts”, progress bar) | `assets/session-shell.css` |
 | Old pages you do not use | `Archive/` (safe to ignore) |
 | Ideas for future posts (not live yet) | `CONTENT_IDEAS.md` |
-| Ideas for future QE resources | `QE_REPOSITORY_IDEAS.md` |
 
 **Live site:** https://sandeepsingh87.in  
 **GitHub repo:** https://github.com/sandeepsingh87/my-website
-
----
-
-## Library vs QE Repository
-
-| | **Knowledge Library** | **QE Repository** |
-|---|----------------------|-------------------|
-| **Purpose** | All your published sessions, courses, workshops | Quality Engineering material others can reuse |
-| **Catalog file** | `library-data.js` | `qe-repository-data.js` |
-| **Browse page** | `library.html` | `qe-repository.html` |
-| **New HTML files** | Usually `sessions/` | Usually `qe-repo/` (can also link to `sessions/` |
-| **Categories** | Training, Course, Session, Project, Workshop | Training, Case Study, Project, Template, Reference, Playbook |
-
-The same HTML file can appear in **both** catalogs if it helps QEs (e.g. a Playwright guide).
-
----
-
-## Everyday workflow: add a QE Repository resource
-
-1. Copy `qe-repo/_resource-template.html` → `qe-repo/my-topic.html`
-2. Edit the content inside `<main>` and the `<title>` / description in `<head>`
-3. Open `qe-repository-data.js` and add a new object (copy an existing one)
-4. Add the page URL to `sitemap.xml`
-5. `git add` → `git commit` → `git push`
-
-Categories for QE Repository: **Training**, **Case Study**, **Project**, **Template**, **Reference**, **Playbook**.
 
 ---
 
@@ -193,14 +163,11 @@ When asking for help, say:
 ## Summary cheat sheet
 
 ```
-New session       → sessions/_session-template.html → library-data.js → push
-New QE resource   → qe-repo/_resource-template.html → qe-repository-data.js → push
-AI session HTML   → node scripts/add-session-shell.js sessions/foo.html
-AI QE repo HTML   → node scripts/add-qe-repo-shell.js qe-repo/foo.html
-Homepage          → index.html + assets/home.css
-Library list      → library-data.js
-QE Repository list → qe-repository-data.js
-Colours           → assets/tokens.css
+New post     → copy _session-template.html → edit → library-data.js → sitemap.xml → git push
+AI HTML dump → sessions/foo.html → node scripts/add-session-shell.js sessions/foo.html
+Homepage     → index.html + assets/home.css
+Library list → library-data.js only (for new cards)
+Colours      → assets/tokens.css
 ```
 
 You do **not** need npm, Node packages, or a bundler for normal updates — only Node for the optional `add-session-shell.js` script.

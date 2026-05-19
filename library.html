@@ -33,7 +33,6 @@
         <li><a href="index.html#experience">Experience</a></li>
         <li><a href="index.html#skills">Skills</a></li>
         <li><a href="library.html" aria-current="page">Library</a></li>
-        <li><a href="qe-repository.html">QE Repository</a></li>
         <li><a href="index.html#contact">Contact</a></li>
       </ul>
       <div class="nav__right">
@@ -56,7 +55,6 @@
         <li><a href="index.html#experience" onclick="closeMobile()">Experience</a></li>
         <li><a href="index.html#skills" onclick="closeMobile()">Skills</a></li>
         <li><a href="library.html" onclick="closeMobile()">Library</a></li>
-        <li><a href="qe-repository.html" onclick="closeMobile()">QE Repository</a></li>
         <li><a href="index.html#contact" onclick="closeMobile()">Contact</a></li>
       </ul>
     </div>
@@ -152,8 +150,7 @@
         <p class="footer__copy">&copy; 2026 Sandeep Singh. All rights reserved.</p>
         <ul class="footer__links" role="list">
           <li><a href="https://www.linkedin.com/in/sandeepsingh87/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><a href="qe-repository.html">QE Repository</a></li>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="https://sandeepsingh87.in" target="_blank" rel="noopener noreferrer">Website</a></li>
           <li><a href="mailto:mailsandeeps3@gmail.com">Email</a></li>
         </ul>
       </div>
@@ -168,15 +165,178 @@
 
   <!-- Load catalog -->
   <script src="library-data.js"></script>
-  <script src="assets/catalog-engine.js"></script>
   <script src="assets/site.js"></script>
+
   <script>
-    initResourceCatalog({
-      dataKey: 'LIBRARY',
-      entryLabel: 'entries',
-      featuredLabel: '⭐ Featured',
-      allLabelDefault: 'All Entries'
+  // ── Library engine ──
+  (function(){
+    // State
+    let activeFilter = 'all';
+    let searchQuery  = '';
+    let sortOrder    = 'newest';
+
+    // Format date  "2026-05-08" → "May 2026"
+    function fmtDate(iso) {
+      const d = new Date(iso + 'T00:00:00');
+      return d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
+    }
+
+    // Category → CSS slug
+    function catSlug(c) { return c.toLowerCase().replace(/\s+/g, '-'); }
+
+    // Build a card element
+    function buildCard(entry, featured) {
+      const a = document.createElement('a');
+      a.href = entry.file;
+      a.className = 'lib-card' + (featured ? ' lib-card--featured' : '');
+      a.setAttribute('data-id', entry.id);
+      a.setAttribute('data-category', entry.category.toLowerCase());
+      a.setAttribute('data-tags', entry.tags.join(' ').toLowerCase());
+      a.setAttribute('data-title', entry.title.toLowerCase());
+      a.setAttribute('data-desc', entry.description.toLowerCase());
+      a.setAttribute('data-date', entry.date);
+
+      const slug = catSlug(entry.category);
+      a.innerHTML = `
+        <div class="card-top">
+          <div class="card-badges">
+            <span class="cat-pill cat-pill--${slug}">${entry.category}</span>
+            ${featured ? '<span class="featured-badge">Featured</span>' : ''}
+          </div>
+          <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+        <h2 class="card-title">${entry.title}</h2>
+        <p class="card-desc">${entry.description}</p>
+        <div class="card-footer">
+          <div class="card-meta">
+            <span class="card-date">${fmtDate(entry.date)}</span>
+            <span class="card-duration">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              ${entry.duration}
+            </span>
+          </div>
+          <div class="card-tags">
+            ${entry.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}
+          </div>
+        </div>`;
+      return a;
+    }
+
+    // Inject dynamic filter chips from categories in data
+    function buildChips() {
+      const cats = [...new Set(LIBRARY.map(e => e.category))].sort();
+      const wrap = document.getElementById('filter-chips');
+      cats.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'chip';
+        btn.textContent = cat;
+        btn.setAttribute('data-filter', cat.toLowerCase());
+        btn.addEventListener('click', () => setFilter(cat.toLowerCase()));
+        wrap.appendChild(btn);
+      });
+    }
+
+    function setFilter(val) {
+      activeFilter = val;
+      document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.filter === val));
+      render();
+    }
+
+    function clearAll() {
+      document.getElementById('search-input').value = '';
+      searchQuery = '';
+      setFilter('all');
+    }
+    window.clearAll = clearAll;
+
+    function sortEntries(arr) {
+      return [...arr].sort((a, b) => {
+        if (sortOrder === 'newest') return b.date.localeCompare(a.date);
+        if (sortOrder === 'oldest') return a.date.localeCompare(b.date);
+        if (sortOrder === 'az') return a.title.localeCompare(b.title);
+        if (sortOrder === 'za') return b.title.localeCompare(a.title);
+        return 0;
+      });
+    }
+
+    function matches(entry) {
+      const catOk = activeFilter === 'all' || entry.category.toLowerCase() === activeFilter;
+      if (!catOk) return false;
+      if (!searchQuery) return true;
+      const q = searchQuery.toLowerCase();
+      return entry.title.toLowerCase().includes(q)
+          || entry.description.toLowerCase().includes(q)
+          || entry.tags.some(t => t.toLowerCase().includes(q));
+    }
+
+    function render() {
+      const filteredAll = sortEntries(LIBRARY.filter(matches));
+      const featuredEntries = filteredAll.filter(e => e.featured);
+      const otherEntries = filteredAll.filter(e => !e.featured);
+
+      const fGrid = document.getElementById('featured-grid');
+      const aGrid = document.getElementById('all-grid');
+      const fSec  = document.getElementById('featured-section');
+      const aSec  = document.getElementById('all-section');
+      const empty = document.getElementById('empty-state');
+      const countEl = document.getElementById('results-count');
+
+      fGrid.innerHTML = '';
+      aGrid.innerHTML = '';
+
+      const noFilter = activeFilter === 'all' && !searchQuery;
+
+      // Show featured block only on unfiltered view
+      if (noFilter && featuredEntries.length) {
+        fSec.hidden = false;
+        featuredEntries.forEach(e => fGrid.appendChild(buildCard(e, true)));
+      } else {
+        fSec.hidden = true;
+      }
+
+      // All / non-featured
+      const toList = noFilter ? otherEntries : filteredAll;
+      if (toList.length) {
+        aSec.hidden = false;
+        document.getElementById('all-label').textContent = noFilter ? 'All Entries' : `${filteredAll.length} result${filteredAll.length !== 1 ? 's' : ''}`;
+        toList.forEach(e => aGrid.appendChild(buildCard(e, false)));
+      } else {
+        aSec.hidden = true;
+      }
+
+      // Empty state
+      const totalShown = noFilter ? (featuredEntries.length + otherEntries.length) : filteredAll.length;
+      empty.classList.toggle('visible', totalShown === 0);
+
+      countEl.innerHTML = totalShown === 0
+        ? ''
+        : `Showing <strong>${totalShown}</strong> of <strong>${LIBRARY.length}</strong> entries`;
+    }
+
+    // ── Hero stats ──
+    function updateStats() {
+      document.getElementById('total-count').textContent = LIBRARY.length;
+      const cats = new Set(LIBRARY.map(e => e.category));
+      document.getElementById('category-count').textContent = cats.size;
+      const latest = LIBRARY.slice().sort((a,b) => b.date.localeCompare(a.date))[0];
+      document.getElementById('latest-date').textContent = latest ? fmtDate(latest.date) : '—';
+    }
+
+    // ── Wire up controls ──
+    document.getElementById('search-input').addEventListener('input', e => {
+      searchQuery = e.target.value.trim();
+      render();
     });
+    document.getElementById('sort-select').addEventListener('change', e => {
+      sortOrder = e.target.value;
+      render();
+    });
+
+    // ── Init ──
+    buildChips();
+    updateStats();
+    render();
+  })();
   </script>
 
 </body>
