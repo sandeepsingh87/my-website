@@ -34,11 +34,48 @@ function ensureAfterBodyOpen(marker, markup) {
   html = html.replace(/<body([^>]*)>/i, `<body$1>\n${markup}`);
 }
 
-ensureBeforeHeadClose('<link rel="stylesheet" href="../assets/session-shell.css" />');
+function stripLegacyChrome() {
+  if (!html.includes('class="session-nav"')) return;
 
-ensureAfterBodyOpen('class="session-nav"', `  <nav class="session-nav" aria-label="Main navigation">
+  html = html.replace(/\s*(?:<!-- NAV -->\s*)?<nav class="nav"[\s\S]*?<\/nav>\s*/gi, '\n');
+
+  if (html.includes('class="session-progress"')) {
+    html = html.replace(/\s*<div class="progress-bar">[\s\S]*?<\/div>\s*(?=<div class="hero"|<main|<section)/i, '\n');
+    html = html.replace(/\s*<div class="progress-bar">[\s\S]*?<\/div>\s*(?=<div class="hero"|<main|<section)/i, '\n');
+  }
+
+  if (html.includes('class="session-footer"')) {
+    html = html.replace(/\s*<!-- FOOTER -->\s*<footer class="footer">[\s\S]*?<\/footer>\s*/gi, '\n');
+  }
+
+  const scrollButtons = html.match(/<button class="scroll-top"[\s\S]*?<\/button>/g) || [];
+  if (scrollButtons.length > 1) {
+    let kept = false;
+    html = html.replace(/<button class="scroll-top"[\s\S]*?<\/button>/g, (m) => {
+      if (kept) return '';
+      kept = true;
+      return m;
+    });
+  }
+
+  const scripts = html.match(/<script src="\.\.\/assets\/site\.js"><\/script>/g) || [];
+  if (scripts.length > 1) {
+    let first = true;
+    html = html.replace(/<script src="\.\.\/assets\/site\.js"><\/script>\s*/g, (m) => {
+      if (first) {
+        first = false;
+        return m;
+      }
+      return '';
+    });
+  }
+
+  html = html.replace(/href="\/"(?![^"]*sandeepsingh87)/g, 'href="../index.html"');
+}
+
+const sessionShellMarkup = `  <nav class="session-nav" aria-label="Main navigation">
     <div class="session-nav__inner">
-      <a href="/" class="session-nav__logo" aria-label="Sandeep Singh — Home">
+      <a href="../index.html" class="session-nav__logo" aria-label="Sandeep Singh — Home">
         <svg class="session-nav__mark" viewBox="0 0 34 34" fill="none" aria-hidden="true">
           <rect width="34" height="34" rx="7" fill="var(--session-primary)"/>
           <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#fff" letter-spacing="0.5">SS</text>
@@ -68,13 +105,16 @@ ensureAfterBodyOpen('class="session-nav"', `  <nav class="session-nav" aria-labe
       <span class="session-progress__label" data-reading-progress-label>0%</span>
     </div>
   </div>
-`);
+`;
+
+ensureBeforeHeadClose('<link rel="stylesheet" href="../assets/session-shell.css" />');
+ensureAfterBodyOpen('class="session-nav"', sessionShellMarkup);
 
 ensureBeforeBodyClose(`  <footer class="session-footer">
     <div class="session-footer__inner">
       <p class="session-footer__copy">&copy; 2026 Sandeep Singh. All rights reserved.</p>
       <ul class="session-footer__links">
-        <li><a href="/">Home</a></li>
+        <li><a href="../index.html">Home</a></li>
         <li><a href="../library.html">Library</a></li>
         <li><a href="mailto:mailsandeeps3@gmail.com">Email</a></li>
       </ul>
@@ -95,6 +135,8 @@ if (!html.includes('session-shell-offset')) {
     return `<main${attrs} class="session-shell-offset">`;
   });
 }
+
+stripLegacyChrome();
 
 fs.writeFileSync(filePath, html);
 console.log(`Updated ${target} with the shared session shell.`);
