@@ -6,7 +6,7 @@ const path = require('path');
 const target = process.argv[2];
 
 if (!target) {
-  console.error('Usage: node scripts/add-session-shell.js sessions/new-session.html');
+  console.error('Usage: node scripts/add-qe-repo-shell.js qe-repo/new-resource.html');
   process.exit(1);
 }
 
@@ -88,9 +88,9 @@ const sessionShellMarkup = `  <nav class="session-nav" aria-label="Main navigati
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
           </svg>
         </button>
-        <a href="../library.html" class="session-nav__back">
+        <a href="../qe-repository.html" class="session-nav__back">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-          All Posts
+          QE Repository
         </a>
       </div>
     </div>
@@ -140,4 +140,4 @@ if (!html.includes('session-shell-offset')) {
 stripLegacyChrome();
 
 fs.writeFileSync(filePath, html);
-console.log(`Updated ${target} with the shared session shell.`);
+console.log(`Updated ${target} with the shared QE Repository shell.`);

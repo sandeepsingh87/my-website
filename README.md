@@ -11,6 +11,9 @@ Static personal site for [sandeepsingh87.in](https://sandeepsingh87.in): homepag
 | `index.html` | Homepage — profile, experience, skills |
 | `library.html` | Knowledge library UI (cards driven by `library-data.js`) |
 | `library-data.js` | Catalog of all published sessions |
+| `qe-repository.html` | QE Repository browse page (search & filters) |
+| `qe-repository-data.js` | Catalog of QE-focused resources |
+| `qe-repo/` | HTML files for QE Repository (templates, case studies, etc.) |
 | `links.html` | Redirects to `library.html` |
 | `sessions/` | Long-form articles and training notes |
 | `sessions/_session-template.html` | Starter template for new posts |

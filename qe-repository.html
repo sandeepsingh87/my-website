@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Knowledge Library — Sandeep Singh</title>
-  <meta name="description" content="Sandeep Singh's personal knowledge library — session notes, training materials, course learnings, and project insights from 16+ years in Quality Engineering." />
+  <title>QE Repository — Sandeep Singh</title>
+  <meta name="description" content="Quality Engineering Repository — training, case studies, project notes, templates, and playbooks for QEs to learn and implement." />
+  <link rel="canonical" href="https://sandeepsingh87.in/qe-repository.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/tokens.css" />
+  <link rel="stylesheet" href="assets/tokens.css" />
   <link rel="stylesheet" href="assets/site-chrome.css" />
   <link rel="stylesheet" href="assets/library.css" />
+  <link rel="stylesheet" href="assets/qe-repository.css" />
 </head>
 <body>
 
@@ -32,8 +34,8 @@
         <li><a href="index.html#about">About</a></li>
         <li><a href="index.html#experience">Experience</a></li>
         <li><a href="index.html#skills">Skills</a></li>
-        <li><a href="library.html" aria-current="page">Library</a></li>
-        <li><a href="qe-repository.html">QE Repository</a></li>
+        <li><a href="library.html">Library</a></li>
+        <li><a href="qe-repository.html" aria-current="page">QE Repository</a></li>
         <li><a href="index.html#contact">Contact</a></li>
       </ul>
       <div class="nav__right">
@@ -63,15 +65,15 @@
   </nav>
 
   <!-- PAGE HERO -->
-  <div class="page-hero">
+  <div class="page-hero page-hero--qe">
     <div class="container">
-      <p class="page-hero__eyebrow">Personal Knowledge Library</p>
-      <h1 class="page-hero__title">Sessions, Courses &amp; <em>Learnings</em></h1>
-      <p class="page-hero__subtitle">Every training session, course, workshop, and project learning — documented and searchable. Click any card to open the full HTML.</p>
+      <p class="page-hero__eyebrow">Quality Engineering Repository</p>
+      <h1 class="page-hero__title">Learn, Reference &amp; <em>Implement</em></h1>
+      <p class="page-hero__subtitle">Training material, case studies, project learnings, templates, and playbooks — curated for Quality Engineers. Open any card to read the full guide.</p>
       <div class="page-hero__meta">
         <div class="page-hero__stat">
           <span class="page-hero__stat-num" id="total-count">—</span>
-          <span class="page-hero__stat-label">Total Entries</span>
+          <span class="page-hero__stat-label">Total Resources</span>
         </div>
         <div class="page-hero__stat">
           <span class="page-hero__stat-num" id="category-count">—</span>
@@ -86,7 +88,7 @@
   </div>
 
   <!-- CONTROLS -->
-  <div class="controls" role="search" aria-label="Search and filter library">
+  <div class="controls" role="search" aria-label="Search and filter QE repository">
     <div class="container">
       <div class="controls__inner">
         <div class="search-wrap">
@@ -94,7 +96,7 @@
             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
           </svg>
           <input type="search" class="search-input" id="search-input"
-            placeholder="Search by title, tag, or keyword…" aria-label="Search library entries" autocomplete="off" />
+            placeholder="Search QE resources by title or tag…" aria-label="Search QE repository" autocomplete="off" />
         </div>
         <div class="filter-chips" id="filter-chips" role="group" aria-label="Filter by category">
           <button class="chip active" data-filter="all">All</button>
@@ -114,6 +116,10 @@
   <main id="main" class="library-main">
     <div class="container">
 
+      <div class="repo-intro">
+        <p><strong>Knowledge Library</strong> holds all sessions and courses. <strong>QE Repository</strong> focuses on material QEs can reuse at work — automation, strategy, case studies, and templates. The same article can appear in both when it fits.</p>
+      </div>
+
       <div class="results-header">
         <p class="results-count" id="results-count" aria-live="polite"></p>
       </div>
@@ -126,7 +132,7 @@
 
       <!-- All entries -->
       <div class="all-section" id="all-section">
-        <p class="all-label" id="all-label">All Entries</p>
+        <p class="all-label" id="all-label">All Resources</p>
         <div class="all-grid" id="all-grid"></div>
       </div>
 
@@ -138,7 +144,7 @@
           </svg>
         </div>
         <h2 class="empty-state__title">Nothing found</h2>
-        <p class="empty-state__body">No entries match your search or filter. Try different keywords or clear the filters.</p>
+        <p class="empty-state__body">No resources match your search or filter. Try different keywords or clear the filters.</p>
         <button class="empty-clear" onclick="clearAll()">Clear everything</button>
       </div>
 
@@ -152,7 +158,7 @@
         <p class="footer__copy">&copy; 2026 Sandeep Singh. All rights reserved.</p>
         <ul class="footer__links" role="list">
           <li><a href="https://www.linkedin.com/in/sandeepsingh87/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><a href="qe-repository.html">QE Repository</a></li>
+          <li><a href="library.html">Library</a></li>
           <li><a href="index.html">Home</a></li>
           <li><a href="mailto:mailsandeeps3@gmail.com">Email</a></li>
         </ul>
@@ -167,17 +173,18 @@
   </button>
 
   <!-- Load catalog -->
-  <script src="library-data.js"></script>
+  <script src="qe-repository-data.js"></script>
   <script src="assets/catalog-engine.js"></script>
   <script src="assets/site.js"></script>
   <script>
     initResourceCatalog({
-      dataKey: 'LIBRARY',
-      entryLabel: 'entries',
-      featuredLabel: '⭐ Featured',
-      allLabelDefault: 'All Entries'
+      dataKey: 'QE_REPOSITORY',
+      entryLabel: 'resources',
+      featuredLabel: '⭐ Featured for QEs',
+      allLabelDefault: 'All Resources'
     });
   </script>
 
 </body>
 </html>
+
