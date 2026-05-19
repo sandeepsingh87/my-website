@@ -1,21 +1,36 @@
-# Session pages
+# Session Page Workflow
 
-Training notes, talks, and articles live here as plain HTML files.
+Use this folder for new training notes, talks, articles, and generated HTML pages.
 
-**Full instructions:** see **[../MAINTENANCE.md](../MAINTENANCE.md)** in the repo root.
+## Best path for new pages
 
-## Quick steps
+1. Copy `_session-template.html` to a new filename.
+2. Replace the title, metadata, and content inside `<main>`.
+3. Add the page to `../library-data.js`.
 
-1. Copy `_session-template.html` → rename → edit content inside `<main>`.
-2. Add an entry in `../library-data.js`.
-3. Add the URL to `../sitemap.xml`.
-4. `git push` to publish.
+The template already includes the consistent header, footer, scroll-to-top button, and reading progress bar.
 
-## AI-generated HTML
+## If an AI tool generates a full HTML file
+
+Place the generated file in `sessions/`, then run:
 
 ```sh
-# From repo root
-node scripts/add-session-shell.js sessions/your-file.html
+# From the repo root
+node scripts/add-session-shell.js sessions/new-session.html
 ```
 
-See MAINTENANCE.md for what the script does and how to avoid duplicate headers.
+If you are already inside this `sessions/` folder, run:
+
+```sh
+node ../scripts/add-session-shell.js new-session.html
+```
+
+The script adds:
+
+- `../assets/session-shell.css`
+- the Sandeep Singh header with the `All Posts` button
+- the reading progress bar
+- the shared footer
+- `../assets/site.js`
+
+If the generated file already has its own header or footer, remove that old markup after running the script so the page has only one top navigation and one footer.
