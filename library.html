@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Knowledge Library — Sandeep Singh</title>
-  <meta name="description" content="Sandeep Singh's personal knowledge library — session notes, training materials, course learnings, and project insights from 16+ years in Quality Engineering." />
+  <title>QE Playbook — Sandeep Singh</title>
+  <meta name="description" content="Sandeep Singh's QE Playbook — practical guides, training notes, course learnings, and project insights from 16+ years in Quality Engineering." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..500&display=swap" rel="stylesheet">
@@ -32,7 +32,7 @@
         <li><a href="index.html#about">About</a></li>
         <li><a href="index.html#experience">Experience</a></li>
         <li><a href="index.html#skills">Skills</a></li>
-        <li><a href="library.html" aria-current="page">Library</a></li>
+        <li><a href="library.html" aria-current="page">QE Playbook</a></li>
         <li><a href="index.html#contact">Contact</a></li>
       </ul>
       <div class="nav__right">
@@ -54,7 +54,7 @@
         <li><a href="index.html#about" onclick="closeMobile()">About</a></li>
         <li><a href="index.html#experience" onclick="closeMobile()">Experience</a></li>
         <li><a href="index.html#skills" onclick="closeMobile()">Skills</a></li>
-        <li><a href="library.html" onclick="closeMobile()">Library</a></li>
+        <li><a href="library.html" onclick="closeMobile()">QE Playbook</a></li>
         <li><a href="index.html#contact" onclick="closeMobile()">Contact</a></li>
       </ul>
     </div>
@@ -63,9 +63,13 @@
   <!-- PAGE HERO -->
   <div class="page-hero">
     <div class="container">
-      <p class="page-hero__eyebrow">Personal Knowledge Library</p>
-      <h1 class="page-hero__title">Sessions, Courses &amp; <em>Learnings</em></h1>
-      <p class="page-hero__subtitle">Every training session, course, workshop, and project learning — documented and searchable. Click any card to open the full HTML.</p>
+      <p class="page-hero__eyebrow">Practical notes for builders and quality engineers</p>
+      <h1 class="page-hero__title">QE <em>Playbook</em></h1>
+      <p class="page-hero__subtitle">Field notes, hands-on guides, and training material from quality engineering, automation, AI experiments, and platform work. Search by topic, skim the featured picks, or open a card and start learning.</p>
+      <div class="page-hero__actions">
+        <a href="#featured-section" class="hero-link hero-link--primary">Start with featured</a>
+        <a href="#search-input" class="hero-link">Search topics</a>
+      </div>
       <div class="page-hero__meta">
         <div class="page-hero__stat">
           <span class="page-hero__stat-num" id="total-count">—</span>
@@ -92,7 +96,7 @@
             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
           </svg>
           <input type="search" class="search-input" id="search-input"
-            placeholder="Search by title, tag, or keyword…" aria-label="Search library entries" autocomplete="off" />
+            placeholder="Search Playwright, hosting, QE, platform…" aria-label="Search playbook entries" autocomplete="off" />
         </div>
         <div class="filter-chips" id="filter-chips" role="group" aria-label="Filter by category">
           <button class="chip active" data-filter="all">All</button>
@@ -118,13 +122,13 @@
 
       <!-- Featured -->
       <div class="featured-section" id="featured-section">
-        <p class="featured-label">⭐ Featured</p>
+        <p class="featured-label">Featured starting points</p>
         <div class="featured-grid" id="featured-grid"></div>
       </div>
 
       <!-- All entries -->
       <div class="all-section" id="all-section">
-        <p class="all-label" id="all-label">All Entries</p>
+        <p class="all-label" id="all-label">All Playbook Entries</p>
         <div class="all-grid" id="all-grid"></div>
       </div>
 
@@ -136,7 +140,7 @@
           </svg>
         </div>
         <h2 class="empty-state__title">Nothing found</h2>
-        <p class="empty-state__body">No entries match your search or filter. Try different keywords or clear the filters.</p>
+        <p class="empty-state__body">No playbook entries match your search or filter. Try different keywords or clear the filters.</p>
         <button class="empty-clear" onclick="clearAll()">Clear everything</button>
       </div>
 
@@ -149,6 +153,7 @@
       <div class="footer__inner">
         <p class="footer__copy">&copy; 2026 Sandeep Singh. All rights reserved.</p>
         <ul class="footer__links" role="list">
+          <li><a href="library.html">QE Playbook</a></li>
           <li><a href="https://www.linkedin.com/in/sandeepsingh87/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
           <li><a href="https://sandeepsingh87.in" target="_blank" rel="noopener noreferrer">Website</a></li>
           <li><a href="mailto:mailsandeeps3@gmail.com">Email</a></li>
@@ -298,7 +303,7 @@
       const toList = noFilter ? otherEntries : filteredAll;
       if (toList.length) {
         aSec.hidden = false;
-        document.getElementById('all-label').textContent = noFilter ? 'All Entries' : `${filteredAll.length} result${filteredAll.length !== 1 ? 's' : ''}`;
+        document.getElementById('all-label').textContent = noFilter ? 'All Playbook Entries' : `${filteredAll.length} result${filteredAll.length !== 1 ? 's' : ''}`;
         toList.forEach(e => aGrid.appendChild(buildCard(e, false)));
       } else {
         aSec.hidden = true;

@@ -14,13 +14,13 @@
   <link rel="stylesheet" href="assets/styles.css">
   <style>
 /* HERO */
-    .hero{padding-block:clamp(var(--space-24),14vw,var(--space-32));
-      padding-top:calc(clamp(56px,7vw,68px) + clamp(var(--space-20),10vw,var(--space-32)))}
+    .hero{padding-block:clamp(var(--space-24),14vw,var(--space-32,8rem));
+      padding-top:calc(clamp(56px,7vw,68px) + clamp(var(--space-24),12vw,var(--space-32,8rem)))}
     .hero__inner{display:grid;grid-template-columns:1fr min(260px,35%);
       align-items:start;gap:clamp(var(--space-8),5vw,var(--space-16))}
     .hero__eyebrow{font-size:var(--text-xs);font-weight:500;letter-spacing:0.12em;
       text-transform:uppercase;color:var(--color-accent);margin-bottom:var(--space-4)}
-    .hero__name{font-family:var(--font-display);font-size:var(--text-3xl);font-weight:400;
+    .hero__name{font-family:var(--font-display);font-size:var(--text-3xl,clamp(3.5rem,5vw,6rem));font-weight:400;
       line-height:1.05;color:var(--color-text);margin-bottom:var(--space-5)}
     .hero__name em{font-style:italic;color:var(--color-primary)}
     .hero__title{font-size:var(--text-base);font-weight:400;color:var(--color-text-muted);
@@ -56,6 +56,43 @@
     .hero__stat-number{font-family:var(--font-display);font-size:var(--text-lg);font-weight:400;
       color:var(--color-primary);line-height:1;margin-bottom:var(--space-1)}
     .hero__stat-label{font-size:var(--text-xs);color:var(--color-text-faint);letter-spacing:0.05em}
+
+    /* PLAYBOOK FEATURE */
+    .playbook-feature{background:var(--color-primary);color:var(--color-text-inverse);
+      padding-block:clamp(var(--space-12),7vw,var(--space-20))}
+    .playbook-feature__inner{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,0.95fr);
+      gap:clamp(var(--space-8),5vw,var(--space-16));align-items:center}
+    .playbook-feature__label{font-size:var(--text-xs);font-weight:600;letter-spacing:0.14em;
+      text-transform:uppercase;color:oklch(from var(--color-text-inverse) l c h / 0.68);margin-bottom:var(--space-3)}
+    .playbook-feature__title{font-family:var(--font-display);font-size:clamp(2rem,5vw,4.5rem);
+      font-weight:400;line-height:0.98;max-width:8ch;margin-bottom:var(--space-5)}
+    .playbook-feature__title em{font-style:italic;color:#f0c28d}
+    .playbook-feature__copy{font-size:var(--text-base);line-height:1.7;
+      color:oklch(from var(--color-text-inverse) l c h / 0.78);max-width:54ch;margin-bottom:var(--space-6)}
+    .playbook-feature__actions{display:flex;gap:var(--space-3);flex-wrap:wrap;align-items:center}
+    .btn--light{background:var(--color-text-inverse);color:var(--color-primary)}
+    .btn--light:hover{background:#ffffff}
+    .btn--outline-light{color:var(--color-text-inverse);
+      border:1px solid oklch(from var(--color-text-inverse) l c h / 0.34)}
+    .btn--outline-light:hover{border-color:var(--color-text-inverse);
+      background:oklch(from var(--color-text-inverse) l c h / 0.08)}
+    .playbook-feature__panel{background:oklch(from var(--color-text-inverse) l c h / 0.08);
+      border:1px solid oklch(from var(--color-text-inverse) l c h / 0.16);
+      border-radius:var(--radius-xl);padding:var(--space-5);box-shadow:var(--shadow-lg)}
+    .playbook-feature__panel-head{display:flex;align-items:center;justify-content:space-between;
+      gap:var(--space-4);margin-bottom:var(--space-5)}
+    .playbook-feature__panel-title{font-size:var(--text-xs);font-weight:600;letter-spacing:0.12em;
+      text-transform:uppercase;color:#f0c28d}
+    .playbook-feature__count{font-family:var(--font-display);font-size:var(--text-lg);line-height:1}
+    .playbook-feature__items{display:grid;gap:var(--space-3)}
+    .playbook-feature__item{padding:var(--space-4);border-radius:var(--radius-lg);
+      background:oklch(from var(--color-text-inverse) l c h / 0.08);
+      border:1px solid oklch(from var(--color-text-inverse) l c h / 0.12)}
+    .playbook-feature__item-kicker{font-size:0.68rem;font-weight:600;letter-spacing:0.12em;
+      text-transform:uppercase;color:#f0c28d;margin-bottom:var(--space-1)}
+    .playbook-feature__item-title{font-size:var(--text-sm);font-weight:600;color:var(--color-text-inverse)}
+    .playbook-feature__item-body{font-size:var(--text-xs);line-height:1.55;
+      color:oklch(from var(--color-text-inverse) l c h / 0.66);margin-top:var(--space-1)}
 
     /* SECTION COMMON */
     .section{padding-block:clamp(var(--space-16),8vw,var(--space-24))}
@@ -128,7 +165,7 @@
     .cert-card__issuer{font-size:var(--text-xs);color:var(--color-text-muted)}
 
     /* CONTACT */
-    .contact-section{text-align:center;padding-block:clamp(var(--space-20),10vw,var(--space-32))}
+    .contact-section{text-align:center;padding-block:clamp(var(--space-20),10vw,var(--space-32,8rem))}
     .contact-section .section__title{margin-bottom:var(--space-5)}
     .contact-section .section__subtitle{margin:0 auto var(--space-8)}
     .contact__links{display:flex;gap:var(--space-4);flex-wrap:wrap;justify-content:center}
@@ -184,7 +221,7 @@
       .hero__inner { grid-template-columns: 1fr min(220px, 32%); gap: var(--space-8); }
     }
     @media (max-width: 767px) {
-      .hero { padding-top: calc(clamp(56px, 7vw, 68px) + var(--space-10)); padding-bottom: var(--space-16); }
+      .hero { padding-top: calc(clamp(56px, 7vw, 68px) + var(--space-16)); padding-bottom: var(--space-16); }
       .hero__inner { grid-template-columns: 1fr; text-align: center; }
       .hero__photo-wrap { order: -1; align-items: center; margin-bottom: var(--space-4); }
       .hero__photo { width: min(160px, 48vw); aspect-ratio: 1/1; border-radius: 50%; margin: 0 auto; }
@@ -192,6 +229,8 @@
       .hero__actions { justify-content: center; }
       .hero__title { margin-inline: auto; }
       .hero__stat-row { max-width: 260px; margin: 0 auto; }
+      .playbook-feature__inner { grid-template-columns: 1fr; }
+      .playbook-feature__title { max-width: 10ch; }
     }
     @media (max-width: 479px) {
       .hero__name { font-size: clamp(2.2rem, 9vw, 3rem); }
@@ -348,7 +387,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="library.html">Library</a></li>
+        <li><a href="library.html">QE Playbook</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <div class="nav__right">
@@ -370,7 +409,7 @@
         <li><a href="#about" onclick="closeMobile()">About</a></li>
         <li><a href="#experience" onclick="closeMobile()">Experience</a></li>
         <li><a href="#skills" onclick="closeMobile()">Skills</a></li>
-        <li><a href="library.html" onclick="closeMobile()">Library</a></li>
+        <li><a href="library.html" onclick="closeMobile()">QE Playbook</a></li>
         <li><a href="#contact" onclick="closeMobile()">Contact</a></li>
       </ul>
     </div>
@@ -401,13 +440,13 @@
               <span class="tag">Financial Services</span>
             </div>
             <div class="hero__actions">
-              <a href="#experience" class="btn btn--primary">
+              <a href="library.html" class="btn btn--primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>
+                Explore QE Playbook
+              </a>
+              <a href="#experience" class="btn btn--ghost">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
                 View Experience
-              </a>
-              <a href="https://www.linkedin.com/in/sandeepsingh87/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-                LinkedIn
               </a>
               <a href="https://sandeepsingh87.in/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -438,6 +477,54 @@
               <div class="hero__stat">
                 <div class="hero__stat-number">625</div>
                 <div class="hero__stat-label">Followers</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- QE PLAYBOOK FEATURE -->
+    <section class="playbook-feature" aria-labelledby="playbook-title">
+      <div class="container--wide">
+        <div class="playbook-feature__inner">
+          <div>
+            <p class="playbook-feature__label">Main Attraction</p>
+            <h2 class="playbook-feature__title" id="playbook-title">QE <em>Playbook</em></h2>
+            <p class="playbook-feature__copy">
+              A growing collection of practical guides, training notes, and field-tested ideas from quality engineering, automation, AI, and platform work. Built to be searched, skimmed, and used.
+            </p>
+            <div class="playbook-feature__actions">
+              <a href="library.html" class="btn btn--light">
+                Open the Playbook
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+              <a href="library.html#main" class="btn btn--outline-light">Browse latest entries</a>
+            </div>
+          </div>
+
+          <div class="playbook-feature__panel" aria-label="Featured playbook topics">
+            <div class="playbook-feature__panel-head">
+              <p class="playbook-feature__panel-title">Inside now</p>
+              <span class="playbook-feature__count">4+</span>
+            </div>
+            <div class="playbook-feature__items">
+              <div class="playbook-feature__item">
+                <p class="playbook-feature__item-kicker">Guide</p>
+                <h3 class="playbook-feature__item-title">Host Your Website for Free</h3>
+                <p class="playbook-feature__item-body">A practical path through GitHub, Cloudflare Pages, DNS, and publishing workflow.</p>
+              </div>
+              <div class="playbook-feature__item">
+                <p class="playbook-feature__item-kicker">Automation</p>
+                <h3 class="playbook-feature__item-title">Getting Started with Playwright</h3>
+                <p class="playbook-feature__item-body">A hands-on starting point for modern browser automation and E2E testing.</p>
+              </div>
+              <div class="playbook-feature__item">
+                <p class="playbook-feature__item-kicker">Thinking</p>
+                <h3 class="playbook-feature__item-title">Why QE Is Not Just Testing</h3>
+                <p class="playbook-feature__item-body">The mindset shift from execution to risk, prevention, automation, and ownership.</p>
               </div>
             </div>
           </div>
@@ -836,7 +923,7 @@
       <div class="footer__inner">
         <p class="footer__copy">&copy; 2026 Sandeep Singh. All rights reserved.</p>
         <ul class="footer__links" role="list">
-          <li><a href="library.html">Library</a></li>
+          <li><a href="library.html">QE Playbook</a></li>
           <li><a href="https://www.linkedin.com/in/sandeepsingh87/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
           <li><a href="mailto:mailsandeeps3@gmail.com">Email</a></li>
         </ul>
