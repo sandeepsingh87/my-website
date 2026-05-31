@@ -65,7 +65,8 @@ Key identity details used across the site:
 ├── library.html                       # QE Playbook page
 ├── library-data.js                    # Data source for Playbook cards
 ├── links.html                         # Redirect/legacy links page
-├── profile.jpg                        # Home hero image
+├── profile.webp                       # Preferred profile image
+├── profile.jpg                        # Profile image fallback
 ├── README.md
 ├── SESSION_HANDOFF.md                 # This file
 ├── assets/
@@ -337,8 +338,8 @@ http://127.0.0.1:8000/library.html
    - theme color
 
 3. Improve image performance:
-   - Convert `profile.jpg` to WebP
-   - Keep JPG fallback if desired
+   - Keep `profile.webp` as the preferred profile image
+   - Keep `profile.jpg` as fallback where useful
    - Add explicit dimensions and loading behavior
 
 4. Add a content workflow:

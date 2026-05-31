@@ -42,7 +42,8 @@
     .hero__photo-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:var(--space-4)}
     .hero__photo{width:100%;aspect-ratio:3/4;border-radius:var(--radius-xl);
       background:var(--color-surface-offset);overflow:hidden;box-shadow:var(--shadow-lg);position:relative}
-    .hero__photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
+    .hero__photo picture,.hero__photo img{display:block;width:100%;height:100%}
+    .hero__photo img{object-fit:cover;object-position:center top}
     .hero__photo-placeholder{width:100%;height:100%;display:flex;flex-direction:column;
       align-items:center;justify-content:center;gap:var(--space-3);
       background:linear-gradient(145deg,var(--color-primary-highlight),var(--color-surface-offset))}
@@ -456,14 +457,17 @@
           </div>
           <div class="hero__photo-wrap">
             <div class="hero__photo">
-              <img
-  src="profile.jpg"
-  alt="Sandeep Singh — Manager, E2E Quality Engineering"
-  width="400"
-  height="533"
-  loading="eager"
-  style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"
-/>
+              <picture>
+                <source srcset="profile.webp" type="image/webp">
+                <img
+                  src="profile.jpg"
+                  alt="Sandeep Singh — Manager, E2E Quality Engineering"
+                  width="400"
+                  height="533"
+                  loading="eager"
+                  style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"
+                />
+              </picture>
             </div>
             <div class="hero__stat-row">
               <div class="hero__stat">
