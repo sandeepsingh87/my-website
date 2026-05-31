@@ -150,9 +150,12 @@
     .skill-card__category{font-size:var(--text-xs);font-weight:600;letter-spacing:0.08em;
       text-transform:uppercase;color:var(--color-primary);margin-bottom:var(--space-4)}
     .skill-card__items{display:flex;flex-wrap:wrap;gap:var(--space-2)}
-    .skill-pill{font-size:var(--text-xs);font-weight:400;padding:var(--space-1) var(--space-3);
+    .skill-pill{display:inline-flex;align-items:center;font-size:var(--text-xs);font-weight:400;padding:var(--space-1) var(--space-3);
       background:var(--color-bg);color:var(--color-text-muted);
-      border:1px solid oklch(from var(--color-text) l c h / 0.1);border-radius:var(--radius-full)}
+      border:1px solid oklch(from var(--color-text) l c h / 0.1);border-radius:var(--radius-full);
+      text-decoration:none}
+    .skill-pill:hover{color:var(--color-primary);border-color:oklch(from var(--color-primary) l c h / 0.3);
+      background:oklch(from var(--color-primary) l c h / 0.08)}
 
     /* CERTIFICATIONS */
     .certs__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:var(--space-4)}
@@ -721,64 +724,64 @@
           <div class="skill-card fade-in">
             <div class="skill-card__category">Test Automation</div>
             <div class="skill-card__items">
-              <span class="skill-pill">Playwright</span>
-              <span class="skill-pill">Selenium</span>
-              <span class="skill-pill">Cypress</span>
-              <span class="skill-pill">JavaScript</span>
-              <span class="skill-pill">TypeScript</span>
-              <span class="skill-pill">RestAssured</span>
+              <a class="skill-pill" href="https://playwright.dev" target="_blank" rel="noopener noreferrer">Playwright</a>
+              <a class="skill-pill" href="https://www.selenium.dev/documentation/" target="_blank" rel="noopener noreferrer">Selenium</a>
+              <a class="skill-pill" href="https://docs.cypress.io" target="_blank" rel="noopener noreferrer">Cypress</a>
+              <a class="skill-pill" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">JavaScript</a>
+              <a class="skill-pill" href="https://www.typescriptlang.org/docs/" target="_blank" rel="noopener noreferrer">TypeScript</a>
+              <a class="skill-pill" href="https://rest-assured.io" target="_blank" rel="noopener noreferrer">RestAssured</a>
             </div>
           </div>
           <div class="skill-card fade-in">
             <div class="skill-card__category">Testing Types</div>
             <div class="skill-card__items">
-              <span class="skill-pill">E2E Testing</span>
-              <span class="skill-pill">API Testing</span>
-              <span class="skill-pill">Functional QA</span>
-              <span class="skill-pill">Regression</span>
-              <span class="skill-pill">Mobile Testing</span>
-              <span class="skill-pill">Performance</span>
+              <a class="skill-pill" href="https://playwright.dev/docs/writing-tests" target="_blank" rel="noopener noreferrer">E2E Testing</a>
+              <a class="skill-pill" href="https://learning.postman.com/docs/getting-started/overview/" target="_blank" rel="noopener noreferrer">API Testing</a>
+              <a class="skill-pill" href="https://www.atlassian.com/continuous-delivery/software-testing/types-of-software-testing" target="_blank" rel="noopener noreferrer">Functional QA</a>
+              <a class="skill-pill" href="https://www.atlassian.com/continuous-delivery/software-testing/types-of-software-testing" target="_blank" rel="noopener noreferrer">Regression</a>
+              <a class="skill-pill" href="https://appium.io/docs/en/latest/" target="_blank" rel="noopener noreferrer">Mobile Testing</a>
+              <a class="skill-pill" href="https://k6.io/docs/" target="_blank" rel="noopener noreferrer">Performance</a>
             </div>
           </div>
           <div class="skill-card fade-in">
             <div class="skill-card__category">Leadership &amp; Process</div>
             <div class="skill-card__items">
-              <span class="skill-pill">Team Management</span>
-              <span class="skill-pill">Agile / Scrum</span>
-              <span class="skill-pill">SAFe Framework</span>
-              <span class="skill-pill">Test Strategy</span>
-              <span class="skill-pill">QA Governance</span>
-              <span class="skill-pill">Stakeholder Mgmt</span>
+              <a class="skill-pill" href="https://www.atlassian.com/agile/teams" target="_blank" rel="noopener noreferrer">Team Management</a>
+              <a class="skill-pill" href="https://www.atlassian.com/agile/scrum" target="_blank" rel="noopener noreferrer">Agile / Scrum</a>
+              <a class="skill-pill" href="https://scaledagile.com/what-is-safe/" target="_blank" rel="noopener noreferrer">SAFe Framework</a>
+              <a class="skill-pill" href="https://www.atlassian.com/agile/software-development/testing" target="_blank" rel="noopener noreferrer">Test Strategy</a>
+              <a class="skill-pill" href="https://www.istqb.org" target="_blank" rel="noopener noreferrer">QA Governance</a>
+              <a class="skill-pill" href="https://www.atlassian.com/agile/project-management/stakeholders" target="_blank" rel="noopener noreferrer">Stakeholder Mgmt</a>
             </div>
           </div>
           <div class="skill-card fade-in">
             <div class="skill-card__category">Tools &amp; Platforms</div>
             <div class="skill-card__items">
-              <span class="skill-pill">JIRA</span>
-              <span class="skill-pill">Azure DevOps</span>
-              <span class="skill-pill">Postman</span>
-              <span class="skill-pill">Git / GitHub</span>
-              <span class="skill-pill">VS Code</span>
-              <span class="skill-pill">Jenkins / CI</span>
+              <a class="skill-pill" href="https://www.atlassian.com/software/jira" target="_blank" rel="noopener noreferrer">JIRA</a>
+              <a class="skill-pill" href="https://learn.microsoft.com/en-us/azure/devops/?view=azure-devops" target="_blank" rel="noopener noreferrer">Azure DevOps</a>
+              <a class="skill-pill" href="https://learning.postman.com" target="_blank" rel="noopener noreferrer">Postman</a>
+              <a class="skill-pill" href="https://docs.github.com/en" target="_blank" rel="noopener noreferrer">Git / GitHub</a>
+              <a class="skill-pill" href="https://code.visualstudio.com/docs" target="_blank" rel="noopener noreferrer">VS Code</a>
+              <a class="skill-pill" href="https://www.jenkins.io/doc/" target="_blank" rel="noopener noreferrer">Jenkins / CI</a>
             </div>
           </div>
           <div class="skill-card fade-in">
             <div class="skill-card__category">AI &amp; Emerging Tech</div>
             <div class="skill-card__items">
-              <span class="skill-pill">AI-assisted Testing</span>
-              <span class="skill-pill">Prompt Engineering</span>
-              <span class="skill-pill">ML in QA</span>
-              <span class="skill-pill">Generative AI</span>
+              <a class="skill-pill" href="https://www.thoughtworks.com/en-gb/insights/blog/test-automation/unlocking-the-potential-of-ai-driven-testing" target="_blank" rel="noopener noreferrer">AI-assisted Testing</a>
+              <a class="skill-pill" href="https://www.promptingguide.ai" target="_blank" rel="noopener noreferrer">Prompt Engineering</a>
+              <a class="skill-pill" href="https://learn.microsoft.com/en-us/training/modules/introduction-to-machine-learning/" target="_blank" rel="noopener noreferrer">ML in QA</a>
+              <a class="skill-pill" href="https://cloud.google.com/ai/generative-ai" target="_blank" rel="noopener noreferrer">Generative AI</a>
             </div>
           </div>
           <div class="skill-card fade-in">
             <div class="skill-card__category">Domain Knowledge</div>
             <div class="skill-card__items">
-              <span class="skill-pill">Financial Services</span>
-              <span class="skill-pill">Payments / Fintech</span>
-              <span class="skill-pill">Digital Banking</span>
-              <span class="skill-pill">Compliance QA</span>
-              <span class="skill-pill">Mainframe</span>
+              <a class="skill-pill" href="https://www.worldbank.org/en/publication/fintech-and-the-future-of-finance" target="_blank" rel="noopener noreferrer">Financial Services</a>
+              <a class="skill-pill" href="https://www.worldbank.org/en/topic/fintech" target="_blank" rel="noopener noreferrer">Payments / Fintech</a>
+              <a class="skill-pill" href="https://www.ibm.com/think/topics/digital-banking" target="_blank" rel="noopener noreferrer">Digital Banking</a>
+              <a class="skill-pill" href="https://www.isaca.org/resources/isaca-journal" target="_blank" rel="noopener noreferrer">Compliance QA</a>
+              <a class="skill-pill" href="https://www.ibm.com/docs/en/devops-test-perftestservr/11.0.4?topic=testing-applications-zos" target="_blank" rel="noopener noreferrer">Mainframe</a>
             </div>
           </div>
         </div>
