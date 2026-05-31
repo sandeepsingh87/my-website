@@ -130,6 +130,16 @@ Latest commit `2a4603f` includes:
 - Missing design token issues fixed for hero spacing/text sizing
 - Stale `links.html` labels updated
 
+### 4. Mobile And Theme Rules
+Mobile compatibility and theme consistency are important project requirements.
+
+- Default theme should be `light`.
+- User-selected theme is stored in `localStorage` under the key `theme`.
+- `assets/site.js` is the source of truth for theme toggle behavior.
+- Theme toggle should work globally across pages that include `assets/site.js`.
+- Session pages should use `<html data-theme="light">` and respond to `[data-theme="dark"]` where they define page-specific styles.
+- On mobile, verify there is no horizontal overflow and fixed nav/progress bars do not cover page content.
+
 ---
 
 ## Current Page Behavior
@@ -361,6 +371,8 @@ http://127.0.0.1:8000/library.html
    - session shell/template if needed
 9. If adding session pages, also update `library-data.js`.
 10. Verify the fixed nav does not overlap hero/page content.
+11. Verify mobile compatibility at around 390px wide before shipping visual changes.
+12. Do not add page-specific theme logic if shared `assets/site.js` can handle it.
 
 ---
 

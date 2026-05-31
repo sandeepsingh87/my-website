@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,6 +23,14 @@
     --step4: #a29bfe;
   }
 
+  [data-theme="dark"] {
+    --black: #0f0f12;
+    --white: #141412;
+    --muted: #9b968e;
+    --border: #2f2d28;
+    --card: #1d1b18;
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   html { scroll-behavior: smooth; }
@@ -35,11 +43,28 @@
     font-size: 16px;
   }
 
+  [data-theme="dark"] body { background: var(--white); color: #e7e2d8; }
+  [data-theme="dark"] section,
+  [data-theme="dark"] .progress-tracker,
+  [data-theme="dark"] .final-summary,
+  [data-theme="dark"] .workflow-step {
+    background: var(--card);
+    color: #e7e2d8;
+  }
+  [data-theme="dark"] .substep-body p,
+  [data-theme="dark"] .info-body,
+  [data-theme="dark"] td,
+  [data-theme="dark"] .workflow-label {
+    color: #d7d0c4;
+  }
+  [data-theme="dark"] code { background: #24221e; color: #f0b47c; }
+  [data-theme="dark"] tr:hover td { background: #24221e; }
+
   /* HERO */
   .hero {
     background: var(--black);
     color: var(--white);
-    padding: 80px 40px 60px;
+    padding: 156px 40px 60px;
     position: relative;
     overflow: hidden;
   }
@@ -232,7 +257,7 @@
     color: var(--muted);
     margin-top: 2px;
   }
-  .substep-body { flex: 1; }
+  .substep-body { flex: 1; min-width: 0; }
   .substep-body p { margin-bottom: 10px; color: #333; }
   .substep-body p:last-child { margin-bottom: 0; }
 
@@ -242,6 +267,7 @@
     border-radius: 8px;
     overflow: hidden;
     margin: 12px 0;
+    max-width: 100%;
   }
   .code-header {
     background: #111827;
@@ -273,6 +299,7 @@
   pre {
     padding: 20px;
     overflow-x: auto;
+    max-width: 100%;
     font-family: 'DM Mono', monospace;
     font-size: 13.5px;
     line-height: 1.8;
@@ -480,14 +507,18 @@
   footer span { color: var(--accent); }
 
   @media (max-width: 640px) {
-    .hero { padding: 48px 24px 40px; }
-    main { padding: 0 24px 60px; }
+    .hero { padding: 132px 24px 40px; }
+    main { padding: 0 16px 60px; }
     .toc { padding: 0 16px; }
-    .cost-banner { grid-template-columns: repeat(2, 1fr); }
+    .cost-banner { grid-template-columns: 1fr; padding: 24px; }
     .progress-steps { grid-template-columns: repeat(2, 1fr); }
     .summary-grid { grid-template-columns: 1fr; }
     .hero-stats { gap: 24px; }
     .final-summary { padding: 32px 24px; }
+    .substep { gap: 10px; }
+    .substep-num { width: 24px; height: 24px; font-size: 10px; }
+    .code-header { padding-inline: 12px; }
+    pre { padding: 16px; font-size: 12px; }
   }
 
   @media print {
@@ -1122,7 +1153,7 @@ git push origin main
       <p class="session-footer__copy">&copy; 2026 Sandeep Singh. All rights reserved.</p>
       <ul class="session-footer__links">
         <li><a href="/">Home</a></li>
-        <li><a href="../library.html">Library</a></li>
+        <li><a href="../library.html">QE Playbook</a></li>
         <li><a href="mailto:mailsandeeps3@gmail.com">Email</a></li>
       </ul>
     </div>

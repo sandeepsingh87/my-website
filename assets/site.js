@@ -1,5 +1,32 @@
 (function () {
   const root = document.documentElement;
+  const THEME_KEY = 'theme';
+  const DEFAULT_THEME = 'light';
+
+  function getStoredTheme() {
+    try {
+      return window.localStorage.getItem(THEME_KEY);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function storeTheme(theme) {
+    try {
+      window.localStorage.setItem(THEME_KEY, theme);
+    } catch (error) {
+      // The current page still updates even when storage is unavailable.
+    }
+  }
+
+  function applyTheme(theme) {
+    const nextTheme = theme === 'dark' ? 'dark' : DEFAULT_THEME;
+    root.setAttribute('data-theme', nextTheme);
+    root.style.colorScheme = nextTheme;
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => setThemeIcon(button, nextTheme));
+    syncLinkedInBadge();
+    return nextTheme;
+  }
 
   function setThemeIcon(button, theme) {
     if (!button) return;
@@ -17,19 +44,22 @@
   }
 
   function initThemeToggle() {
-    const button = document.querySelector('[data-theme-toggle]');
-    if (!button) return;
-    let theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    root.setAttribute('data-theme', theme);
-    setThemeIcon(button, theme);
-    syncLinkedInBadge();
+    let theme = applyTheme(getStoredTheme() || DEFAULT_THEME);
+    const buttons = document.querySelectorAll('[data-theme-toggle]');
+    if (!buttons.length) return;
 
-    button.addEventListener('click', () => {
-      theme = theme === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      setThemeIcon(button, theme);
-      setTimeout(syncLinkedInBadge, 50);
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        storeTheme(theme);
+        applyTheme(theme);
+        setTimeout(syncLinkedInBadge, 50);
+      });
+    });
+
+    window.addEventListener('storage', (event) => {
+      if (event.key !== THEME_KEY) return;
+      theme = applyTheme(event.newValue || DEFAULT_THEME);
     });
   }
 
