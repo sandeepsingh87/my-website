@@ -23,6 +23,8 @@ Build a React-based testing website that can become the best candidate applicati
 - Styling: plain CSS in `src/styles/app.css`
 - Fixture data: `src/data/fixtures.js`
 - Main app: `src/main.jsx`
+- Vite development entry: `dev.html`
+- Static published entry: `index.html`
 - Main site cross-link: parent `index.html` header links to `testing-lab/`
 - Testing app cross-link: app header links back to `../index.html`
 
@@ -67,6 +69,8 @@ testing-lab/
 ├── package.json
 ├── vite.config.js
 ├── index.html
+├── dev.html
+├── assets/
 ├── src/
 │   ├── main.jsx
 │   ├── data/fixtures.js
@@ -93,4 +97,17 @@ cd testing-lab
 npm install
 npm run dev
 npm run build
+npm run publish:static
 ```
+
+## Static Hosting Warning
+
+The live site serves files directly from the repository. Do not point public `/testing-lab/` at raw JSX source.
+
+After React source changes, always run:
+
+```sh
+npm run publish:static
+```
+
+Then commit `testing-lab/index.html` and `testing-lab/assets/`.

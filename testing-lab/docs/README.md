@@ -86,6 +86,19 @@ cd testing-lab
 npm run build
 ```
 
+## Publish To Static Hosting
+
+The public `/testing-lab/` route must serve compiled assets, not the Vite development entry.
+
+After changing React source, run:
+
+```sh
+cd testing-lab
+npm run publish:static
+```
+
+This builds the app, copies compiled files into `testing-lab/assets/`, and updates `testing-lab/index.html` for static hosting.
+
 ## Future Roadmap
 
 - Add React Router for deeper URL-based test scenarios.
