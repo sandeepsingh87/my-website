@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trust the Process - Work Culture Playbook</title>
+<meta name="description" content="A professional work-culture playbook inspired by Mikel Arteta's Arsenal rebuild, translated into practical leadership lessons for modern teams.">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=cabinet-grotesk@700,800&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme="light"]{
+--bg:#f7f6f2;--surface:#ffffff;--surface2:#f1eee8;--surface3:#fbfaf7;--border:#dcd7cf;
+--text:#171614;--muted:#65605a;--faint:#9c9790;
+--primary:#14365a;--primary-h:#0e2842;--primary-lt:#dce8f4;
+--accent:#b96524;--accent-lt:#f8e7d8;
+--success:#2f6f46;--success-lt:#deefe4;
+--warn:#96512a;--warn-lt:#f4e4d8;
+--purple:#5d3b8c;--purple-lt:#ebe3f5;
+--shadow:0 2px 8px rgba(20,54,90,0.08);--shadow-lg:0 18px 50px rgba(20,54,90,0.14);
+--radius:10px;--radius-lg:16px;--content:1120px;
+}
+[data-theme="dark"]{
+--bg:#121417;--surface:#1b2028;--surface2:#222936;--surface3:#171b22;--border:#313948;
+--text:#eef2f7;--muted:#a9b2c1;--faint:#6e7787;
+--primary:#8ab8ec;--primary-h:#b9d5f8;--primary-lt:#1d344c;
+--accent:#f0a161;--accent-lt:#3a2617;
+--success:#7bc490;--success-lt:#173323;
+--warn:#d18a62;--warn-lt:#382417;
+--purple:#b395e5;--purple-lt:#2c2140;
+--shadow:0 2px 10px rgba(0,0,0,0.35);--shadow-lg:0 18px 50px rgba(0,0,0,0.45);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:116px}
+body{font-family:'Satoshi',system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.72}
+a{color:var(--primary);text-decoration:none}
+a:hover{text-decoration:underline}
+p{max-width:74ch;margin-bottom:14px;color:var(--text)}
+strong{font-weight:700}
+svg{display:block;max-width:100%}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+[data-theme="dark"] .nav{background:rgba(27,32,40,0.92)}
+.nav__inner{max-width:var(--content);margin-inline:auto;padding-inline:24px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav__logo{display:flex;align-items:center;gap:12px;color:var(--text);text-decoration:none;min-width:0}
+.nav__logo-mark{width:34px;height:34px;flex-shrink:0}
+.nav__logo-name{font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:16px;color:var(--text);white-space:nowrap}
+.nav__right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.theme-toggle{width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:var(--muted);border-radius:8px;background:none;border:none;cursor:pointer;transition:all .2s}
+.theme-toggle:hover{color:var(--text);background:var(--surface2)}
+.nav__back{font-size:12px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--muted);padding:8px 14px;border:1px solid var(--border);border-radius:999px;text-decoration:none}
+.nav__back:hover{color:var(--primary);border-color:var(--primary);text-decoration:none}
+.progress-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 24px;position:fixed;top:60px;left:0;right:0;z-index:90}
+.progress-inner{max-width:var(--content);margin:auto;display:flex;align-items:center;gap:12px}
+.progress-track{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:3px;width:0%;transition:width .3s}
+.progress-label{font-size:12px;color:var(--muted);white-space:nowrap;font-weight:600}
+.hero{position:relative;overflow:hidden;margin-top:96px;padding:74px 24px 52px;background:linear-gradient(135deg,#102b49 0%,#14365a 44%,#9d5525 100%);color:#fff}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 18% 20%,rgba(255,255,255,0.15),transparent 28%),linear-gradient(90deg,rgba(255,255,255,0.06) 1px,transparent 1px),linear-gradient(0deg,rgba(255,255,255,0.06) 1px,transparent 1px);background-size:auto,44px 44px,44px 44px;opacity:.72}
+.hero__inner{position:relative;z-index:1;max-width:var(--content);margin:auto;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.75fr);gap:36px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:7px 14px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
+.hero h1{font-family:'Cabinet Grotesk',sans-serif;font-size:clamp(36px,6vw,76px);font-weight:800;letter-spacing:0;line-height:.98;margin-bottom:18px;max-width:860px}
+.hero p{color:rgba(255,255,255,.86);font-size:clamp(16px,2vw,20px);max-width:760px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.hero-tag{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);border-radius:999px;padding:7px 13px;font-size:13px;color:#fff}
+.hero-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);border-radius:var(--radius-lg);padding:22px;box-shadow:0 20px 45px rgba(0,0,0,.18);backdrop-filter:blur(12px)}
+.hero-card h2{font-family:'Cabinet Grotesk',sans-serif;font-size:22px;margin-bottom:10px}
+.hero-card p{font-size:14px;color:rgba(255,255,255,.78);margin-bottom:18px}
+.hero-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.hero-metric{padding:14px;border-radius:10px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.16)}
+.hero-metric strong{display:block;font-family:'Cabinet Grotesk',sans-serif;font-size:26px;color:#fff;line-height:1}
+.hero-metric span{display:block;color:rgba(255,255,255,.76);font-size:12px;margin-top:4px}
+.container{max-width:var(--content);margin:0 auto;padding:0 24px}
+section{padding:56px 0}
+section.band{background:var(--surface2)}
+.section-header{margin-bottom:30px}
+.section-tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:5px;margin-bottom:12px}
+.tag-blue{background:var(--primary-lt);color:var(--primary)}
+.tag-orange{background:var(--accent-lt);color:var(--accent)}
+.tag-green{background:var(--success-lt);color:var(--success)}
+.tag-purple{background:var(--purple-lt);color:var(--purple)}
+.tag-warn{background:var(--warn-lt);color:var(--warn)}
+h2{font-family:'Cabinet Grotesk',sans-serif;font-size:clamp(26px,3.6vw,42px);font-weight:800;line-height:1.08;margin-bottom:12px}
+h3{font-family:'Cabinet Grotesk',sans-serif;font-size:19px;font-weight:800;line-height:1.2;margin-bottom:8px}
+.lead{font-size:18px;color:var(--muted);max-width:76ch;margin-bottom:0}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.card-icon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;margin-bottom:16px;background:var(--primary-lt);color:var(--primary)}
+.card-icon.orange{background:var(--accent-lt);color:var(--accent)}
+.card-icon.green{background:var(--success-lt);color:var(--success)}
+.card-icon.purple{background:var(--purple-lt);color:var(--purple)}
+.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:800;margin-bottom:10px}
+.summary{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:22px;align-items:stretch}
+.summary-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px;box-shadow:var(--shadow)}
+.summary-panel.large{background:linear-gradient(135deg,var(--surface) 0%,var(--surface3) 100%)}
+.quote{position:relative;padding:26px;border-radius:var(--radius-lg);background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow)}
+.quote::before{content:"";position:absolute;left:0;top:20px;bottom:20px;width:4px;background:linear-gradient(var(--primary),var(--accent));border-radius:4px}
+.quote p{font-family:'Cabinet Grotesk',sans-serif;font-size:clamp(22px,3vw,34px);font-weight:800;line-height:1.12;margin-left:18px;margin-bottom:12px;max-width:780px}
+.quote span{display:block;margin-left:18px;color:var(--muted);font-size:14px}
+.flywheel{display:grid;grid-template-columns:minmax(290px,.9fr) minmax(0,1.1fr);gap:28px;align-items:center}
+.flywheel-graphic{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;box-shadow:var(--shadow)}
+.flywheel-list{display:grid;gap:12px}
+.flywheel-step{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.step-num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--primary);color:#fff;font-weight:800}
+.timeline{position:relative;padding-left:32px;margin-top:24px}
+.timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:30px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 22px;box-shadow:var(--shadow)}
+.tl-item::before{content:"";position:absolute;left:-29px;top:24px;width:16px;height:16px;border-radius:50%;background:var(--accent);border:3px solid var(--bg)}
+.tl-time{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:5px}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--surface);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:760px}
+th{background:var(--primary);color:#fff;padding:14px 16px;text-align:left;font-weight:700;vertical-align:top}
+td{padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text)}
+tr:last-child td{border-bottom:0}
+tr:hover td{background:var(--surface2)}
+.signal-board{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.bar-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;box-shadow:var(--shadow)}
+.bar-row{display:grid;grid-template-columns:150px 1fr 44px;gap:12px;align-items:center;margin:15px 0}
+.bar-label{font-size:13px;color:var(--muted);font-weight:700}
+.bar-track{height:10px;background:var(--surface2);border-radius:999px;overflow:hidden;border:1px solid var(--border)}
+.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.bar-value{font-size:12px;color:var(--muted);font-weight:800;text-align:right}
+.radar-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;box-shadow:var(--shadow)}
+.plan{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.plan-card{position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow)}
+.plan-card::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--primary)}
+.plan-card:nth-child(2)::before{background:var(--accent)}
+.plan-card:nth-child(3)::before{background:var(--success)}
+.clean{padding-left:19px;margin:10px 0 0}
+.clean li{margin-bottom:9px;color:var(--text)}
+.callout{display:flex;gap:14px;align-items:flex-start;background:var(--primary-lt);border-left:4px solid var(--primary);border-radius:var(--radius);padding:18px 20px;margin:22px 0}
+.callout.orange{background:var(--accent-lt);border-left-color:var(--accent)}
+.callout.green{background:var(--success-lt);border-left-color:var(--success)}
+.callout svg{flex:0 0 22px;color:var(--primary);margin-top:2px}
+.callout.orange svg{color:var(--accent)}
+.callout.green svg{color:var(--success)}
+.callout p{font-size:14px;color:var(--muted);margin-bottom:0;max-width:100%}
+.checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.check-item{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.check-item svg{color:var(--success);flex:0 0 20px;margin-top:2px}
+.sources{display:grid;gap:12px}
+.source-link{display:grid;grid-template-columns:140px 1fr;gap:14px;padding:15px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
+.source-link span{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+footer{background:var(--primary);color:#fff;text-align:center;padding:32px 24px}
+footer p{color:rgba(255,255,255,.82);max-width:100%;margin-bottom:4px;font-size:14px}
+.scroll-top{position:fixed;bottom:24px;right:24px;background:var(--primary);color:#fff;border:none;border-radius:50%;width:44px;height:44px;cursor:pointer;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;display:flex;align-items:center;justify-content:center;z-index:200;transition:opacity .2s}
+.scroll-top.visible{opacity:1;pointer-events:auto}
+@media(max-width:920px){
+  .hero__inner,.summary,.flywheel,.signal-board{grid-template-columns:1fr}
+  .grid-3,.grid-2,.plan{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  html{scroll-padding-top:108px}
+  .nav__inner{padding-inline:16px}
+  .nav__logo-name{font-size:14px}
+  .nav__back{padding:8px 10px}
+  .hero{padding:50px 18px 38px}
+  .container{padding:0 18px}
+  section{padding:42px 0}
+  .hero-metrics{grid-template-columns:1fr 1fr}
+  .bar-row{grid-template-columns:1fr;gap:7px}
+  .bar-value{text-align:left}
+  .checklist{grid-template-columns:1fr}
+  .source-link{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="../index.html" class="nav__logo" aria-label="Sandeep Singh - Home">
+      <svg class="nav__logo-mark" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+        <rect width="34" height="34" rx="7" fill="var(--primary)"/>
+        <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
+          font-family="'Cabinet Grotesk', sans-serif"
+          font-size="15" fill="#fff" letter-spacing="0.5">SS</text>
+      </svg>
+      <span class="nav__logo-name">Sandeep Singh</span>
+    </a>
+    <div class="nav__right">
+      <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <a href="../library.html" class="nav__back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        All Posts
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="progress-bar">
+  <div class="progress-inner">
+    <span class="progress-label">Reading Progress</span>
+    <div class="progress-track"><div class="progress-fill" id="progFill" data-reading-progress-fill></div></div>
+    <span class="progress-label" id="progPct" data-reading-progress-label>0%</span>
+  </div>
+</div>
+
+<main id="main">
+  <header class="hero">
+    <div class="hero__inner">
+      <div>
+        <div class="hero-badge">QE Playbook - Leadership and Culture</div>
+        <h1>Trust the Process: A Work Culture Playbook</h1>
+        <p>How Mikel Arteta's Arsenal rebuild can help leaders build standards, trust, ownership, patience, and repeatable performance inside modern teams.</p>
+        <div class="hero-tags">
+          <span class="hero-tag">Culture Building</span>
+          <span class="hero-tag">Leadership</span>
+          <span class="hero-tag">Quality Mindset</span>
+          <span class="hero-tag">Team Standards</span>
+          <span class="hero-tag">Execution Rhythm</span>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Article snapshot">
+        <h2>The headline lesson</h2>
+        <p>Performance improves when the environment becomes clear enough that the right behaviours repeat without constant supervision.</p>
+        <div class="hero-metrics">
+          <div class="hero-metric"><strong>2019</strong><span>Arsenal appointment</span></div>
+          <div class="hero-metric"><strong>2020</strong><span>FA Cup credibility</span></div>
+          <div class="hero-metric"><strong>7</strong><span>Culture pillars</span></div>
+          <div class="hero-metric"><strong>90</strong><span>Day rollout plan</span></div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="summary">
+        <div class="quote">
+          <p>Culture repair starts before performance repair.</p>
+          <span>A team first learns how to behave, then learns how to win consistently.</span>
+        </div>
+        <div class="summary-panel large">
+          <div class="section-tag tag-blue">Executive Summary</div>
+          <h2>The core idea</h2>
+          <p>The Arteta model is not about copying football tactics. It is about copying a leadership pattern: define the destination, make standards visible, remove habits that damage trust, back the right people, and repeat the message until the culture becomes normal.</p>
+          <p>For a workplace, this means fewer random reactions, fewer personality-driven rules, and more predictable habits around quality, communication, ownership, and learning.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag tag-orange">The Model</span>
+        <h2>The culture flywheel</h2>
+        <p class="lead">Strong teams are not built by one speech. They are built through a loop that keeps converting belief into behaviour, behaviour into trust, and trust into performance.</p>
+      </div>
+      <div class="flywheel">
+        <div class="flywheel-graphic" aria-label="Culture flywheel diagram">
+          <svg viewBox="0 0 520 520" role="img" aria-labelledby="flywheel-title">
+            <title id="flywheel-title">Culture flywheel with four stages: clarity, standards, accountability, growth</title>
+            <defs>
+              <linearGradient id="wheelGrad" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#14365a"/>
+                <stop offset="55%" stop-color="#2f6f46"/>
+                <stop offset="100%" stop-color="#b96524"/>
+              </linearGradient>
+              <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L9,3 z" fill="#b96524"/>
+              </marker>
+            </defs>
+            <circle cx="260" cy="260" r="168" fill="none" stroke="url(#wheelGrad)" stroke-width="26" stroke-linecap="round" stroke-dasharray="210 34"/>
+            <path d="M260 72 A188 188 0 0 1 448 260" fill="none" stroke="#b96524" stroke-width="8" marker-end="url(#arrow)" opacity=".9"/>
+            <path d="M448 260 A188 188 0 0 1 260 448" fill="none" stroke="#b96524" stroke-width="8" marker-end="url(#arrow)" opacity=".65"/>
+            <path d="M260 448 A188 188 0 0 1 72 260" fill="none" stroke="#b96524" stroke-width="8" marker-end="url(#arrow)" opacity=".55"/>
+            <path d="M72 260 A188 188 0 0 1 260 72" fill="none" stroke="#b96524" stroke-width="8" marker-end="url(#arrow)" opacity=".45"/>
+            <circle cx="260" cy="260" r="92" fill="var(--surface2)" stroke="var(--border)" stroke-width="3"/>
+            <text x="260" y="250" text-anchor="middle" font-family="Cabinet Grotesk, sans-serif" font-size="28" font-weight="800" fill="var(--text)">Trust</text>
+            <text x="260" y="282" text-anchor="middle" font-family="Satoshi, sans-serif" font-size="15" fill="var(--muted)">the process</text>
+            <g font-family="Satoshi, sans-serif" font-weight="800" font-size="17" fill="var(--text)">
+              <text x="260" y="48" text-anchor="middle">Clarity</text>
+              <text x="475" y="266" text-anchor="middle">Standards</text>
+              <text x="260" y="492" text-anchor="middle">Accountability</text>
+              <text x="45" y="266" text-anchor="middle">Growth</text>
+            </g>
+          </svg>
+        </div>
+        <div class="flywheel-list">
+          <div class="flywheel-step">
+            <div class="step-num">1</div>
+            <div><h3>Clarity</h3><p>Make the mission, identity, and operating rules easy to repeat. Confusion is expensive.</p></div>
+          </div>
+          <div class="flywheel-step">
+            <div class="step-num">2</div>
+            <div><h3>Standards</h3><p>Define what good looks like in meetings, delivery, documentation, quality, feedback, and follow-up.</p></div>
+          </div>
+          <div class="flywheel-step">
+            <div class="step-num">3</div>
+            <div><h3>Accountability</h3><p>Protect the standard when pressure rises. The culture is what the team is allowed to repeat.</p></div>
+          </div>
+          <div class="flywheel-step">
+            <div class="step-num">4</div>
+            <div><h3>Growth</h3><p>Coach people who align with the direction. Build future strength, not only today's output.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag tag-blue">Context</span>
+        <h2>What changed at Arsenal</h2>
+        <p class="lead">The rebuild was not only about tactics. It was about discipline, emotional control, younger aligned talent, and a clearer sense of what the club wanted to become.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v6c0 5-3.5 7.5-8 8-4.5-.5-8-3-8-8V7l8-4z"/><path d="M9 12l2 2 4-5"/></svg>
+          </div>
+          <h3>Visible football changes</h3>
+          <ul class="clean">
+            <li>Higher accountability around effort, attitude, and discipline.</li>
+            <li>More trust in hungry players who matched the direction.</li>
+            <li>Clearer removal of behaviours that did not fit the environment.</li>
+            <li>Repeated messaging around unity, energy, and belief.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon orange">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2"/><circle cx="12" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>
+          </div>
+          <h3>Workplace translation</h3>
+          <ul class="clean">
+            <li>Hire and promote for behaviour, not only skill.</li>
+            <li>Make team rules apply to top performers also.</li>
+            <li>Keep quality, respect, ownership, and follow-through non-negotiable.</li>
+            <li>Reward consistency, not only crisis heroics.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout orange">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        <div>
+          <strong>Leadership takeaway</strong>
+          <p>If a team says it wants quality but tolerates sloppy handovers, unclear ownership, weak reviews, and repeated excuses, the real culture is already visible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag tag-purple">Timeline</span>
+        <h2>From reset to contender mindset</h2>
+        <p class="lead">The useful lesson is not that success came instantly. It is that visible progress followed difficult culture work, tough decisions, and repeated reinforcement.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-time">2019</div>
+          <h3>Appointment and reset</h3>
+          <p>Arteta returned to Arsenal as head coach in December 2019 after working under Pep Guardiola at Manchester City. The early job was stabilisation: restore standards, simplify expectations, and create belief again.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">2020</div>
+          <h3>Early trophy and credibility</h3>
+          <p>Winning the FA Cup in 2020 gave the project credibility. More importantly, it showed the group that discipline and belief could produce a real result.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">2021</div>
+          <h3>Squad reshaping</h3>
+          <p>The club leaned further into younger players and a more aligned environment. In work terms, this is the hard middle: the phase where the old habits resist the new system.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">2022</div>
+          <h3>Culture became visible</h3>
+          <p>The All or Nothing: Arsenal documentary made the emotional intensity, standards, and dressing-room messaging more visible to the public.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">Long term</div>
+          <h3>Process becomes identity</h3>
+          <p>The real proof of a culture is not a good week. It is whether the same standards survive setbacks, pressure, criticism, and leadership fatigue.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag tag-blue">Workplace Translation</span>
+        <h2>Turn football lessons into operating habits</h2>
+        <p class="lead">Use this table for project squads, QE teams, engineering groups, operations teams, startups, or leadership groups.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Arteta-style principle</th>
+              <th>Meaning in a workplace</th>
+              <th>Simple operating habit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Trust the process</strong></td>
+              <td>Stay committed to a clear plan without changing direction every time pressure rises.</td>
+              <td>Review strategy monthly; adjust evidence, not emotions.</td>
+            </tr>
+            <tr>
+              <td><strong>Non-negotiable standards</strong></td>
+              <td>Some behaviours must remain strong even when deadlines are tight.</td>
+              <td>Define five team rules for quality, communication, ownership, respect, and follow-up.</td>
+            </tr>
+            <tr>
+              <td><strong>Right people, right mindset</strong></td>
+              <td>Talent matters, but repeated behaviour decides whether talent helps or harms the team.</td>
+              <td>Use hiring, promotion, and ownership decisions to protect the environment.</td>
+            </tr>
+            <tr>
+              <td><strong>Emotional energy</strong></td>
+              <td>Leaders shape the mood of the group, especially after failure.</td>
+              <td>Communicate calmly after incidents; separate learning from blame.</td>
+            </tr>
+            <tr>
+              <td><strong>Young talent development</strong></td>
+              <td>Future strength is created by coached ownership, not only senior dependency.</td>
+              <td>Give high-potential people clear ownership with a senior review rhythm.</td>
+            </tr>
+            <tr>
+              <td><strong>Consistency over drama</strong></td>
+              <td>Daily habits beat one-time motivational speeches.</td>
+              <td>Run weekly review, quality checklist, learning note, and retrospective rituals.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag tag-green">Culture Pillars</span>
+        <h2>The seven pillars of a process-led team</h2>
+        <p class="lead">These pillars make the model practical enough to use in real teams without turning culture into a slogan.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card"><div class="kicker">01</div><h3>Clear mission</h3><p>Every person should know what the team is trying to become in the next 12 to 18 months.</p></div>
+        <div class="card"><div class="kicker">02</div><h3>Behavioural standards</h3><p>Document what good looks like in meetings, delivery, handover, feedback, and quality.</p></div>
+        <div class="card"><div class="kicker">03</div><h3>Calm leadership</h3><p>Leaders should create belief, not panic. In difficult periods, calm is a performance tool.</p></div>
+        <div class="card"><div class="kicker">04</div><h3>Hard accountability</h3><p>Missed ownership, poor attitude, and repeated excuses should not become normal.</p></div>
+        <div class="card"><div class="kicker">05</div><h3>Growth mindset</h3><p>Coach people, especially newer team members, so the system becomes stronger over time.</p></div>
+        <div class="card"><div class="kicker">06</div><h3>Team-first identity</h3><p>The group should matter more than ego, title, noise, or internal politics.</p></div>
+        <div class="card"><div class="kicker">07</div><h3>Daily repetition</h3><p>Culture becomes real only when the same message is seen in action again and again.</p></div>
+        <div class="card"><div class="kicker">Bonus</div><h3>Visible belief</h3><p>Say the direction clearly and often. Teams follow what leaders reinforce consistently.</p></div>
+        <div class="card"><div class="kicker">QE lens</div><h3>Quality as behaviour</h3><p>Quality culture shows up in prevention, review discipline, clean test evidence, and honest risk communication.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag tag-orange">Measurement</span>
+        <h2>Signals that show culture is changing</h2>
+        <p class="lead">A culture page should not stay abstract. Pick a small number of useful indicators and review them honestly.</p>
+      </div>
+      <div class="signal-board">
+        <div class="bar-card">
+          <h3>Example culture dashboard</h3>
+          <div class="bar-row"><div class="bar-label">Ownership follow-up</div><div class="bar-track"><div class="bar-fill" style="width:82%"></div></div><div class="bar-value">82%</div></div>
+          <div class="bar-row"><div class="bar-label">Review discipline</div><div class="bar-track"><div class="bar-fill" style="width:74%"></div></div><div class="bar-value">74%</div></div>
+          <div class="bar-row"><div class="bar-label">Quality evidence</div><div class="bar-track"><div class="bar-fill" style="width:68%"></div></div><div class="bar-value">68%</div></div>
+          <div class="bar-row"><div class="bar-label">Learning rhythm</div><div class="bar-track"><div class="bar-fill" style="width:79%"></div></div><div class="bar-value">79%</div></div>
+          <div class="bar-row"><div class="bar-label">Blocker response</div><div class="bar-track"><div class="bar-fill" style="width:71%"></div></div><div class="bar-value">71%</div></div>
+        </div>
+        <div class="radar-card">
+          <h3>Culture balance view</h3>
+          <svg viewBox="0 0 420 300" role="img" aria-labelledby="radar-title">
+            <title id="radar-title">Radar chart showing culture balance across clarity, accountability, trust, learning, and execution</title>
+            <g transform="translate(210 150)">
+              <polygon points="0,-110 105,-34 65,89 -65,89 -105,-34" fill="none" stroke="var(--border)" stroke-width="2"/>
+              <polygon points="0,-76 72,-23 45,62 -45,62 -72,-23" fill="none" stroke="var(--border)" stroke-width="2"/>
+              <polygon points="0,-40 38,-12 24,32 -24,32 -38,-12" fill="none" stroke="var(--border)" stroke-width="2"/>
+              <line x1="0" y1="0" x2="0" y2="-110" stroke="var(--border)"/>
+              <line x1="0" y1="0" x2="105" y2="-34" stroke="var(--border)"/>
+              <line x1="0" y1="0" x2="65" y2="89" stroke="var(--border)"/>
+              <line x1="0" y1="0" x2="-65" y2="89" stroke="var(--border)"/>
+              <line x1="0" y1="0" x2="-105" y2="-34" stroke="var(--border)"/>
+              <polygon points="0,-92 74,-24 43,60 -52,72 -82,-27" fill="rgba(20,54,90,.22)" stroke="var(--primary)" stroke-width="3"/>
+              <circle cx="0" cy="-92" r="4" fill="var(--primary)"/>
+              <circle cx="74" cy="-24" r="4" fill="var(--primary)"/>
+              <circle cx="43" cy="60" r="4" fill="var(--primary)"/>
+              <circle cx="-52" cy="72" r="4" fill="var(--primary)"/>
+              <circle cx="-82" cy="-27" r="4" fill="var(--primary)"/>
+            </g>
+            <g font-family="Satoshi, sans-serif" font-size="13" font-weight="800" fill="var(--muted)">
+              <text x="210" y="22" text-anchor="middle">Clarity</text>
+              <text x="365" y="114" text-anchor="middle">Accountability</text>
+              <text x="315" y="270" text-anchor="middle">Trust</text>
+              <text x="105" y="270" text-anchor="middle">Learning</text>
+              <text x="55" y="114" text-anchor="middle">Execution</text>
+            </g>
+          </svg>
+          <p>Do not measure 40 things. Pick five to seven indicators, review them monthly, and connect each one to a visible behaviour.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag tag-blue">Implementation</span>
+        <h2>How to implement this in 30-60-90 days</h2>
+        <p class="lead">Use this if you are leading a QE team, project squad, startup group, engineering pod, or delivery function.</p>
+      </div>
+      <div class="plan">
+        <div class="plan-card">
+          <div class="kicker">First 30 days</div>
+          <h3>Set the direction</h3>
+          <ul class="clean">
+            <li>Write the mission in one paragraph.</li>
+            <li>Define five non-negotiable standards.</li>
+            <li>Tell the team what will change and why.</li>
+            <li>Start one weekly culture review.</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <div class="kicker">Next 60 days</div>
+          <h3>Make it visible</h3>
+          <ul class="clean">
+            <li>Track signals for quality, delivery, and trust.</li>
+            <li>Coach people who want to improve.</li>
+            <li>Challenge habits that break the standard.</li>
+            <li>Reward steady team-first behaviour.</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <div class="kicker">Next 90 days</div>
+          <h3>Lock the culture</h3>
+          <ul class="clean">
+            <li>Convert standards into onboarding routines.</li>
+            <li>Show proof of early wins.</li>
+            <li>Keep language simple and repeated.</li>
+            <li>Protect the process when pressure rises.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag tag-warn">Risks</span>
+        <h2>Mistakes that break the process</h2>
+        <p class="lead">Many teams like the idea of culture but fail in execution. These are the mistakes to watch closely.</p>
+      </div>
+      <div class="checklist">
+        <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><p>Changing direction too fast because one month was difficult.</p></div>
+        <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><p>Keeping toxic high performers because they deliver short-term output.</p></div>
+        <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><p>Talking about standards but not enforcing them.</p></div>
+        <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><p>Using motivation speeches without system changes.</p></div>
+        <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><p>Confusing activity with progress.</p></div>
+        <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><p>Expecting trust without transparency.</p></div>
+      </div>
+      <div class="callout green">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <div>
+          <strong>Final practical rule</strong>
+          <p>If the behaviour is important, put it into a ritual. If it is not in a ritual, it will depend on memory, mood, and personality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag tag-purple">Reference Points</span>
+        <h2>Sources and further reading</h2>
+        <p class="lead">These references support the public timeline and context used in this playbook. The workplace model is an interpretation for team leadership and quality engineering.</p>
+      </div>
+      <div class="sources">
+        <a class="source-link" href="https://www.premierleague.com/en/news/1535710" target="_blank" rel="noopener noreferrer">
+          <span>Appointment</span>
+          <strong>Premier League: Arteta appointed Arsenal head coach</strong>
+        </a>
+        <a class="source-link" href="https://www.skysports.com/football/news/11670/11888052" target="_blank" rel="noopener noreferrer">
+          <span>Timeline</span>
+          <strong>Sky Sports: Arsenal appointed Mikel Arteta in December 2019</strong>
+        </a>
+        <a class="source-link" href="https://www.goal.com/en-us/news/arteta-makes-arsenal-history-with-fa-cup-final-victory/z624s8ikc6rx1uul0g53kpva2" target="_blank" rel="noopener noreferrer">
+          <span>FA Cup</span>
+          <strong>Goal: Arteta's first-season FA Cup win context</strong>
+        </a>
+        <a class="source-link" href="https://en.wikipedia.org/wiki/All_or_Nothing:_Arsenal" target="_blank" rel="noopener noreferrer">
+          <span>Documentary</span>
+          <strong>All or Nothing: Arsenal documentary context</strong>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p><strong>QE Playbook</strong> - Leadership, culture, standards, and repeatable quality.</p>
+  <p>Prepared by <strong>Sandeep Singh</strong> for practical team learning.</p>
+</footer>
+
+<button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>

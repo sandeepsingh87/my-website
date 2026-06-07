@@ -6,6 +6,17 @@
 
 const LIBRARY = [
   {
+    id: "arteta-work-culture-playbook",
+    title: "Trust the Process - Work Culture Playbook",
+    category: "Session",
+    date: "2026-06-07",
+    duration: "12 min read",
+    description: "A leadership and culture playbook inspired by Mikel Arteta's Arsenal rebuild, translated into practical team standards, trust, accountability, quality signals, and 30-60-90 day execution habits.",
+    tags: ["Leadership", "Work Culture", "Team Standards", "Quality Mindset", "Execution"],
+    file: "sessions/arteta-work-culture-playbook.html",
+    featured: true
+  },
+  {
     id: "website-hosting-tutorial",
     title: "Host Your Website for Free — Step by Step Guide",
     category: "Training",
