@@ -6,6 +6,17 @@
 
 const LIBRARY = [
   {
+    id: "ace-pune-team26-recap",
+    title: "ACE Pune Team '26 Recap - Human-AI Collaboration at Scale",
+    category: "Session",
+    date: "2026-06-14",
+    duration: "30 min read",
+    description: "A complete recap of the Atlassian Community Pune Team '26 event covering Teamwork Graph, Rovo, AI Ops, Service Collection, Product Collection, partner demos, key quotes, use cases, takeaways, and next steps.",
+    tags: ["Atlassian", "ACE Pune", "Team '26", "Rovo", "AI", "Teamwork Graph"],
+    file: "sessions/ace-pune-team26-recap.html",
+    featured: true
+  },
+  {
     id: "arteta-work-culture-playbook",
     title: "Trust the Process - Work Culture Playbook",
     category: "Session",
@@ -14,7 +25,7 @@ const LIBRARY = [
     description: "A leadership and culture playbook inspired by Mikel Arteta's Arsenal rebuild, translated into practical team standards, trust, accountability, quality signals, and 30-60-90 day execution habits.",
     tags: ["Leadership", "Work Culture", "Team Standards", "Quality Mindset", "Execution"],
     file: "sessions/arteta-work-culture-playbook.html",
-    featured: true
+    featured: false
   },
   {
     id: "website-hosting-tutorial",
@@ -36,7 +47,7 @@ const LIBRARY = [
     description: "How Atlassian built platform infrastructure for Jira, Confluence & Bitbucket at scale — Envoy proxies, self-service APIs, centralised auth, IaC, and platform engineering lessons from 8 years of real work.",
     tags: ["Platform Engineering", "Atlassian", "Cloud Infrastructure", "Envoy", "AWS"],
     file: "sessions/atlassian-training.html",
-    featured: true
+    featured: false
   },
   {
     id: "playwright-getting-started-2026",
@@ -47,7 +58,7 @@ const LIBRARY = [
     description: "A practical intro to Playwright — covering installation, first test, selectors, assertions, and running tests in headed vs headless mode. Built for QE teams new to Playwright.",
     tags: ["Playwright", "Test Automation", "JavaScript", "E2E Testing"],
     file: "sessions/getting-started-with-playwright-2026.html",
-    featured: true
+    featured: false
   },
   /* {
     id: "ai-in-testing-overview",
@@ -58,7 +69,7 @@ const LIBRARY = [
     description: "Session notes from an internal knowledge-sharing talk covering AI-assisted test generation, self-healing locators, and how LLMs are changing quality engineering workflows.",
     tags: ["AI", "Quality Engineering", "Automation", "GenAI"],
     file: "sessions/ai-in-testing-overview.html",
-    featured: true
+    featured: false
   }, */
 /*   {
     id: "safe-agile-qe-role",
@@ -91,7 +102,7 @@ const LIBRARY = [
     description: "Exploring the Playwright MCP (Model Context Protocol) integration — how AI agents can drive browser automation, what it means for test maintenance, and live demo walkthrough.",
     tags: ["Playwright", "MCP", "AI", "Agentic Testing"],
     file: "sessions/playwright-mcp-agentic-testing.html",
-    featured: true
+    featured: false
   }, */
 /*   {
     id: "test-strategy-fintech",
@@ -113,6 +124,6 @@ const LIBRARY = [
   description: "A practical explanation of how modern QE moves beyond test execution into prevention, automation, risk thinking, and shared quality ownership.",
   tags: ["QE", "Testing", "Quality Assurance", "Quality Engineering"],
   file: "sessions/why-qe-is-not-just-testing.html",
-  featured: true
+  featured: false
   }
 ];
