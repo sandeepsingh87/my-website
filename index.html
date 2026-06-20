@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sandeep Singh — Quality Engineering Leader</title>
-  <meta name="description" content="Sandeep Singh — Manager, E2E, Quality Engineering Leader with 16+ years of experience in digital QA, E2E testing, and AI-driven test automation." />
+  <meta name="description" content="Sandeep Singh — Manager, E2E, Quality Engineering Leader with 18+ years of experience in digital QA, E2E testing, and AI-driven test automation." />
   <meta property="og:title" content="Sandeep Singh — Quality Engineering Leader" />
-  <meta property="og:description" content="Manager, E2E, Quality Engineering at Western Union. 16+ years in QA, digital testing, and automation." />
+  <meta property="og:description" content="Manager, E2E, Quality Engineering at Western Union. 18+ years in QA, digital testing, and automation." />
   <meta property="og:url" content="https://sandeepsingh87.in/" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,8 +61,8 @@
     /* PLAYBOOK FEATURE */
     .playbook-feature{background:var(--color-primary);color:var(--color-text-inverse);
       padding-block:clamp(var(--space-12),7vw,var(--space-20))}
-    .playbook-feature__inner{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,0.95fr);
-      gap:clamp(var(--space-8),5vw,var(--space-16));align-items:center}
+    .playbook-feature__inner{display:grid;grid-template-columns:minmax(300px,0.78fr) minmax(0,1.22fr);
+      gap:clamp(var(--space-10),6vw,var(--space-20));align-items:start}
     .playbook-feature__label{font-size:var(--text-xs);font-weight:600;letter-spacing:0.14em;
       text-transform:uppercase;color:oklch(from var(--color-text-inverse) l c h / 0.68);margin-bottom:var(--space-3)}
     .playbook-feature__title{font-family:var(--font-display);font-size:clamp(2rem,5vw,4.5rem);
@@ -77,23 +77,40 @@
       border:1px solid oklch(from var(--color-text-inverse) l c h / 0.34)}
     .btn--outline-light:hover{border-color:var(--color-text-inverse);
       background:oklch(from var(--color-text-inverse) l c h / 0.08)}
-    .playbook-feature__panel{background:oklch(from var(--color-text-inverse) l c h / 0.08);
+    .playbook-feature__panel{background:oklch(from var(--color-text-inverse) l c h / 0.06);
       border:1px solid oklch(from var(--color-text-inverse) l c h / 0.16);
-      border-radius:var(--radius-xl);padding:var(--space-5);box-shadow:var(--shadow-lg)}
+      border-radius:8px;padding:var(--space-5);box-shadow:var(--shadow-lg)}
     .playbook-feature__panel-head{display:flex;align-items:center;justify-content:space-between;
       gap:var(--space-4);margin-bottom:var(--space-5)}
     .playbook-feature__panel-title{font-size:var(--text-xs);font-weight:600;letter-spacing:0.12em;
       text-transform:uppercase;color:#f0c28d}
-    .playbook-feature__count{font-family:var(--font-display);font-size:var(--text-lg);line-height:1}
+    .playbook-feature__count{display:grid;place-items:center;min-width:32px;height:32px;
+      padding-inline:8px;border-radius:999px;background:oklch(from var(--color-text-inverse) l c h / 0.12);
+      font-family:var(--font-body);font-size:0.82rem;font-weight:700;line-height:1}
     .playbook-feature__items{display:grid;gap:var(--space-3)}
-    .playbook-feature__item{padding:var(--space-4);border-radius:var(--radius-lg);
+    .playbook-feature__item{position:relative;padding:18px 46px 18px 18px;border-radius:8px;
       background:oklch(from var(--color-text-inverse) l c h / 0.08);
-      border:1px solid oklch(from var(--color-text-inverse) l c h / 0.12)}
+      border:1px solid oklch(from var(--color-text-inverse) l c h / 0.12);
+      display:block;text-decoration:none;transition:background var(--transition-interactive),border-color var(--transition-interactive)}
+    .playbook-feature__item:hover{background:oklch(from var(--color-text-inverse) l c h / 0.13);
+      border-color:oklch(from var(--color-text-inverse) l c h / 0.25);text-decoration:none}
+    .playbook-feature__item::after{content:"\2197";position:absolute;top:18px;right:18px;
+      font-size:1rem;color:oklch(from var(--color-text-inverse) l c h / 0.58)}
+    .playbook-feature__item--primary{padding:24px 52px 24px 24px;background:#ffffff;border-color:#ffffff;
+      box-shadow:0 14px 34px oklch(0.1 0.02 240 / 0.18)}
+    .playbook-feature__item--primary:hover{background:#ffffff;border-color:#ffffff;transform:translateY(-2px)}
+    .playbook-feature__item--primary::after{top:24px;right:24px;color:#14365a}
     .playbook-feature__item-kicker{font-size:0.68rem;font-weight:600;letter-spacing:0.12em;
       text-transform:uppercase;color:#f0c28d;margin-bottom:var(--space-1)}
     .playbook-feature__item-title{font-size:var(--text-sm);font-weight:600;color:var(--color-text-inverse)}
     .playbook-feature__item-body{font-size:var(--text-xs);line-height:1.55;
-      color:oklch(from var(--color-text-inverse) l c h / 0.66);margin-top:var(--space-1)}
+      color:oklch(from var(--color-text-inverse) l c h / 0.66);margin-top:var(--space-1);
+      display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+    .playbook-feature__item--primary .playbook-feature__item-kicker{color:#a65f25;margin-bottom:8px}
+    .playbook-feature__item--primary .playbook-feature__item-title{font-family:var(--font-display);
+      font-size:1.65rem;font-weight:400;line-height:1.12;color:#14365a}
+    .playbook-feature__item--primary .playbook-feature__item-body{display:-webkit-box;-webkit-box-orient:vertical;
+      -webkit-line-clamp:3;overflow:hidden;margin-top:10px;color:#5f6873;font-size:0.86rem;line-height:1.58}
 
     /* SECTION COMMON */
     .section{padding-block:clamp(var(--space-16),8vw,var(--space-24))}
@@ -327,6 +344,156 @@
       .scroll-top { bottom: var(--space-4); right: var(--space-4); width: 40px; height: 40px; }
     }
 
+    /* MOBILE MATERIAL LAYOUT */
+    @media (max-width: 767px) {
+      body { overflow-x: clip; background: var(--color-bg); }
+      .container, .container--wide { padding-inline: 18px; }
+
+      .nav {
+        background: oklch(from var(--color-surface) l c h / 0.96);
+        box-shadow: 0 2px 12px oklch(0.2 0.01 240 / 0.08);
+      }
+      .nav__inner { height: 60px; padding-inline: 16px; }
+      .nav__logo { gap: 10px; }
+      .nav__logo-mark { width: 32px; height: 32px; }
+      .nav__logo-name { font-family: var(--font-body); font-size: 0.88rem; font-weight: 700; }
+      .nav__right { gap: 2px; }
+      .theme-toggle, .nav__hamburger { width: 42px; height: 42px; border-radius: 8px; }
+      .nav__mobile {
+        position: fixed; top: 60px; left: 0; right: 0;
+        max-height: calc(100dvh - 60px); overflow-y: auto;
+        padding: 8px 18px 20px; background: var(--color-surface);
+        border-top: 1px solid var(--color-divider);
+        box-shadow: 0 14px 28px oklch(0.2 0.01 240 / 0.14);
+      }
+      .nav__mobile-links { gap: 0; }
+      .nav__mobile-links li { border-bottom: 1px solid var(--color-divider); }
+      .nav__mobile-links li:last-child { border-bottom: 0; }
+      .nav__mobile-links a {
+        min-height: 50px; display: flex; align-items: center;
+        padding: 12px 4px; color: var(--color-text); font-size: 0.94rem; font-weight: 500;
+      }
+
+      .hero {
+        padding: 84px 0 42px; background: var(--color-surface-2);
+        border-bottom: 1px solid var(--color-divider);
+      }
+      .hero__inner { display: flex; flex-direction: column; gap: 0; text-align: left; }
+      .hero__photo-wrap {
+        order: -1; display: grid; grid-template-columns: 112px minmax(0, 1fr);
+        align-items: stretch; gap: 10px; width: 100%; margin: 0 0 26px;
+      }
+      .hero__photo {
+        width: 112px; aspect-ratio: 4 / 5; margin: 0; border-radius: 8px;
+        box-shadow: 0 8px 22px oklch(0.2 0.01 240 / 0.14);
+      }
+      .hero__stat-row { grid-template-columns: 1fr; gap: 7px; width: 100%; max-width: none; margin: 0; }
+      .hero__stat {
+        display: flex; align-items: center; justify-content: space-between;
+        min-height: 0; padding: 9px 12px; text-align: left;
+        border-radius: 8px; background: var(--color-surface); box-shadow: var(--shadow-sm);
+      }
+      .hero__stat-number { margin: 0; font-family: var(--font-body); font-size: 1.1rem; font-weight: 700; }
+      .hero__stat-label { font-size: 0.7rem; font-weight: 500; color: var(--color-text-muted); }
+      .hero__eyebrow { margin-bottom: 8px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; }
+      .hero__name { margin-bottom: 14px; font-size: 2.75rem; line-height: 0.98; }
+      .hero__name br { display: none; }
+      .hero__name em { margin-left: 0.16em; }
+      .hero__title { margin: 0 0 20px; font-size: 0.98rem; line-height: 1.62; }
+      .hero__tags { justify-content: flex-start; gap: 7px; margin-bottom: 24px; }
+      .hero__tags .tag { padding: 5px 10px; border-radius: 999px; font-size: 0.7rem; }
+      .hero__tags .tag:nth-child(n+5) { display: none; }
+      .hero__actions { display: grid; grid-template-columns: 1fr; gap: 10px; width: 100%; }
+      .hero__actions .btn {
+        width: 100%; max-width: none; min-height: 48px; justify-content: center;
+        padding: 12px 16px; border-radius: 8px; font-size: 0.88rem;
+      }
+      .hero__actions .btn:nth-child(3) { display: none; }
+
+      .playbook-feature { padding-block: 44px; }
+      .playbook-feature__inner { grid-template-columns: 1fr; gap: 26px; }
+      .playbook-feature__title { max-width: none; margin-bottom: 14px; font-size: 2.75rem; }
+      .playbook-feature__copy { margin-bottom: 22px; font-size: 0.95rem; line-height: 1.65; }
+      .playbook-feature__actions { display: grid; gap: 10px; }
+      .playbook-feature__actions .btn { width: 100%; min-height: 46px; justify-content: center; border-radius: 8px; }
+      .playbook-feature__panel { padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+      .playbook-feature__panel-head { margin-bottom: 12px; }
+      .playbook-feature__items { gap: 10px; }
+      .playbook-feature__item { padding: 16px 42px 16px 16px; border-radius: 8px; }
+      .playbook-feature__item::after { top: 16px; right: 16px; }
+      .playbook-feature__item--primary { padding: 20px 46px 20px 20px; }
+      .playbook-feature__item--primary::after { top: 20px; right: 18px; }
+      .playbook-feature__item--primary .playbook-feature__item-title { font-size: 1.35rem; }
+      .playbook-feature__item--primary .playbook-feature__item-body { -webkit-line-clamp: 3; font-size: 0.8rem; }
+
+      .section { padding-block: 44px; }
+      .section__header { margin-bottom: 26px; }
+      .section__label { margin-bottom: 8px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; }
+      .section__title { font-size: 2rem; line-height: 1.08; }
+      .section__subtitle { margin-top: 10px; font-size: 0.94rem; line-height: 1.55; }
+
+      .about__grid { grid-template-columns: 1fr; gap: 28px; }
+      .about__body p { margin-bottom: 17px; font-size: 0.94rem; line-height: 1.72; }
+      .about__highlights { gap: 10px; }
+      .highlight-card {
+        display: grid; grid-template-columns: 38px minmax(0, 1fr); column-gap: 12px;
+        padding: 15px; border-radius: 8px; box-shadow: none;
+      }
+      .highlight-card__icon { grid-row: 1 / span 2; display: grid; place-items: center; width: 38px; height: 38px; margin: 0; border-radius: 8px; background: oklch(from var(--color-primary) l c h / 0.1); }
+      .highlight-card__title { margin: 0 0 3px; font-size: 0.88rem; }
+      .highlight-card__body { font-size: 0.8rem; line-height: 1.48; }
+
+      .experience__list { gap: 12px; }
+      .exp-item {
+        display: block; padding: 18px; border: 1px solid var(--color-divider);
+        border-radius: 8px; background: var(--color-surface); box-shadow: var(--shadow-sm);
+      }
+      .exp-item:last-child { border-bottom: 1px solid var(--color-divider); }
+      .exp-item__meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+      .exp-item__period { margin: 0; font-size: 0.72rem; }
+      .exp-item__period::after { content: none; }
+      .exp-item__company { font-size: 0.68rem; text-align: right; }
+      .exp-item__role { margin-bottom: 8px; font-family: var(--font-body); font-size: 1rem; font-weight: 700; }
+      .exp-item__desc { margin-bottom: 14px; font-size: 0.84rem; line-height: 1.6; }
+      .exp-item__tags { gap: 6px; }
+      .tag--sm { padding: 4px 7px; border-radius: 4px; font-size: 0.65rem; }
+
+      .skills__grid { grid-template-columns: 1fr; gap: 10px; }
+      .skill-card { padding: 17px; border-radius: 8px; box-shadow: none; }
+      .skill-card__category { margin-bottom: 12px; font-size: 0.72rem; }
+      .skill-card__items { gap: 7px; }
+      .skill-pill { padding: 5px 9px; font-size: 0.69rem; }
+
+      .certs__grid { grid-template-columns: 1fr; gap: 10px; }
+      .cert-card { padding: 15px; border-radius: 8px; }
+      .cert-card__icon { width: 38px; height: 38px; border-radius: 8px; }
+      .cert-card__title { font-size: 0.86rem; }
+      .cert-card__issuer { font-size: 0.72rem; line-height: 1.45; }
+
+      .linkedin-section__inner { align-items: stretch; gap: 24px; }
+      .linkedin-section__text { width: 100%; }
+      .linkedin-section__badge { width: 100%; overflow: hidden; }
+      .linkedin-section__badge iframe, .linkedin-section__badge .badge-base { max-width: 100%; }
+
+      .contact-section { padding-block: 52px; text-align: left; }
+      .contact-section .section__subtitle { margin-inline: 0; }
+      .contact__links { align-items: stretch; gap: 10px; }
+      .contact__links .btn { width: 100%; max-width: none; min-height: 48px; border-radius: 8px; }
+
+      .footer { margin-top: 0; padding-block: 28px; }
+      .footer__inner { align-items: flex-start; gap: 18px; }
+      .footer__links { display: grid; grid-template-columns: repeat(2, auto); gap: 10px 22px; }
+      .scroll-top { bottom: 16px; right: 16px; width: 42px; height: 42px; }
+    }
+
+    @media (max-width: 359px) {
+      .container, .container--wide { padding-inline: 14px; }
+      .hero__photo-wrap { grid-template-columns: 98px minmax(0, 1fr); }
+      .hero__photo { width: 98px; }
+      .hero__name { font-size: 2.4rem; }
+      .section__title { font-size: 1.75rem; }
+    }
+
     /* PRINT */
     @media print {
       .nav, .scroll-top, .theme-toggle, .nav__hamburger { display: none !important; }
@@ -364,7 +531,7 @@
 @media (max-width: 767px) {
   .linkedin-section__inner {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
   }
 }
   </style>
@@ -433,7 +600,7 @@
               Sandeep<br><em>Singh</em>
             </h1>
             <p class="hero__title">
-              Quality Engineering leader with <strong>16+ years</strong> of experience in digital QA,
+              Quality Engineering leader with <strong>18+ years</strong> of experience in digital QA,
               end-to-end testing, and AI-driven automation. Currently driving quality strategy
               at Western Union, Pune.
             </p>
@@ -476,7 +643,7 @@
             </div>
             <div class="hero__stat-row">
               <div class="hero__stat">
-                <div class="hero__stat-number">16+</div>
+                <div class="hero__stat-number">18+</div>
                 <div class="hero__stat-label">Years</div>
               </div>
               <div class="hero__stat">
@@ -516,26 +683,10 @@
 
           <div class="playbook-feature__panel" aria-label="Featured playbook topics">
             <div class="playbook-feature__panel-head">
-              <p class="playbook-feature__panel-title">Inside now</p>
-              <span class="playbook-feature__count">4+</span>
+              <p class="playbook-feature__panel-title">Featured now</p>
+              <span class="playbook-feature__count" data-featured-count>0</span>
             </div>
-            <div class="playbook-feature__items">
-              <div class="playbook-feature__item">
-                <p class="playbook-feature__item-kicker">Guide</p>
-                <h3 class="playbook-feature__item-title">Host Your Website for Free</h3>
-                <p class="playbook-feature__item-body">A practical path through GitHub, Cloudflare Pages, DNS, and publishing workflow.</p>
-              </div>
-              <div class="playbook-feature__item">
-                <p class="playbook-feature__item-kicker">Automation</p>
-                <h3 class="playbook-feature__item-title">Getting Started with Playwright</h3>
-                <p class="playbook-feature__item-body">A hands-on starting point for modern browser automation and E2E testing.</p>
-              </div>
-              <div class="playbook-feature__item">
-                <p class="playbook-feature__item-kicker">Thinking</p>
-                <h3 class="playbook-feature__item-title">Why QE Is Not Just Testing</h3>
-                <p class="playbook-feature__item-body">The mindset shift from execution to risk, prevention, automation, and ownership.</p>
-              </div>
-            </div>
+            <div class="playbook-feature__items" data-featured-playbook aria-live="polite"></div>
           </div>
         </div>
       </div>
@@ -548,22 +699,25 @@
       <div class="container">
         <div class="section__header fade-in">
           <p class="section__label">About Me</p>
-          <h2 class="section__title" id="about-title">Building Quality at Scale</h2>
-          <p class="section__subtitle">Testing strategist who turns complexity into reliable software.</p>
+          <h2 class="section__title" id="about-title">Quality Is How I Lead</h2>
+          <p class="section__subtitle">A practical QE leader shaped by technology, people, and the responsibility to deliver well.</p>
         </div>
         <div class="about__grid">
           <div class="about__body fade-in">
             <p>
-              Hi, I'm Sandeep Singh — a <strong>Manager of End-to-End Testing</strong> with over 16 years of experience in software testing and quality assurance, primarily in the <strong>financial services sector</strong>.
+              My journey in software quality spans over <strong>18 years</strong> and reflects how the industry itself has changed — from mainframe testing, HP QTP, ALM and UFT to modern open-source frameworks such as Playwright, and from traditional QA practices to a complete <strong>Quality Engineering mindset</strong>.
             </p>
             <p>
-              In my current role at <strong>Western Union</strong>, I lead and manage a team of testers, develop and implement testing strategies, and ensure the quality of software products that serve millions of customers globally.
+              I started as a test engineer and gradually discovered a deeper passion: building quality into every layer of software delivery. Today, as a <strong>Manager of End-to-End Testing</strong> in financial services, I lead high-performing QE teams and work closely with engineering and product leaders to create strategies that are scalable, risk-aware, and aligned with enterprise delivery goals.
             </p>
             <p>
-              I'm passionate about the intersection of <strong>AI and Quality Engineering</strong> — exploring how automation, machine learning, and intelligent test frameworks can elevate software reliability. I believe quality is not just a phase; it's a culture.
+              My toolkit has grown with the industry — Playwright, Appium, SeeTest and BrowserStack for web and mobile coverage, with Jira and Confluence providing delivery visibility. I believe in using the <strong>right tool for the right problem</strong>. I now use AI to accelerate test design, improve processes, and reduce repetitive work so that teams can focus on meaningful defects, better application quality, and on-time delivery.
             </p>
             <p>
-              Outside work, I follow football and cricket, read on technology and finance, and enjoy sharing knowledge through mentoring and community engagement.
+              At my core, I am a <strong>solution provider</strong>. Whether I am bridging gaps between development and business, modernising a legacy testing pipeline, or coaching a team to think beyond test execution, my north star remains simple: <strong>quality delivered, on time, every time</strong>.
+            </p>
+            <p>
+              Away from the screen, football shapes how I think about leadership. I look at the system, the team balance, and whether it can win consistently rather than occasionally. I bring the same thinking to QE teams, while continuing to explore new tools and ideas that can help people work better. I enjoy connecting with technical leaders and QA/QE practitioners who are shaping the future of software quality.
             </p>
           </div>
           <div class="about__highlights fade-in">
@@ -571,29 +725,29 @@
               <div class="highlight-card__icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.8" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
-              <div class="highlight-card__title">Quality Engineering Leadership</div>
-              <div class="highlight-card__body">Leading cross-functional QE teams, defining testing strategies, and driving delivery excellence across agile programs.</div>
+              <div class="highlight-card__title">QE Leadership at Enterprise Scale</div>
+              <div class="highlight-card__body">Building capable teams, scalable test strategies, and clear quality ownership across complex delivery programs.</div>
             </div>
             <div class="highlight-card">
               <div class="highlight-card__icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
               </div>
-              <div class="highlight-card__title">AI &amp; Automation Explorer</div>
-              <div class="highlight-card__body">Integrating AI-powered tools and automation frameworks like Playwright and Selenium into modern QE pipelines.</div>
+              <div class="highlight-card__title">Modern Testing &amp; AI</div>
+              <div class="highlight-card__body">Using modern automation and AI to improve test design, reduce repetitive effort, and sharpen engineering focus.</div>
             </div>
             <div class="highlight-card">
               <div class="highlight-card__icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.8" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
               </div>
-              <div class="highlight-card__title">Fintech Domain Specialist</div>
-              <div class="highlight-card__body">Deep domain expertise in financial services — payments, digital banking, and compliance-driven QA processes.</div>
+              <div class="highlight-card__title">Financial Services Experience</div>
+              <div class="highlight-card__body">Deep experience across payments, digital journeys, enterprise risk, and quality practices shaped by customer trust.</div>
             </div>
             <div class="highlight-card">
               <div class="highlight-card__icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.8" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               </div>
-              <div class="highlight-card__title">Based in Pune, India</div>
-              <div class="highlight-card__body">Working with global teams across time zones from Pune, Maharashtra.</div>
+              <div class="highlight-card__title">Solution-Led Collaboration</div>
+              <div class="highlight-card__body">Bringing engineering, product, business, and QE together to solve the right problem and deliver with confidence.</div>
             </div>
           </div>
         </div>
@@ -607,7 +761,7 @@
       <div class="container">
         <div class="section__header fade-in">
           <p class="section__label">Career Journey</p>
-          <h2 class="section__title" id="experience-title">16 Years of Impact</h2>
+          <h2 class="section__title" id="experience-title">18+ Years of Impact</h2>
           <p class="section__subtitle">From Quality Assurance to Quality Engineering - a career built on crafting quality.</p>
         </div>
         <div class="experience__list">
@@ -720,7 +874,7 @@
         <div class="section__header fade-in">
           <p class="section__label">Expertise</p>
           <h2 class="section__title" id="skills-title">Skills &amp; Toolbox</h2>
-          <p class="section__subtitle">A breadth of technical and leadership capabilities built over 16 years.</p>
+          <p class="section__subtitle">A breadth of technical and leadership capabilities built over 18 years.</p>
         </div>
         <div class="skills__grid">
           <div class="skill-card fade-in">
@@ -869,7 +1023,7 @@
         <p class="section__label">Professional Network</p>
         <h2 class="section__title">Let's Connect on LinkedIn</h2>
         <p class="section__subtitle">
-          16+ years of quality engineering experience. Follow for insights on
+          18+ years of quality engineering experience. Follow for insights on
           QE strategy, test automation, and building high-performing teams.
         </p>
       </div>
@@ -945,7 +1099,8 @@
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </button>
 
-  <script src="assets/site.js"></script>
+  <script src="library-data.js?v=20260621"></script>
+  <script src="assets/site.js?v=20260621"></script>
 
 </body>
 </html>

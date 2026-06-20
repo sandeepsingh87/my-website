@@ -107,6 +107,50 @@
     window.addEventListener('resize', update);
   }
 
+  function initFeaturedPlaybook() {
+    const container = document.querySelector('[data-featured-playbook]');
+    if (!container) return;
+
+    const catalog = Array.isArray(window.LIBRARY) ? window.LIBRARY : [];
+    const featured = catalog
+      .filter((entry) => entry.featured)
+      .sort((a, b) => b.date.localeCompare(a.date));
+    const count = document.querySelector('[data-featured-count]');
+
+    if (count) count.textContent = String(featured.length);
+    container.innerHTML = '';
+
+    if (!featured.length) {
+      const message = document.createElement('p');
+      message.className = 'playbook-feature__item-body';
+      message.textContent = 'New featured entries are coming soon.';
+      container.appendChild(message);
+      return;
+    }
+
+    featured.slice(0, 3).forEach((entry, index) => {
+      const link = document.createElement('a');
+      link.className = 'playbook-feature__item' + (index === 0 ? ' playbook-feature__item--primary' : '');
+      link.href = entry.file;
+      link.setAttribute('aria-label', 'Read ' + entry.title);
+
+      const kicker = document.createElement('p');
+      kicker.className = 'playbook-feature__item-kicker';
+      kicker.textContent = entry.category + ' / ' + entry.duration;
+
+      const title = document.createElement('h3');
+      title.className = 'playbook-feature__item-title';
+      title.textContent = entry.title;
+
+      const body = document.createElement('p');
+      body.className = 'playbook-feature__item-body';
+      body.textContent = entry.description;
+
+      link.append(kicker, title, body);
+      container.appendChild(link);
+    });
+  }
+
   function initToc() {
     const headings = document.querySelectorAll('.prose h2[id]');
     const tocLinks = document.querySelectorAll('.toc__list a');
@@ -143,6 +187,7 @@
     initMobileNav();
     initScrollTop();
     initReadingProgress();
+    initFeaturedPlaybook();
     initToc();
   });
 })();

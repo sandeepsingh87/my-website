@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>QE Playbook — Sandeep Singh</title>
-  <meta name="description" content="Sandeep Singh's QE Playbook — practical guides, training notes, course learnings, and project insights from 16+ years in Quality Engineering." />
+  <meta name="description" content="Sandeep Singh's QE Playbook — practical guides, training notes, course learnings, and project insights from 18+ years in Quality Engineering." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..500&display=swap" rel="stylesheet">
@@ -169,12 +169,14 @@
   </button>
 
   <!-- Load catalog -->
-  <script src="library-data.js"></script>
-  <script src="assets/site.js"></script>
+  <script src="library-data.js?v=20260621"></script>
+  <script src="assets/site.js?v=20260621"></script>
 
   <script>
   // ── Library engine ──
   (function(){
+    const LIBRARY = Array.isArray(window.LIBRARY) ? window.LIBRARY : [];
+
     // State
     let activeFilter = 'all';
     let searchQuery  = '';

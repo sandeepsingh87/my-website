@@ -4,7 +4,7 @@
 //  every time you host a new HTML file.
 // ─────────────────────────────────────────────
 
-const LIBRARY = [
+window.LIBRARY = [
   {
     id: "ace-pune-team26-recap",
     title: "ACE Pune Team '26 Recap - Human-AI Collaboration at Scale",
