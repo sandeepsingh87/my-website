@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
-    "publish:static": "npm run build && cp -R dist/assets ./assets && cp dist/dev.html ./index.html",
+    "publish:static": "npm run build && rm -rf ./assets && cp -R dist/assets ./assets && cp dist/dev.html ./index.html",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {

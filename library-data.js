@@ -2,6 +2,7 @@
 //  LIBRARY CATALOG  —  library-data.js
 //  Add a new entry object to the array below
 //  every time you host a new HTML file.
+//  Draft ideas for future entries live in sessions/planned-entries.md
 // ─────────────────────────────────────────────
 
 window.LIBRARY = [
@@ -60,61 +61,6 @@ window.LIBRARY = [
     file: "sessions/getting-started-with-playwright-2026.html",
     featured: false
   },
-  /* {
-    id: "ai-in-testing-overview",
-    title: "AI in Testing — What QEs Need to Know",
-    category: "Session",
-    date: "2026-04-22",
-    duration: "30 min read",
-    description: "Session notes from an internal knowledge-sharing talk covering AI-assisted test generation, self-healing locators, and how LLMs are changing quality engineering workflows.",
-    tags: ["AI", "Quality Engineering", "Automation", "GenAI"],
-    file: "sessions/ai-in-testing-overview.html",
-    featured: false
-  }, */
-/*   {
-    id: "safe-agile-qe-role",
-    title: "QE's Role in a SAFe Agile Program",
-    category: "Course",
-    date: "2026-03-10",
-    duration: "1 hr read",
-    description: "Deep dive into how quality engineering fits into SAFe — PI Planning, built-in quality, System Demo, and how QEs collaborate across ARTs. Based on SAFe 5 Practitioner coursework.",
-    tags: ["SAFe", "Agile", "Quality Engineering", "PI Planning"],
-    file: "sessions/safe-agile-qe-role.html",
-    featured: false
-  }, */
-/*   {
-    id: "api-testing-postman-restassured",
-    title: "API Testing with Postman & RestAssured",
-    category: "Workshop",
-    date: "2026-02-14",
-    duration: "50 min read",
-    description: "Hands-on workshop material covering REST API fundamentals, Postman collections, environment variables, and Java-based RestAssured automation with assertion strategies.",
-    tags: ["API Testing", "Postman", "RestAssured", "Java"],
-    file: "sessions/api-testing-postman-restassured.html",
-    featured: false
-  }, */
-/*   {
-    id: "playwright-mcp-agentic-testing",
-    title: "Playwright MCP — Agentic Test Automation",
-    category: "Training",
-    date: "2026-05-12",
-    duration: "35 min read",
-    description: "Exploring the Playwright MCP (Model Context Protocol) integration — how AI agents can drive browser automation, what it means for test maintenance, and live demo walkthrough.",
-    tags: ["Playwright", "MCP", "AI", "Agentic Testing"],
-    file: "sessions/playwright-mcp-agentic-testing.html",
-    featured: false
-  }, */
-/*   {
-    id: "test-strategy-fintech",
-    title: "Building a Test Strategy for Fintech Products",
-    category: "Project",
-    date: "2026-01-20",
-    duration: "40 min read",
-    description: "Project learnings from building a QE strategy for a global payments platform — risk-based testing, regression pyramid, shift-left approach, and governance reporting.",
-    tags: ["Test Strategy", "Fintech", "Risk-Based Testing", "QA Governance"],
-    file: "sessions/test-strategy-fintech.html",
-    featured: false
-  }, */
   {
   id: "qe-is-not-just-testing",
   title: "Why Quality Engineering is Not Just Testing",

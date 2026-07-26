@@ -1,0 +1,15 @@
+{
+  "name": "Sandeep Singh — Quality Engineering Leader",
+  "short_name": "Sandeep Singh",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#f6f5f1",
+  "theme_color": "#14365a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
