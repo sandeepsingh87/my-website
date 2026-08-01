@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /Archive/
 
 Sitemap: https://sandeepsingh87.in/sitemap.xml

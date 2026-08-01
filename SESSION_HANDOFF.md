@@ -1,5 +1,5 @@
 # Session Handoff — Sandeep Singh Personal Website
-**Date:** 2026-05-31  
+**Date:** 2026-08-02  
 **Use this as starting context in the next AI session.**
 
 ---
@@ -7,19 +7,19 @@
 ## Current Project State
 
 ### Project Location
-`/Users/sandeepsingh/my-website`
+`c:\Workspace\Personal\my-website` (also cloned on Mac at `/Users/sandeepsingh/my-website`)
 
 ### Site Type
 Static personal website built with plain HTML, CSS, and JavaScript.
 
-There is no Astro/Next/build pipeline currently. A previous incomplete Astro attempt was removed. The site should be treated as a static site unless the user explicitly asks to migrate frameworks again.
+There is no Astro/Next/build pipeline for the main site. A previous incomplete Astro attempt was removed. The site should be treated as a static site unless the user explicitly asks to migrate frameworks again.
+
+The `testing-lab/` subfolder is a separate Vite + React app with its own `package.json` and publish workflow.
 
 ### Git State
 - Current branch: `main`
-- Remote tracking: `origin/main`
-- Latest commit: `2a4603f Rename library to QE Playbook and improve landing layout`
-- Backup branch: `legacy`
-- `legacy` points to older static-site state: `36c8a40 CSS Cleanup Updates`
+- Remote tracking: `origin/main` (`https://github.com/sandeepsingh87/my-website.git`)
+- Latest commit: run `git log --oneline -1` before editing (was `b19c674` as of 2026-08-02)
 
 Before making changes, always run:
 
@@ -60,25 +60,31 @@ Key identity details used across the site:
 ## Current File Map
 
 ```text
-/Users/sandeepsingh/my-website/
+c:\Workspace\Personal\my-website\
 ├── index.html                         # Home page / personal landing page
 ├── library.html                       # QE Playbook page
-├── library-data.js                    # Data source for Playbook cards
-├── links.html                         # Redirect/legacy links page
-├── profile.webp                       # Preferred profile image
-├── profile.jpg                        # Profile image fallback
+├── library-data.js                    # Data source for Playbook cards (7 entries)
+├── links.html                         # Redirect to library.html
+├── sitemap.xml, robots.txt            # SEO (Archive/ disallowed in robots.txt)
+├── manifest.json, favicon.svg         # PWA basics
+├── profile.webp, profile.jpg          # Profile images
 ├── README.md
 ├── SESSION_HANDOFF.md                 # This file
 ├── assets/
 │   ├── styles.css                     # Shared design tokens, nav, footer, layout
+│   ├── home.css                       # Home page styles
 │   ├── library.css                    # QE Playbook page styles
 │   ├── session-shell.css              # Shared styles for session/article pages
 │   └── site.js                        # Theme toggle, mobile nav, scroll top, TOC, copy code
 ├── scripts/
 │   └── add-session-shell.js           # Adds shared shell to generated session HTML
+├── testing-lab/                       # Vite + React QE demo app (see testing-lab/docs/)
 ├── sessions/
 │   ├── _session-template.html
+│   ├── planned-entries.md
 │   ├── README.md
+│   ├── ace-pune-team26-recap.html
+│   ├── arteta-work-culture-playbook.html
 │   ├── atlassian-training.html
 │   ├── getting-started-with-playwright-2026.html
 │   ├── website-hosting-tutorial.html
@@ -119,8 +125,13 @@ Reasoning:
 
 The URL remains `library.html` for now to avoid breaking existing links.
 
-### 3. Latest Committed Playbook Improvements
-Latest commit `2a4603f` includes:
+### 3. Recent Committed Improvements
+Notable commits since the QE Playbook rename:
+
+- `734048b` — Clean up repo hygiene, dedupe CSS, add SEO/PWA basics (`robots.txt`, `sitemap.xml`, `manifest.json`, `favicon.svg`)
+- `b19c674` — Fix missing Testing Lab nav link and duplicate nav/footer on 2 pages
+
+Earlier commit `2a4603f` includes:
 
 - Visible nav/footer labels changed from `Library` to `QE Playbook`
 - Home hero primary CTA changed to `Explore QE Playbook`
@@ -326,16 +337,18 @@ http://127.0.0.1:8000/library.html
    - QE role in SAFe/Agile programs
 
 ### Medium Priority
-1. Add SEO basics:
-   - `robots.txt`
-   - `sitemap.xml`
-   - Better Open Graph image
-   - JSON-LD Person/Website schema
+1. SEO enhancements (basics done):
+   - ~~`robots.txt`~~ ✓ (includes `Disallow: /Archive/`)
+   - ~~`sitemap.xml`~~ ✓
+   - Session-level canonical + OG tags on all 7 articles ✓
+   - Still todo: JSON-LD Person/Website schema on home
+   - Still todo: dedicated OG image (1200×630) instead of profile photo
 
-2. Add PWA basics:
-   - `manifest.json`
-   - favicon files
-   - theme color
+2. PWA basics (done):
+   - ~~`manifest.json`~~ ✓
+   - ~~`favicon.svg`~~ ✓
+   - ~~theme color~~ ✓
+   - Still todo: installable PWA (service worker, PNG icons) if desired
 
 3. Improve image performance:
    - Keep `profile.webp` as the preferred profile image

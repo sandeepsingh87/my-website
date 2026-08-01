@@ -53,7 +53,7 @@ ensureAfterBodyOpen('class="session-nav"', `  <nav class="session-nav" aria-labe
         </button>
         <a href="../library.html" class="session-nav__back">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-          All Posts
+          QE Playbook
         </a>
       </div>
     </div>
@@ -75,7 +75,7 @@ ensureBeforeBodyClose(`  <footer class="session-footer">
       <p class="session-footer__copy">&copy; 2026 Sandeep Singh. All rights reserved.</p>
       <ul class="session-footer__links">
         <li><a href="/">Home</a></li>
-        <li><a href="../library.html">Library</a></li>
+        <li><a href="../library.html">QE Playbook</a></li>
         <li><a href="mailto:mailsandeeps3@gmail.com">Email</a></li>
       </ul>
     </div>

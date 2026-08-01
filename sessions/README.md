@@ -28,7 +28,7 @@ node ../scripts/add-session-shell.js new-session.html
 The script adds:
 
 - `../assets/session-shell.css`
-- the Sandeep Singh header with the `All Posts` button
+- the Sandeep Singh header with the `QE Playbook` back button
 - the reading progress bar
 - the shared footer
 - `../assets/site.js`
