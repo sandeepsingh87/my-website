@@ -50,18 +50,43 @@ await page.locator('[automation-id="btn-profile-submit"]').click();
 
 ## Current Feature Areas
 
-- Responsive desktop and mobile navigation.
-- Dashboard metrics.
-- Environment status list.
-- Release checklist with checkboxes.
-- Notifications.
-- Registration form with text, email, password, dropdown, range, checkbox, radio, textarea, and file upload controls.
-- Orders table with search, filtering, sorting, row actions, status changes, and modal details.
-- Multi-step workflow.
-- Settings accordions.
-- Toast notifications.
-- Theme toggle.
-- Negative scenario trigger.
+- Compact test-environment strip (no marketing hero).
+- Deep-linked views: `?view=forms|commerce|workflow|settings`.
+- Dashboard metrics tied to checklist / notifications; dismissible notes; sandbox-down env.
+- Registration form: validation, password hints, confirm password, terms, file type/size, notes counter.
+- Orders table: search, filter, sort (incl. amount/date), pagination, empty state, modal, locked terminal statuses.
+- Gated multi-step workflow with locked future steps.
+- Settings: API reveal/copy/regen, flags, audit log, CSV download, reset lab, negative confirm.
+- Theme + flags persist; orders/checklist persist for the tab session.
+- Dual locators (`automation-id` + `data-testid`).
+- **Money Transfer Lab** — `/testing-lab/money-transfer`. See [money-transfer/](./money-transfer/).
+
+## Main lab docs
+
+| Doc | Audience |
+|-----|----------|
+| [main-lab/PRODUCT.md](./main-lab/PRODUCT.md) | Product |
+| [main-lab/ENGINEERING.md](./main-lab/ENGINEERING.md) | Engineering |
+| [main-lab/US-MAIN.md](./main-lab/US-MAIN.md) | Product + QE |
+| [main-lab/TEST_SCENARIOS.md](./main-lab/TEST_SCENARIOS.md) | QE / automation ingest |
+
+## Money Transfer Auth Lab docs
+
+| Doc | Audience |
+|-----|----------|
+| [PRODUCT.md](./money-transfer/PRODUCT.md) | Product |
+| [ENGINEERING.md](./money-transfer/ENGINEERING.md) | Engineering |
+| [US-LOGIN.md](./money-transfer/US-LOGIN.md) | Product + QE |
+| [US-TRANSFER.md](./money-transfer/US-TRANSFER.md) | Product + QE |
+| [TEST_SCENARIOS.md](./money-transfer/TEST_SCENARIOS.md) | QE / automation ingest |
+
+Local URL:
+
+```text
+http://localhost:5173/testing-lab/money-transfer
+```
+
+Seed password: `Welcome123` · Demo OTP: `147272` · Sample phone: `+91 98765 43210`
 
 ## Local Development
 
@@ -77,6 +102,12 @@ Open the Vite URL, usually:
 
 ```text
 http://localhost:5173/testing-lab/
+```
+
+Auth lab:
+
+```text
+http://localhost:5173/testing-lab/money-transfer
 ```
 
 ## Build
@@ -101,12 +132,8 @@ This builds the app, copies compiled files into `testing-lab/assets/`, and updat
 
 ## Future Roadmap
 
-- Add React Router for deeper URL-based test scenarios.
-- Add authentication simulation with valid and invalid login users.
+- Expand role-based pages and permissions.
 - Add API mocking using MSW.
-- Add seeded test data and reset controls.
-- Add accessibility test examples.
 - Add visual regression targets.
-- Add role-based pages and permissions.
 - Add CI/CD examples for build, unit tests, Playwright smoke tests, and release gates.
 - Add product-style release notes and changelog.
