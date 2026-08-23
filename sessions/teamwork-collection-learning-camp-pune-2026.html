@@ -351,7 +351,10 @@
     .gratitude__group h3 { margin: 0; color: var(--ink); font-size: 1rem; }
     .gratitude__group p { margin: 0.45rem 0 0; color: var(--muted); font-size: 0.84rem; }
     .gratitude__names { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.85rem; }
-    .gratitude__names span { padding: 0.32rem 0.55rem; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: var(--color-surface); font-size: 0.75rem; font-weight: 600; }
+    .gratitude__names span { padding: 0.45rem 0.85rem; border: 1px solid color-mix(in srgb, var(--accent, #4c7dff) 35%, var(--line)); border-radius: 999px; color: var(--ink); background: linear-gradient(135deg, color-mix(in srgb, var(--accent, #4c7dff) 10%, var(--color-surface)), var(--color-surface)); font-size: 0.88rem; font-weight: 700; letter-spacing: 0.01em; box-shadow: 0 1px 2px rgba(0,0,0,0.06); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .gratitude__names span:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.12); }
+    .gratitude__group h3 { position: relative; padding-bottom: 0.5rem; margin-bottom: 0.2rem; }
+    .gratitude__group h3::after { content: ""; position: absolute; left: 0; bottom: 0; width: 2.4rem; height: 3px; border-radius: 999px; background: linear-gradient(90deg, var(--accent, #4c7dff), color-mix(in srgb, var(--accent, #4c7dff) 30%, transparent)); }
     .footer-note { margin-top: 2rem; color: var(--muted); font-size: 0.75rem; }
 
     @media (max-width: 980px) {
@@ -414,7 +417,7 @@
     <nav class="camp-nav" aria-label="Guide sections">
       <div class="camp-nav__inner container">
         <span class="camp-nav__label">Camp guide</span>
-        <a href="#live-result">Live result</a><a href="#story">The day</a><a href="#workflow">The workflow</a><a href="#replay">Replay the Jira lab</a><a href="#afternoon-lab">Afternoon lab</a><a href="#prompts">Prompts</a><a href="#guardrails">Guardrails</a><a href="#resources">Champion Pack</a><a href="#credits">Thank you</a>
+        <a href="#top">Live result</a><a href="#story">The day</a><a href="#workflow">The workflow</a><a href="#replay">Replay the Jira lab</a><a href="#afternoon-lab">Afternoon lab</a><a href="#prompts">Prompts</a><a href="#guardrails">Guardrails</a><a href="#resources">Champion Pack</a><a href="#credits">Thank you</a>
       </div>
     </nav>
 
@@ -697,9 +700,7 @@ Never close or resolve the work item. Do not put credentials, active exploit det
           </div>
           <div class="gratitude__groups">
             <article class="gratitude__group"><h3>To the workshop speakers and guides</h3><p>Thank you for making the sessions clear, practical, and lively - from the Jira agent flow through the Confluence, Loom, and Rovo exercises, to the thoughtful answers during Q&amp;A.</p><div class="gratitude__names"><span>Swapnil Jalamkar</span><span>Honey Nitharwal</span><span>Md Zeeshan Ali</span><span>Sushmitha Vijayaraghavan</span></div></article>
-            <article class="gratitude__group"><h3>To the Pune Atlassian Community</h3><p>Thank you for the welcome, coordination, technical support, energy, and the spirit of learning together. The community made a full-day workshop feel personal and encouraging.</p><div class="gratitude__names"><span>Anil Kumar</span><span>Datta Borude</span><span>Jayesh Baviskar</span><span>Piyush Annadate</span><span>Awneet Srivastava</span><span>Sachin Dhamale</span><span>Sachin Pawar</span></div></article>
-            <article class="gratitude__group"><h3>To the wider Atlassian roadshow team</h3><p>Thank you for bringing this global learning camp to Pune and for backing the local community with a workshop that was designed to be tried, questioned, and carried back to our own teams.</p><div class="gratitude__names"><span>Rachel Tang</span><span>Brittany Soinski</span><span>Amanda Bauman</span><span>Atlassian team</span></div></article>
-            <article class="gratitude__group"><h3>To every participant</h3><p>Thank you for asking real questions, helping one another when a setup step took time, and bringing the energy that made the room feel like a working session rather than a presentation.</p><div class="gratitude__names"><span>Atlassian Community Champions - Pune</span><span>Teamwork Collection Learning Camp 2026</span></div></article>
+            <article class="gratitude__group"><h3>To the Pune Atlassian Community Champions</h3><p>Thank you for the welcome, coordination, technical support, energy, and the spirit of learning together. The community made a full-day workshop feel personal and encouraging.</p><div class="gratitude__names"><span>Anil Kumar</span><span>Datta Borude</span><span>Jayesh Baviskar</span><span>Piyush Annadate</span><span>Awneet Srivastava</span><span>Sachin Dhamale</span><span>Sachin Pawar</span></div></article>
           </div>
         </div>
         <div class="photos" aria-label="Event photos">
