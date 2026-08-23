@@ -7,6 +7,17 @@
 
 window.LIBRARY = [
   {
+    id: "teamwork-collection-learning-camp-pune-2026",
+    title: "Teamwork Collection Learning Camp, Pune - Hands-on Guide",
+    category: "Workshop",
+    date: "2026-08-19",
+    duration: "25 min read",
+    description: "A detailed attendee guide to the Teamwork Collection Learning Camp in Pune: the day timeline, Jira Coding Agent lab, Teamwork Eats deployment, practical prompts, rollout guardrails, and Champion Pack resources.",
+    tags: ["Atlassian", "Jira", "Confluence", "Loom", "Rovo", "AI Agents", "ACE Pune"],
+    file: "sessions/teamwork-collection-learning-camp-pune-2026.html",
+    featured: true
+  },
+  {
     id: "ace-pune-team26-recap",
     title: "ACE Pune Team '26 Recap - Human-AI Collaboration at Scale",
     category: "Session",
@@ -15,7 +26,7 @@ window.LIBRARY = [
     description: "A complete recap of the Atlassian Community Pune Team '26 event covering Teamwork Graph, Rovo, AI Ops, Service Collection, Product Collection, partner demos, key quotes, use cases, takeaways, and next steps.",
     tags: ["Atlassian", "ACE Pune", "Team '26", "Rovo", "AI", "Teamwork Graph"],
     file: "sessions/ace-pune-team26-recap.html",
-    featured: true
+    featured: false
   },
   {
     id: "arteta-work-culture-playbook",
