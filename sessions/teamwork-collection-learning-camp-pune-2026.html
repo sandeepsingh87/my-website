@@ -11,7 +11,7 @@
   <meta property="og:description" content="From a messy brainstorm to a live app: a visual event timeline, workshop replay guide, practical prompts, and lessons from Pune." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://sandeepsingh87.in/sessions/teamwork-collection-learning-camp-pune-2026.html" />
-  <meta property="og:image" content="https://sandeepsingh87.in/profile.webp" />
+  <meta property="og:image" content="https://sandeepsingh87.in/sessions/Images/social.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://sandeepsingh87.in/sessions/teamwork-collection-learning-camp-pune-2026.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -197,6 +197,29 @@
     .dayline__tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.85rem; }
     .dayline__tags span { padding: 0.24rem 0.5rem; border-radius: 999px; color: var(--muted); background: var(--soft); font-size: 0.7rem; font-weight: 600; }
     .timeline-note { max-width: 710px; margin: 1.5rem 0 0 3.4rem; color: var(--muted); font-size: 0.82rem; }
+
+    /* Event photos */
+    .photos { display: grid; gap: 1rem; margin-top: 2.4rem; }
+    .photos--two { grid-template-columns: 1fr 1fr; }
+    .photo { position: relative; display: block; margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--color-surface); }
+    .photo--wide { margin-top: 2.4rem; }
+    .photo__link { display: block; cursor: zoom-in; }
+    .photo img { display: block; width: 100%; height: auto; }
+    .photo figcaption { padding: 0.75rem 1rem; color: var(--muted); font-size: 0.82rem; line-height: 1.4; text-align: center; }
+    .photo__zoom { position: absolute; top: 0.8rem; right: 0.8rem; display: grid; width: 2.2rem; height: 2.2rem; place-items: center; border-radius: 50%; background: rgba(7, 20, 40, 0.52); color: #fff; font-size: 0.95rem; opacity: 0; transition: opacity .2s ease; pointer-events: none; }
+    .photo:hover .photo__zoom, .photo:focus-within .photo__zoom { opacity: 1; }
+    @media (max-width: 640px) {
+      .photos--two { grid-template-columns: 1fr; }
+    }
+
+    /* Lightbox */
+    .lightbox { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; padding: 1.2rem; background: rgba(6, 13, 30, 0.92); backdrop-filter: blur(4px); }
+    .lightbox[open] { display: flex; }
+    .lightbox__figure { max-width: min(1200px, 96vw); margin: 0; text-align: center; }
+    .lightbox__img { display: block; max-width: 100%; max-height: 82vh; width: auto; height: auto; margin-inline: auto; border-radius: 0.5rem; box-shadow: 0 30px 90px rgba(0,0,0,0.55); }
+    .lightbox__caption { margin-top: 0.9rem; color: #dce8ff; font-size: 0.95rem; }
+    .lightbox__close { position: absolute; top: 1.1rem; right: 1.3rem; width: 2.7rem; height: 2.7rem; border-radius: 50%; background: rgba(255,255,255,0.12); color: #fff; font-size: 1.2rem; line-height: 1; cursor: pointer; }
+    .lightbox__close:hover { background: rgba(255,255,255,0.22); }
 
     /* The afternoon: Confluence, Loom and Rovo */
     .platform-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
@@ -406,7 +429,7 @@
         <aside class="hero-card hero-card--result" id="live-result" aria-label="Live Teamwork Eats result">
           <div class="hero-card__topline">Live result</div>
           <h2><span>Teamwork Eats</span><em>is live. 🍕</em></h2>
-          <p>Built in the hands-on session, then deployed to GitHub Pages. Open it first, explore it freely, and come back here for the workshop story behind it.</p>
+          <p>Built in the hands-on session, then deployed to GitHub Pages. In the lab our coding slice was the cart and checkout experience; the live app has since grown further. Open it first, explore it freely, and come back here for the workshop story behind it.</p>
           <div class="eats-preview" aria-hidden="true"><div class="eats-preview__menu"><span>🍕<small>Pizza</small></span><span>🍔<small>Burger</small></span><span>🍪<small>Cookie</small></span></div><div class="eats-preview__cart"><div><b>🛒</b><span>Live cart</span></div></div></div>
           <div class="hero-card__actions"><a href="https://sandeepsingh87.github.io/teamwork-eats/" target="_blank" rel="noopener noreferrer">Open the live app ↗</a><a href="https://sandeepsingh87.github.io/teamwork-eats/tutorial.html" target="_blank" rel="noopener noreferrer">See “How It’s Built” ↗</a></div>
           <div class="hero-card__caption"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg> Built with the camp flow: context → Jira work → code → live app</div>
@@ -448,14 +471,41 @@
           </div>
         </div>
 
+        <div class="photos photos--two" aria-label="Event photos">
+          <figure class="photo">
+            <a href="Images/Stage-lg.webp" class="photo__link" data-lightbox="true">
+              <img src="Images/Stage.webp" alt="The Teamwork Collection Learning Camp on stage in Pune" loading="lazy" decoding="async" width="1200" height="900" />
+              <span class="photo__zoom" aria-hidden="true">⤢</span>
+            </a>
+            <figcaption>On stage during the Teamwork Collection Learning Camp.</figcaption>
+          </figure>
+          <figure class="photo">
+            <a href="Images/myimage-from-teamworklearningcamp-lg.webp" class="photo__link" data-lightbox="true">
+              <img src="Images/myimage-from-teamworklearningcamp.webp" alt="Me at the Teamwork Collection Learning Camp in Pune" loading="lazy" decoding="async" width="900" height="523" />
+              <span class="photo__zoom" aria-hidden="true">⤢</span>
+            </a>
+            <figcaption>At the camp, between the hands-on sessions.</figcaption>
+          </figure>
+        </div>
+
         <div class="dayline" aria-label="Event timeline">
-          <article class="dayline__item"><div class="dayline__dot">01</div><div class="dayline__card"><p class="dayline__kicker">Morning · Welcome</p><h3>Pune community, learning mindset, and the day’s map</h3><p>The Pune Community Champions opened the camp and set the expectation: bring your laptop, participate, and keep asking questions. The session began with Teamwork Collection, Teamwork Graph, and why AI needs context rather than isolated prompts.</p><div class="dayline__tags"><span>Community Champions</span><span>Teamwork Graph</span><span>Context</span></div></div></article>
-          <article class="dayline__item"><div class="dayline__dot">02</div><div class="dayline__card"><p class="dayline__kicker">Late morning · Agents in Jira</p><h3>A messy food-app brainstorm became structured work</h3><p>Swapnil Jalamkar led the main lab. We asked a Jira Coding Agent to read a Confluence brainstorm and a repository, select workable ideas, and create well-structured Jira work items with acceptance criteria and dependencies.</p><div class="dayline__tags"><span>Jira Coding Agent</span><span>Research skill</span><span>Work items</span></div></div></article>
-          <article class="dayline__item"><div class="dayline__dot">03</div><div class="dayline__card"><p class="dayline__kicker">Before lunch · Live implementation</p><h3>Triaged work, agent coding, and a browser preview</h3><p>The lab then moved from planning to execution. We added a Triage Agent to the board flow, assigned a visual change to the Coding Agent, inspected the live preview, and used the same session to ask for another UI change.</p><div class="dayline__tags"><span>Triage Agent</span><span>Live preview</span><span>Draft PR</span></div></div></article>
-          <article class="dayline__item"><div class="dayline__dot">04</div><div class="dayline__card"><p class="dayline__kicker">Afternoon · Confluence and Loom</p><h3>Explain work clearly, then make it usable</h3><p>Honey Nitharwal showed how a Loom recording can capture a bug with the screen activity and the explanation in one place, then create a Jira work item. The session also used Confluence, Rovo, whiteboards, and voting to find ideas and shape a campaign plan.</p><div class="dayline__tags"><span>Video bug report</span><span>Whiteboards</span><span>Rovo answers</span></div></div></article>
-          <article class="dayline__item"><div class="dayline__dot">05</div><div class="dayline__card"><p class="dayline__kicker">Close · Q&amp;A and Champion Pack</p><h3>The questions moved from “can it?” to “how do we run it well?”</h3><p>The discussion covered data access, connectors, source-of-truth habits, usage visibility, credits, and a gradual rollout. The day closed with take-home workshop material, further learning resources, feedback, community thanks, photos, and the Champion Pack 2.0.</p><div class="dayline__tags"><span>Governance</span><span>Adoption</span><span>Champion Pack 2.0</span></div></div></article>
+          <article class="dayline__item"><div class="dayline__dot">01</div><div class="dayline__card"><p class="dayline__kicker">Morning · Champions kickoff</p><h3>Pune’s community set the tone: come ready to build</h3><p>The Pune Community Champions opened the camp and set the expectation: laptop out, participate, keep asking questions. They shared the community’s momentum - a Pune chapter of 2,450+ members, 500+ new joiners in the week - then set the technical stage with Teamwork Collection, the Teamwork Graph, and why AI needs context rather than isolated prompts.</p><div class="dayline__tags"><span>Community Champions</span><span>Teamwork Collection</span><span>Context</span></div></div></article>
+          <article class="dayline__item"><div class="dayline__dot">02</div><div class="dayline__card"><p class="dayline__kicker">Late morning · Agents in Jira</p><h3>A messy food-app brainstorm became structured work</h3><p>Swapnil Jalamkar led the main lab. We logged into our own sandbox, created a space from the Agentic Engineering template, and asked a Jira Coding Agent to read a Confluence brainstorm and a repository, select workable ideas, and create well-structured Jira work items with acceptance criteria and dependencies.</p><div class="dayline__tags"><span>Jira Coding Agent</span><span>Research skill</span><span>Work items</span></div></div></article>
+          <article class="dayline__item"><div class="dayline__dot">03</div><div class="dayline__card"><p class="dayline__kicker">Before lunch · Live implementation</p><h3>Triaged work, agent coding, and a browser preview</h3><p>The lab moved from planning to execution. We added a Triage Agent to a board stage, assigned a visual change to the Coding Agent, inspected the result in a live preview, and asked the session for one more UI change - all without leaving Jira.</p><div class="dayline__tags"><span>Triage Agent</span><span>Live preview</span><span>Draft PR</span></div></div></article>
+          <article class="dayline__item"><div class="dayline__dot">04</div><div class="dayline__card"><p class="dayline__kicker">Midday · Lunch &amp; momentum</p><h3>A proper break before the second half</h3><p>A one-hour lunch let people compare their sandbox results, trade what worked, swap corrections, and get ready for the Confluence and Loom work. The energy carried straight into the afternoon.</p><div class="dayline__tags"><span>Networking</span><span>Comparing work</span><span>Recharge</span></div></div></article>
+          <article class="dayline__item"><div class="dayline__dot">05</div><div class="dayline__card"><p class="dayline__kicker">Afternoon · Confluence and Loom</p><h3>Explain work clearly, then make it reusable</h3><p>Honey Nitharwal showed how a Loom recording can capture a bug with the screen activity in one place, then become a Jira work item. The flow used Confluence, whiteboards, voting, and Rovo to hunt for existing ideas and shape a launch campaign - all without leaving the connected tools.</p><div class="dayline__tags"><span>Video bug report</span><span>Whiteboards</span><span>Create with Rovo</span></div></div></article>
+          <article class="dayline__item"><div class="dayline__dot">06</div><div class="dayline__card"><p class="dayline__kicker">Afternoon · Dedicated Q&amp;A</p><h3>From “can it?” to “how do we run it well?”</h3><p>A dedicated Q&amp;A with the Atlassian team turned to adoption: connectors and what gets indexed, permissions, source-of-truth habits, credits and cost today, usage visibility, and how to start a gradual rollout. Attendees were told to park questions and bring back the classic ones their leaders will ask.</p><div class="dayline__tags"><span>Connectors</span><span>Credits</span><span>Governance</span></div></div></article>
+          <article class="dayline__item"><div class="dayline__dot">07</div><div class="dayline__card"><p class="dayline__kicker">Close · Champion Pack 2.0 &amp; group photo</p><h3>Leave with tools, a feedback loop, and a photo</h3><p>The day wrapped with the Champion Pack 2.0 - the Jira workshop guide, the “Agents in Jira” deck, and admin resources - plus a feedback form, community thanks, and the Pune tradition of a full-group photo. The message: take one small thing back to work on Monday.</p><div class="dayline__tags"><span>Champion Pack 2.0</span><span>Feedback</span><span>Group photo</span></div></div></article>
         </div>
         <p class="timeline-note">The transcript records the sequence of sessions, but not a reliable wall-clock schedule. For that reason, this timeline uses the flow of the day rather than invented exact times.</p>
+
+        <figure class="photo photo--wide">
+          <a href="Images/fullteam-from-teamworklearningcamp-lg.webp" class="photo__link" data-lightbox="true">
+            <img src="Images/fullteam-from-teamworklearningcamp.webp" alt="The full room of attendees and Champions at the Teamwork Collection Learning Camp in Pune" loading="lazy" decoding="async" width="1400" height="529" />
+            <span class="photo__zoom" aria-hidden="true">⤢</span>
+          </a>
+          <figcaption>The full room — attendees and Champions after a packed day of workshops.</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -604,6 +654,23 @@ Never close or resolve the work item. Do not put credentials, active exploit det
       </div>
     </section>
 
+    <section class="section" id="rovo">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Adopt it, thoughtfully</p>
+          <h2>A short cheat-sheet for rolling out Rovo.</h2>
+          <p>The afternoon and Q&amp;A answered the quiet questions teams ask before enabling AI for real. Here is a condensed, evergreen version to hand to an admin or a curious colleague. Check current release notes before you plan anything.</p>
+        </div>
+        <div class="guardrail-grid">
+          <article class="guardrail"><div class="guardrail__icon">01</div><h3>Connectors &amp; controls</h3><p>Four connector types feed Rovo: synced (indexed at scale), synced-live (on the fly, no admin setup), direct (login + on-demand API), and smart links. Admins can allow- or block-list sources, and answers respect each user’s existing permissions.</p></article>
+          <article class="guardrail"><div class="guardrail__icon">02</div><h3>Credits &amp; cost today</h3><p>Rovo credits are counted at the organisation level, not per person. As of the camp they were not being charged, with a roughly 90-day notice window signalled before any change. A larger user base grows the credit pool.</p></article>
+          <article class="guardrail"><div class="guardrail__icon">03</div><h3>Freshness &amp; memory</h3><p>Rovo reads last-updated dates and cross-checks a fact across sources rather than favouring one app. Its inbuilt memory carries context across chats, so a follow-up days later still makes sense.</p></article>
+          <article class="guardrail"><div class="guardrail__icon">04</div><h3>Simple start points</h3><p>Begin with a plain chat search, then “Create with Rovo” for a new doc, and try the mobile app or Rovo CLI where it is enabled. Stay narrow, learn the patterns, then build the custom agents your team really needs.</p></article>
+        </div>
+        <p class="timeline-note">Pricing, availability, and data controls evolve. Use this as a starting point for discussion, then confirm the specifics with your Jira and security administrators.</p>
+      </div>
+    </section>
+
     <section class="section section--soft" id="takeaways">
       <div class="container">
         <div class="action-plan">
@@ -668,6 +735,14 @@ Never close or resolve the work item. Do not put credentials, active exploit det
   <footer class="session-footer"><div class="session-footer__inner"><p class="session-footer__copy">&copy; 2026 Sandeep Singh. All rights reserved.</p><ul class="session-footer__links"><li><a href="/">Home</a></li><li><a href="../library.html">QE Playbook</a></li><li><a href="mailto:mailsandeeps3@gmail.com">Email</a></li></ul></div></footer>
   <button class="scroll-top" id="scroll-top" aria-label="Scroll to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button class="lightbox__close" type="button" aria-label="Close preview">✕</button>
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" alt="" />
+      <figcaption class="lightbox__caption"></figcaption>
+    </figure>
+  </div>
+
   <script src="../assets/site.js"></script>
   <script>
     (function () {
@@ -702,6 +777,46 @@ Never close or resolve the work item. Do not put credentials, active exploit det
         }, { rootMargin: '-22% 0px -70% 0px' });
         sections.forEach(function (section) { observer.observe(section); });
       }
+    }());
+  </script>
+
+  <script>
+    (function () {
+      var lightbox = document.getElementById('lightbox');
+      if (!lightbox) return;
+      var imgEl = lightbox.querySelector('.lightbox__img');
+      var capEl = lightbox.querySelector('.lightbox__caption');
+      var closeEl = lightbox.querySelector('.lightbox__close');
+      var previousOverflow = '';
+
+      function openPreview(src, alt, caption) {
+        imgEl.setAttribute('src', src);
+        imgEl.setAttribute('alt', alt || '');
+        capEl.textContent = caption || '';
+        lightbox.setAttribute('open', '');
+        previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+      }
+      function closePreview() {
+        lightbox.removeAttribute('open');
+        imgEl.removeAttribute('src');
+        document.body.style.overflow = previousOverflow;
+      }
+
+      Array.prototype.forEach.call(document.querySelectorAll('[data-lightbox="true"]'), function (link) {
+        link.addEventListener('click', function (event) {
+          event.preventDefault();
+          var img = link.querySelector('img');
+          var figCaptionEl = link.parentElement ? link.parentElement.querySelector('figcaption') : null;
+          openPreview(link.getAttribute('href'), img ? img.getAttribute('alt') : '', figCaptionEl ? figCaptionEl.textContent : '');
+        });
+      });
+
+      if (closeEl) closeEl.addEventListener('click', closePreview);
+      lightbox.addEventListener('click', function (event) { if (event.target === lightbox) closePreview(); });
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && lightbox.hasAttribute('open')) closePreview();
+      });
     }());
   </script>
 </body>

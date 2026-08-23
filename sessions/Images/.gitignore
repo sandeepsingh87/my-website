@@ -1,0 +1,4 @@
+# Source photos (large) are kept locally but not committed, to keep the repo lean.
+# The page serves only the optimized webp/jpg variants below.
+*.png
+Stage.jpg
