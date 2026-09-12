@@ -8,6 +8,7 @@ import {
   validateLoginPassword
 } from '../../lib/money-transfer/validation.js';
 import { loginWithPassword } from '../../lib/money-transfer/moneyTransferAuth.js';
+import { CLARITY_MASK, track } from '../../lib/siteAnalytics.js';
 
 export default function PasswordLoginForm({
   identifier,
@@ -54,6 +55,7 @@ export default function PasswordLoginForm({
         return;
       }
       showToast?.('Login successful.', 'success');
+      track('login_success', { method: 'password' });
       onSuccess(result.user);
     } catch {
       const message = 'Something went wrong while processing the test login. Please try again.';
@@ -72,6 +74,7 @@ export default function PasswordLoginForm({
           id="login-identifier"
           type="text"
           autoComplete="username"
+          {...CLARITY_MASK}
           maxLength={FIELD_LIMITS.identifier}
           value={identifier}
           placeholder="testuser01@example.com or 9876543210"

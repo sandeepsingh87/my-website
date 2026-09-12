@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { tid } from '../../lib/money-transfer/tid.js';
 import { formatMoney } from '../../lib/money-transfer/transfer.js';
 import { getBalance, readHistory } from '../../lib/money-transfer/transferStore.js';
+import { CLARITY_MASK } from '../../lib/siteAnalytics.js';
 
 export default function MockDashboard({ user, onLogout }) {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function MockDashboard({ user, onLogout }) {
   const history = readHistory(user.id);
 
   return (
-    <section className="mt-dashboard" {...tid('dashboard')}>
+    <section className="mt-dashboard" {...tid('dashboard')} {...CLARITY_MASK}>
       <div className="mt-card mt-dashboard-hero">
         <div className="mt-dashboard-hero-copy">
           <span className="mt-card-kicker">Signed in</span>

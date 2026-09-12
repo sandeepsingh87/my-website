@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { DEMO_OTP, DEMO_PASSWORD } from '../../lib/money-transfer/testUsers.js';
 import { tid } from '../../lib/money-transfer/tid.js';
+import { CLARITY_MASK } from '../../lib/siteAnalytics.js';
 
 export default function AboutLab() {
   const [open, setOpen] = useState(false);
@@ -28,7 +29,7 @@ export default function AboutLab() {
       </button>
 
       {open ? (
-        <div className="mt-about-body" {...tid('about-automation-notes')}>
+        <div className="mt-about-body" {...tid('about-automation-notes')} {...CLARITY_MASK}>
           <ul>
             <li>Stable <code>data-testid</code> and <code>automation-id</code> selectors are available for automation.</li>
             <li>OTP is deterministic: <code>{DEMO_OTP}</code>.</li>

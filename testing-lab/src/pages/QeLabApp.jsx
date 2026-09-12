@@ -36,6 +36,7 @@ import {
   writeTheme
 } from '../lib/qe-lab/storage.js';
 import { tid } from '../lib/tid.js';
+import { track } from '../lib/siteAnalytics.js';
 import AboutLab from '../components/qe-lab/AboutLab.jsx';
 import CommerceView from '../components/qe-lab/CommerceView.jsx';
 import DashboardView from '../components/qe-lab/DashboardView.jsx';
@@ -91,6 +92,14 @@ export default function QeLabApp() {
 
   useEffect(() => {
     document.title = `${TITLES[activeView]} · Testing Lab`;
+  }, [activeView]);
+
+  useEffect(() => {
+    track('testing_lab_view', { lab: 'qe' });
+  }, []);
+
+  useEffect(() => {
+    if (activeView === 'forms') track('testing_lab_form_view');
   }, [activeView]);
 
   useEffect(() => () => {
@@ -201,6 +210,7 @@ export default function QeLabApp() {
     setProfileSaved(true);
     logEvent(`Profile saved for ${formState.fullName}`);
     showToast(`Profile saved for ${formState.fullName}`);
+    track('registration_success', { surface: 'qe_lab' });
   }
 
   function resetProfile() {

@@ -13,6 +13,7 @@ import {
   validateAmount
 } from '../../lib/money-transfer/transfer.js';
 import { getBalance, readDraft, writeDraft } from '../../lib/money-transfer/transferStore.js';
+import { CLARITY_MASK } from '../../lib/siteAnalytics.js';
 
 export default function AmountStep() {
   const navigate = useNavigate();
@@ -73,6 +74,7 @@ export default function AmountStep() {
             <label htmlFor="transfer-send-amount">You send (USD)</label>
             <input
               id="transfer-send-amount"
+              {...CLARITY_MASK}
               inputMode="decimal"
               maxLength={TRANSFER_LIMITS.amount}
               value={draft.sendAmount}
@@ -87,6 +89,7 @@ export default function AmountStep() {
             <label htmlFor="transfer-receive-amount">They receive ({quote.corridor.currency})</label>
             <input
               id="transfer-receive-amount"
+              {...CLARITY_MASK}
               readOnly
               value={Number.isFinite(quote.receive) ? quote.receive.toFixed(2) : ''}
               {...tid('transfer-receive-amount')}

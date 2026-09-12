@@ -12,6 +12,7 @@ import {
   validateRegistrationPassword
 } from '../../lib/money-transfer/validation.js';
 import { registerAccount } from '../../lib/money-transfer/moneyTransferAuth.js';
+import { CLARITY_MASK, track } from '../../lib/siteAnalytics.js';
 
 const empty = {
   firstName: '',
@@ -39,12 +40,17 @@ export default function RegistrationForm({ onRegistered, onGoToLogin, showToast 
   const [formError, setFormError] = useState('');
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [registrationStarted, setRegistrationStarted] = useState(false);
   const strength = passwordStrength(form.password);
   const strengthId = useId();
 
   function setField(key, value) {
     const limit = LIMIT_BY_FIELD[key];
     const nextValue = typeof value === 'string' && limit ? clampLength(value, limit) : value;
+    if (!registrationStarted) {
+      setRegistrationStarted(true);
+      track('registration_started');
+    }
     setForm((current) => ({ ...current, [key]: nextValue }));
   }
 
@@ -91,6 +97,7 @@ export default function RegistrationForm({ onRegistered, onGoToLogin, showToast 
       }
       setSuccess(result.user);
       showToast?.('Test account created successfully.', 'success');
+      track('registration_success', { surface: 'money_transfer' });
       onRegistered?.(result.user);
     } catch {
       setFormError('Something went wrong while creating the test account. Please try again.');
@@ -101,7 +108,7 @@ export default function RegistrationForm({ onRegistered, onGoToLogin, showToast 
 
   if (success) {
     return (
-      <section className="mt-card" {...tid('register-success')}>
+      <section className="mt-card" {...tid('register-success')} {...CLARITY_MASK}>
         <span className="mt-card-kicker">Ready to test</span>
         <h2>Registration successful</h2>
         <p className="mt-muted">Your test account has been created for this browser session.</p>
@@ -182,6 +189,7 @@ export default function RegistrationForm({ onRegistered, onGoToLogin, showToast 
             id="register-email"
             type="email"
             autoComplete="email"
+            {...CLARITY_MASK}
             maxLength={FIELD_LIMITS.email}
             value={form.email}
             onChange={(e) => setField('email', e.target.value)}
@@ -200,6 +208,7 @@ export default function RegistrationForm({ onRegistered, onGoToLogin, showToast 
             id="register-phone"
             type="tel"
             autoComplete="tel"
+            {...CLARITY_MASK}
             maxLength={FIELD_LIMITS.phone}
             value={form.phone}
             onChange={(e) => setField('phone', e.target.value)}

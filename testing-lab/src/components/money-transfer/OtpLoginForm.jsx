@@ -8,6 +8,7 @@ import {
   validateOtp
 } from '../../lib/money-transfer/validation.js';
 import { loginWithOtp, sendOtp } from '../../lib/money-transfer/moneyTransferAuth.js';
+import { CLARITY_MASK, identifierChannel, track } from '../../lib/siteAnalytics.js';
 
 export default function OtpLoginForm({
   identifier,
@@ -51,6 +52,7 @@ export default function OtpLoginForm({
       setErrors({});
       setTouched({});
       showToast?.(result.message || 'Demo OTP ready.', 'success');
+      track('otp_login_started', { method: identifierChannel(identifier) });
     } catch {
       const message = 'Something went wrong while sending the demo OTP. Please try again.';
       setFormError(message);
@@ -81,6 +83,7 @@ export default function OtpLoginForm({
         return;
       }
       showToast?.('Login successful.', 'success');
+      track('login_success', { method: 'otp' });
       onSuccess(result.user);
     } catch {
       const message = 'Something went wrong while verifying the OTP. Please try again.';
@@ -124,6 +127,7 @@ export default function OtpLoginForm({
               id="otp-identifier"
               type="text"
               autoComplete="username"
+              {...CLARITY_MASK}
               maxLength={FIELD_LIMITS.identifier}
               value={identifier}
               onChange={(event) => {

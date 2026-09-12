@@ -9,6 +9,7 @@ import {
 } from '../lib/money-transfer/moneyTransferAuth.js';
 import { readTheme, writeTheme } from '../lib/money-transfer/session.js';
 import { tid } from '../lib/money-transfer/tid.js';
+import { track } from '../lib/siteAnalytics.js';
 import '../styles/money-transfer.css';
 
 export default function MoneyTransferLab() {
@@ -26,6 +27,7 @@ export default function MoneyTransferLab() {
   useEffect(() => {
     const restored = restorePersistedAuth();
     if (restored.user) setUser(restored.user);
+    track('testing_lab_view', { lab: 'money_transfer' });
     return () => {
       if (toastTimer.current) window.clearTimeout(toastTimer.current);
     };

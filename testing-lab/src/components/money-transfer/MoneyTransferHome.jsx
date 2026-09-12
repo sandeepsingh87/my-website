@@ -1,9 +1,10 @@
-import React from 'react';
-import { useOutletContext } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Navigate, useOutletContext } from 'react-router-dom';
 import LoginCard from './LoginCard.jsx';
 import TestCredentialsPanel from './TestCredentialsPanel.jsx';
 import RegistrationForm from './RegistrationForm.jsx';
 import MockDashboard from './MockDashboard.jsx';
+import { track } from '../../lib/siteAnalytics.js';
 
 export default function MoneyTransferHome() {
   const ctx = useOutletContext();
@@ -19,6 +20,10 @@ export default function MoneyTransferHome() {
     scrollToRegister,
     scrollToLogin
   } = ctx;
+
+  useEffect(() => {
+    if (!user) track('login_form_view');
+  }, [user]);
 
   if (user) {
     return <MockDashboard user={user} onLogout={handleLogout} showToast={showToast} />;

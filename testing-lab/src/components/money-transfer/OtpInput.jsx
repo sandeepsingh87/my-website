@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { tid } from '../../lib/money-transfer/tid.js';
+import { CLARITY_MASK } from '../../lib/siteAnalytics.js';
 import { FIELD_LIMITS } from '../../lib/money-transfer/validation.js';
 
 /**
@@ -76,6 +77,7 @@ export default function OtpInput({ value, onChange, onBlur, error, disabled }) {
             inputMode="numeric"
             pattern="[0-9]*"
             autoComplete={index === 0 ? 'one-time-code' : 'off'}
+            {...CLARITY_MASK}
             maxLength={1}
             value={digit}
             disabled={disabled}

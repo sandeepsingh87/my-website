@@ -4,6 +4,7 @@ import TransferStepper from './TransferStepper.jsx';
 import { tid } from '../../lib/money-transfer/tid.js';
 import { formatMoney } from '../../lib/money-transfer/transfer.js';
 import { getTransfer } from '../../lib/money-transfer/transferStore.js';
+import { CLARITY_MASK } from '../../lib/siteAnalytics.js';
 
 export default function ReceiptView() {
   const { ref } = useParams();
@@ -26,7 +27,7 @@ export default function ReceiptView() {
   const created = new Date(transfer.createdAt).toLocaleString();
 
   return (
-    <section className="mt-card mt-receipt" {...tid('transfer-receipt')}>
+    <section className="mt-card mt-receipt" {...tid('transfer-receipt')} {...CLARITY_MASK}>
       <TransferStepper current="receipt" />
       <div className="mt-card-head">
         <span className="mt-card-kicker">Demo receipt</span>

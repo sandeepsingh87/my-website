@@ -20,6 +20,7 @@ import {
   readDraft,
   setBalance
 } from '../../lib/money-transfer/transferStore.js';
+import { CLARITY_MASK } from '../../lib/siteAnalytics.js';
 
 export default function ReviewStep() {
   const navigate = useNavigate();
@@ -81,7 +82,7 @@ export default function ReviewStep() {
   }
 
   return (
-    <section className="mt-card mt-transfer-card" {...tid('transfer-review')}>
+    <section className="mt-card mt-transfer-card" {...tid('transfer-review')} {...CLARITY_MASK}>
       <TransferStepper current="review" />
       <div className="mt-card-head">
         <span className="mt-card-kicker">Step 3 of 3</span>

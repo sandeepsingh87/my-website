@@ -3,6 +3,7 @@ import { Check, Copy, ChevronDown, ChevronUp, KeyRound, Shield } from 'lucide-re
 import { getSeedUsers } from '../../lib/money-transfer/moneyTransferAuth.js';
 import { DEMO_OTP, DEMO_PASSWORD } from '../../lib/money-transfer/testUsers.js';
 import { tid } from '../../lib/money-transfer/tid.js';
+import { CLARITY_MASK } from '../../lib/siteAnalytics.js';
 
 async function copyText(text) {
   if (navigator.clipboard?.writeText) {
@@ -51,7 +52,7 @@ export default function TestCredentialsPanel({ showToast }) {
   }
 
   return (
-    <section className="mt-card mt-credentials" {...tid('test-credentials')}>
+    <section className="mt-card mt-credentials" {...tid('test-credentials')} {...CLARITY_MASK}>
       <div className="mt-card-head mt-cred-head">
         <div className="mt-cred-title-block">
           <span className="mt-card-kicker">Sandbox data</span>

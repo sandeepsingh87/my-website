@@ -85,7 +85,19 @@ ensureBeforeBodyClose(`  <footer class="session-footer">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </button>`);
 
-ensureBeforeBodyClose('  <script src="../assets/site.js"></script>');
+if (!html.includes('assets/analytics.js')) {
+  if (html.includes('<script src="../assets/site.js"')) {
+    html = html.replace(
+      /<script src="\.\.\/assets\/site\.js"><\/script>/,
+      '  <script src="../assets/analytics.js" defer></script>\n  <script src="../assets/site.js"></script>'
+    );
+  } else {
+    ensureBeforeBodyClose('  <script src="../assets/analytics.js" defer></script>');
+    ensureBeforeBodyClose('  <script src="../assets/site.js"></script>');
+  }
+} else {
+  ensureBeforeBodyClose('  <script src="../assets/site.js"></script>');
+}
 
 if (!html.includes('session-shell-offset')) {
   html = html.replace(/<main([^>]*)>/i, (match, attrs) => {

@@ -8,10 +8,12 @@ import ReceiverStep from './components/money-transfer/ReceiverStep.jsx';
 import AmountStep from './components/money-transfer/AmountStep.jsx';
 import ReviewStep from './components/money-transfer/ReviewStep.jsx';
 import ReceiptView from './components/money-transfer/ReceiptView.jsx';
+import { AnalyticsRouteTracker } from './lib/siteAnalytics.js';
 import './styles/app.css';
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter basename="/testing-lab">
+    <AnalyticsRouteTracker />
     <Routes>
       <Route path="/" element={<QeLabApp />} />
       <Route path="/money-transfer" element={<MoneyTransferLab />}>

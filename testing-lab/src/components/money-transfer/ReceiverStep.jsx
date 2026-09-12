@@ -12,6 +12,7 @@ import {
   validateReceiver
 } from '../../lib/money-transfer/transfer.js';
 import { readDraft, writeDraft } from '../../lib/money-transfer/transferStore.js';
+import { CLARITY_MASK } from '../../lib/siteAnalytics.js';
 
 export default function ReceiverStep() {
   const navigate = useNavigate();
@@ -147,6 +148,7 @@ export default function ReceiverStep() {
             <input
               id="transfer-phone"
               type="tel"
+              {...CLARITY_MASK}
               maxLength={TRANSFER_LIMITS.phone}
               value={draft.phone}
               onChange={(e) => setField('phone', e.target.value)}

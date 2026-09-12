@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CheckCircle2, ClipboardCheck, Eye, EyeOff, Upload } from 'lucide-react';
 import { NOTES_MAX } from '../../data/fixtures.js';
 import { tid } from '../../lib/tid.js';
+import { CLARITY_MASK } from '../../lib/siteAnalytics.js';
 
 function passwordHints(password) {
   return [
@@ -78,6 +79,7 @@ export default function FormsView({
             <input
               {...tid('inp-email')}
               type="email"
+              {...CLARITY_MASK}
               className={formErrors.email ? 'input-invalid' : undefined}
               aria-invalid={Boolean(formErrors.email)}
               value={formState.email}
@@ -94,6 +96,7 @@ export default function FormsView({
               <input
                 {...tid('inp-password')}
                 type={showPassword ? 'text' : 'password'}
+                {...CLARITY_MASK}
                 className={formErrors.password ? 'input-invalid' : undefined}
                 aria-invalid={Boolean(formErrors.password)}
                 value={formState.password}
@@ -124,6 +127,7 @@ export default function FormsView({
             <input
               {...tid('inp-confirm-password')}
               type={showPassword ? 'text' : 'password'}
+              {...CLARITY_MASK}
               className={formErrors.confirmPassword ? 'input-invalid' : undefined}
               aria-invalid={Boolean(formErrors.confirmPassword)}
               value={formState.confirmPassword}

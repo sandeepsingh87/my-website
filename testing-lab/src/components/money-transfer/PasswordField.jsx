@@ -1,6 +1,7 @@
 import React, { useId, useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { tid } from '../../lib/money-transfer/tid.js';
+import { CLARITY_MASK } from '../../lib/siteAnalytics.js';
 
 export default function PasswordField({
   id,
@@ -30,6 +31,7 @@ export default function PasswordField({
           onChange={onChange}
           onBlur={onBlur}
           autoComplete={autoComplete}
+          {...CLARITY_MASK}
           maxLength={maxLength}
           aria-invalid={Boolean(error)}
           aria-describedby={described}
